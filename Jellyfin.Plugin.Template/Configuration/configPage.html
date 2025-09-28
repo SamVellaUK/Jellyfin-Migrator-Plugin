@@ -2,40 +2,80 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Template</title>
+    <title>Jellyfin Migrator</title>
 </head>
 <body>
     <div id="TemplateConfigPage" data-role="page" class="page type-interior pluginConfigurationPage" data-require="emby-input,emby-button,emby-select,emby-checkbox">
         <div data-role="content">
             <div class="content-primary">
                 <form id="TemplateConfigForm">
-                    <div class="selectContainer">
-                        <label class="selectLabel" for="Options">Several Options</label>
-                        <select is="emby-select" id="Options" name="Options" class="emby-select-withcolor emby-select">
-                            <option id="optOneOption" value="OneOption">One Option</option>
-                            <option id="optAnotherOption" value="AnotherOption">Another Option</option>
-                        </select>
-                    </div>
-                    <div class="inputContainer">
-                        <label class="inputLabel inputLabelUnfocused" for="AnInteger">An Integer</label>
-                        <input id="AnInteger" name="AnInteger" type="number" is="emby-input" min="0" />
-                        <div class="fieldDescription">A Description</div>
-                    </div>
                     <div class="checkboxContainer checkboxContainer-withDescription">
                         <label class="emby-checkbox-label">
-                            <input id="TrueFalseSetting" name="TrueFalseCheckBox" type="checkbox" is="emby-checkbox" />
-                            <span>A Checkbox</span>
+                            <input id="IncludeUsers" type="checkbox" is="emby-checkbox" />
+                            <span>Export Users</span>
                         </label>
+                        <div class="fieldDescription">Select which users to include.</div>
+                    </div>
+                    <div id="UsersList" class="inputContainer"></div>
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input id="IncludeUserPasswordHashes" type="checkbox" is="emby-checkbox" />
+                            <span>Include Password Hashes (from DB)</span>
+                        </label>
+                        <div class="fieldDescription">Sensitive. Uses server database. Only for selected users.</div>
+                    </div>
+
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input id="IncludeLibraries" type="checkbox" is="emby-checkbox" />
+                            <span>Export Libraries</span>
+                        </label>
+                        <div class="fieldDescription">Select which libraries to include.</div>
+                    </div>
+                    <div id="LibrariesList" class="inputContainer"></div>
+
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input id="IncludePermissions" type="checkbox" is="emby-checkbox" />
+                            <span>Export Permissions</span>
+                        </label>
+                        <div class="fieldDescription">Exports per-user library access for selected users/libraries.</div>
+                    </div>
+
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input id="IncludeWatchHistory" type="checkbox" is="emby-checkbox" />
+                            <span>Export Watch History</span>
+                        </label>
+                        <div class="fieldDescription">Filtered by selected users and libraries.</div>
+                    </div>
+
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input id="IncludeDevices" type="checkbox" is="emby-checkbox" />
+                            <span>Export Devices</span>
+                        </label>
+                        <div class="fieldDescription">Filtered by selected users.</div>
                     </div>
                     <div class="inputContainer">
-                        <label class="inputLabel inputLabelUnfocused" for="AString">A String</label>
-                        <input id="AString" name="AString" type="text" is="emby-input" />
-                        <div class="fieldDescription">Another Description</div>
+                        <label class="inputLabel inputLabelUnfocused" for="ExportDirectory">Export Directory (optional)</label>
+                        <input id="ExportDirectory" name="ExportDirectory" type="text" is="emby-input" placeholder="e.g. C:/jellyfin-exports" />
+                        <div class="fieldDescription">If empty, exports are saved under the Jellyfin data path.</div>
                     </div>
+                    
                     <div>
                         <button is="emby-button" type="submit" class="raised button-submit block emby-button">
                             <span>Save</span>
                         </button>
+                        <button id="RunExportNow" is="emby-button" type="button" class="raised block emby-button" style="margin-top: 0.5rem;">
+                            <span>Save & Run Export</span>
+                        </button>
+                        <div id="ExportRunStatus" style="margin-top:0.5rem; font-weight:600;"></div>
+                        <div class="inputContainer" style="margin-top:0.5rem;">
+                            <label class="inputLabel inputLabelUnfocused">Last Export Log</label>
+                            <pre id="ExportLog" style="max-height:240px; overflow:auto; background:#111; color:#ddd; padding:8px; border-radius:4px;"></pre>
+                            <div id="ExportMeta" class="fieldDescription"></div>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -49,11 +89,18 @@
                 .addEventListener('pageshow', function() {
                     Dashboard.showLoadingMsg();
                     ApiClient.getPluginConfiguration(TemplateConfig.pluginUniqueId).then(function (config) {
-                        document.querySelector('#Options').value = config.Options;
-                        document.querySelector('#AnInteger').value = config.AnInteger;
-                        document.querySelector('#TrueFalseSetting').checked = config.TrueFalseSetting;
-                        document.querySelector('#AString').value = config.AString;
-                        Dashboard.hideLoadingMsg();
+                        document.querySelector('#IncludeUsers').checked = config.IncludeUsers === true;
+                        document.querySelector('#IncludeUserPasswordHashes').checked = config.IncludeUserPasswordHashes === true;
+                        document.querySelector('#IncludeLibraries').checked = config.IncludeLibraries === true;
+                        document.querySelector('#IncludePermissions').checked = config.IncludePermissions === true;
+                        document.querySelector('#IncludeWatchHistory').checked = config.IncludeWatchHistory === true;
+                        document.querySelector('#IncludeDevices').checked = config.IncludeDevices === true;
+                        document.querySelector('#ExportDirectory').value = config.ExportDirectory || '';
+                        
+
+                        // Render dynamic lists
+                        loadUsersAndLibraries(config);
+                        try { renderExportLog(config); } catch (e) {}
                     });
                 });
 
@@ -61,10 +108,36 @@
                 .addEventListener('submit', function(e) {
                 Dashboard.showLoadingMsg();
                 ApiClient.getPluginConfiguration(TemplateConfig.pluginUniqueId).then(function (config) {
-                    config.Options = document.querySelector('#Options').value;
-                    config.AnInteger = document.querySelector('#AnInteger').value;
-                    config.TrueFalseSetting = document.querySelector('#TrueFalseSetting').checked;
-                    config.AString = document.querySelector('#AString').value;
+                    config.IncludeUsers = document.querySelector('#IncludeUsers').checked;
+                    config.IncludeUserPasswordHashes = document.querySelector('#IncludeUserPasswordHashes').checked;
+                    config.IncludeLibraries = document.querySelector('#IncludeLibraries').checked;
+                    config.IncludePermissions = document.querySelector('#IncludePermissions').checked;
+                    config.IncludeWatchHistory = document.querySelector('#IncludeWatchHistory').checked;
+                    config.IncludeDevices = document.querySelector('#IncludeDevices').checked;
+
+                    var selectedUserIds = [];
+                    var selectedUsernames = [];
+                    document.querySelectorAll('#UsersList input[type="checkbox"][data-kind="user"]:checked').forEach(function (el) {
+                        selectedUserIds.push(el.value);
+                        selectedUsernames.push(el.getAttribute('data-username'));
+                    });
+                    config.SelectedUserIds = selectedUserIds;
+                    config.SelectedUsernames = selectedUsernames;
+
+                    var selectedLibIds = [];
+                    var selectedLibPaths = [];
+                    document.querySelectorAll('#LibrariesList input[type="checkbox"][data-kind="library"]:checked').forEach(function (el) {
+                        selectedLibIds.push(el.value);
+                        try {
+                            var paths = JSON.parse(decodeURIComponent(el.getAttribute('data-paths') || '[]'));
+                            (paths || []).forEach(function (p) { selectedLibPaths.push(p); });
+                        } catch {}
+                    });
+                    config.SelectedLibraryIds = selectedLibIds;
+                    config.SelectedLibraryPaths = selectedLibPaths;
+
+                    config.ExportDirectory = document.querySelector('#ExportDirectory').value;
+                    
                     ApiClient.updatePluginConfiguration(TemplateConfig.pluginUniqueId, config).then(function (result) {
                         Dashboard.processPluginConfigurationUpdateResult(result);
                     });
@@ -73,6 +146,180 @@
                 e.preventDefault();
                 return false;
             });
+
+            document.querySelector('#RunExportNow')
+                .addEventListener('click', function () {
+                    Dashboard.showLoadingMsg();
+                    var $status = document.querySelector('#ExportRunStatus');
+
+                    // First save the configuration
+                    ApiClient.getPluginConfiguration(TemplateConfig.pluginUniqueId).then(function (config) {
+                        config.IncludeUsers = document.querySelector('#IncludeUsers').checked;
+                        config.IncludeUserPasswordHashes = document.querySelector('#IncludeUserPasswordHashes').checked;
+                        config.IncludeLibraries = document.querySelector('#IncludeLibraries').checked;
+                        config.IncludePermissions = document.querySelector('#IncludePermissions').checked;
+                        config.IncludeWatchHistory = document.querySelector('#IncludeWatchHistory').checked;
+                        config.IncludeDevices = document.querySelector('#IncludeDevices').checked;
+
+                        var selectedUserIds = [];
+                        var selectedUsernames = [];
+                        document.querySelectorAll('#UsersList input[type="checkbox"][data-kind="user"]:checked').forEach(function (el) {
+                            selectedUserIds.push(el.value);
+                            selectedUsernames.push(el.getAttribute('data-username'));
+                        });
+                        config.SelectedUserIds = selectedUserIds;
+                        config.SelectedUsernames = selectedUsernames;
+
+                        var selectedLibIds = [];
+                        var selectedLibPaths = [];
+                        document.querySelectorAll('#LibrariesList input[type="checkbox"][data-kind="library"]:checked').forEach(function (el) {
+                            selectedLibIds.push(el.value);
+                            try {
+                                var paths = JSON.parse(decodeURIComponent(el.getAttribute('data-paths') || '[]'));
+                                (paths || []).forEach(function (p) { selectedLibPaths.push(p); });
+                            } catch {}
+                        });
+                        config.SelectedLibraryIds = selectedLibIds;
+                        config.SelectedLibraryPaths = selectedLibPaths;
+
+                        config.ExportDirectory = document.querySelector('#ExportDirectory').value;
+
+                        return ApiClient.updatePluginConfiguration(TemplateConfig.pluginUniqueId, config);
+                    }).then(function (result) {
+                        // Configuration saved successfully
+                        console.log('Configuration saved:', result);
+
+                        // Wait a moment for the save to propagate, then run the export
+                        return new Promise(function(resolve) {
+                            setTimeout(function() {
+                                resolve();
+                            }, 1000); // 1 second delay
+                        });
+                    }).then(function () {
+                        // Now run the export
+                        return ApiClient.getScheduledTasks();
+                    }).then(function (tasks) {
+                        var task = (tasks || []).find(function (t) { return t.Key === 'JellyfinMigratorExport'; });
+                        if (!task) {
+                            Dashboard.hideLoadingMsg();
+                            Dashboard.alert({ title: 'Migrator', message: 'Export task not found.' });
+                            return Promise.reject('Task not found');
+                        }
+                        return ApiClient.startScheduledTask(task.Id).then(function () { return task; });
+                    }).then(function () {
+                        Dashboard.hideLoadingMsg();
+                        $status.textContent = 'RUNNING…';
+                        // Light polling to update status until completion (max 5 minutes)
+                        var started = Date.now();
+                        var poll = function () {
+                            ApiClient.getScheduledTasks().then(function (tasks) {
+                                var t = (tasks || []).find(function (x) { return x.Key === 'JellyfinMigratorExport'; });
+                                if (!t) { return; }
+                                var state = (t.State || t.Status || '').toString().toLowerCase();
+                                if (state.indexOf('running') !== -1) {
+                                    $status.textContent = 'RUNNING…';
+                                } else if (state.indexOf('idle') !== -1 || state.indexOf('completed') !== -1 || state === '') {
+                                    $status.textContent = 'COMPLETED';
+                                    return; // stop polling
+                                }
+                                if (Date.now() - started < 5 * 60 * 1000) {
+                                    setTimeout(poll, 2000);
+                                }
+                            }).catch(function () {
+                                if (Date.now() - started < 5 * 60 * 1000) {
+                                    setTimeout(poll, 4000);
+                                }
+                            });
+                        };
+                        setTimeout(poll, 1500);
+                    }).catch(function (err) {
+                        Dashboard.hideLoadingMsg();
+                        console.error('Failed to save settings or start export', err);
+                        Dashboard.alert({ title: 'Migrator', message: 'Failed to save settings or start export.' });
+                    });
+                });
+
+            // Live log updater: polls plugin configuration while status shows RUNNING
+            (function setupLiveLogUpdater() {
+                var timerId = null;
+                function updateLog() {
+                    ApiClient.getPluginConfiguration(TemplateConfig.pluginUniqueId)
+                        .then(function (cfg) { try { renderExportLog(cfg); } catch (e) {} });
+                }
+                function checkStatus() {
+                    var $status = document.querySelector('#ExportRunStatus');
+                    var s = ($status && $status.textContent || '').toLowerCase();
+                    if (s.indexOf('running') !== -1) {
+                        if (!timerId) {
+                            timerId = setInterval(updateLog, 2000);
+                        }
+                    } else {
+                        if (timerId) {
+                            clearInterval(timerId);
+                            timerId = null;
+                            updateLog();
+                        }
+                    }
+                }
+                setInterval(checkStatus, 1000);
+            })();
+
+            function loadUsersAndLibraries(config) {
+                var $users = document.querySelector('#UsersList');
+                var $libs = document.querySelector('#LibrariesList');
+                $users.innerHTML = '<div>Loading users…</div>';
+                $libs.innerHTML = '<div>Loading libraries…</div>';
+
+                var usersUrl = ApiClient.getUrl('Users');
+                var libsUrl = ApiClient.getUrl('Library/VirtualFolders');
+
+                Promise.all([
+                    ApiClient.fetch({ url: usersUrl, method: 'GET' }).then(function (r) { return r.json(); }),
+                    ApiClient.fetch({ url: libsUrl, method: 'GET' }).then(function (r) { return r.json(); })
+                ]).then(function (results) {
+                    var users = results[0] || [];
+                    var libraries = results[1] || [];
+
+                    // Users
+                    var uHtml = users.map(function (u) {
+                        var checked = (config.SelectedUserIds || []).indexOf(u.Id) !== -1 ? 'checked' : '';
+                        return '<label class="emby-checkbox-label" style="display:block;">' +
+                            '<input data-kind="user" type="checkbox" is="emby-checkbox" value="' + (u.Id || '') + '" data-username="' + (u.Name || '') + '" ' + checked + ' />' +
+                            '<span>' + (u.Name || '') + '</span>' +
+                        '</label>';
+                    }).join('');
+                    $users.innerHTML = '<div class="fieldDescription">Select users to include</div>' + uHtml;
+
+                    // Libraries
+                    var lHtml = libraries.map(function (l) {
+                        var checked = (config.SelectedLibraryIds || []).indexOf(l.ItemId) !== -1 ? 'checked' : '';
+                        var dataPaths = encodeURIComponent(JSON.stringify(l.Locations || []));
+                        return '<label class="emby-checkbox-label" style="display:block;">' +
+                            '<input data-kind="library" type="checkbox" is="emby-checkbox" value="' + (l.ItemId || '') + '" data-paths="' + dataPaths + '" ' + checked + ' />' +
+                            '<span>' + (l.Name || '') + ' (' + (l.CollectionType || 'Mixed') + ')</span>' +
+                        '</label>';
+                    }).join('');
+                    $libs.innerHTML = '<div class="fieldDescription">Select libraries to include</div>' + lHtml;
+                }).catch(function (err) {
+                    console.error('Failed to load users/libraries', err);
+                    $users.innerHTML = '<div class="fieldDescription">Failed to load users</div>';
+                    $libs.innerHTML = '<div class="fieldDescription">Failed to load libraries</div>';
+                }).finally(function () {
+                    Dashboard.hideLoadingMsg();
+                });
+            }
+
+            function renderExportLog(config) {
+                var $log = document.querySelector('#ExportLog');
+                var $meta = document.querySelector('#ExportMeta');
+                if (!$log || !$meta) { return; }
+                var log = (config.LastExportLog || '').toString();
+                $log.textContent = log.trim() ? log : '(no recent log)';
+                var parts = [];
+                if (config.LastExportUtc) { try { parts.push('Completed: ' + new Date(config.LastExportUtc).toLocaleString()); } catch(e) {} }
+                if (config.LastExportPath) { parts.push('Path: ' + config.LastExportPath); }
+                $meta.textContent = parts.join(' | ');
+            }
         </script>
     </div>
 </body>
