@@ -74,9 +74,9 @@ public class ExportLogger
             var logPath = Path.Combine(exportRoot, "export.log");
             await File.WriteAllTextAsync(logPath, GetFullLog()).ConfigureAwait(false);
         }
-        catch
+        catch (Exception ex)
         {
-            // Ignore file write errors
+            _logger.LogWarning(ex, "Failed to save log file to {ExportRoot}: {Message}", exportRoot, ex.Message);
         }
     }
 
@@ -97,9 +97,9 @@ public class ExportLogger
                 Plugin.Instance?.SaveConfiguration();
             }
         }
-        catch
+        catch (Exception ex)
         {
-            // Non-fatal
+            _logger.LogWarning(ex, "Failed to save log to plugin configuration: {Message}", ex.Message);
         }
     }
 }

@@ -272,17 +272,8 @@ public class UserExporter
         }
         catch (Exception ex)
         {
-            _exportLogger.LogError($"Failed to get accessible libraries for user {user.Username}: {ex.Message}");
-
-            // Fallback: try to use the library manager directly
-            var virtualFolders = _libraryManager.GetVirtualFolders();
-            foreach (var folder in virtualFolders)
-            {
-                if (!string.IsNullOrEmpty(folder.ItemId) && !string.IsNullOrEmpty(folder.Name))
-                {
-                    libraries.Add(new { id = folder.ItemId, name = folder.Name });
-                }
-            }
+            _exportLogger.LogError($"Failed to get accessible libraries for user {user.Username}: {ex.Message}", ex);
+            _exportLogger.Log($"Returning empty library list for user {user.Username} due to error - will not grant unauthorized access");
         }
 
         return libraries;

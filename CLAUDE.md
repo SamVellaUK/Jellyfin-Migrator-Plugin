@@ -110,7 +110,7 @@ curl -X POST \
 ## Recent Changes
 
 ### Simplified Architecture (Latest)
-- Refactored from single 509-line file to modular 3-file structure
+- Refactored from single 509-line file to modular 4-file structure
 - Separated logging, user export, and coordination concerns
 - Reduced complexity while maintaining full functionality
 - Added comprehensive debugging for library lookup issues
@@ -120,6 +120,42 @@ curl -X POST \
 - Added library permissions with name and ID mapping
 - Fixed case sensitivity issues with GUID comparisons
 - Improved error handling and logging
+
+## Code Review Findings (Latest)
+
+### Current Implementation Strengths
+✅ Clean separation of concerns with DI pattern
+✅ Robust GUID normalization for case-insensitive matching
+✅ Comprehensive timestamped logging system
+✅ Multiple database path search strategies
+✅ Proper async/await patterns with ConfigureAwait(false)
+
+### Known Issues & Technical Debt
+
+**Priority 1 - Type Safety**
+- **Issue:** UserExporter.cs:239, 158 uses `dynamic` types instead of proper Jellyfin types
+- **Impact:** Defeats compile-time safety, incompatible with strict StyleCop rules
+- **Fix Required:** Replace with `MediaBrowser.Controller.Entities.User` type
+
+**Priority 2 - Reflection Fragility**
+- **Issue:** UserExporter.cs:249-252 uses reflection for UserViewQuery property access
+- **Impact:** Silently fails if Jellyfin API changes, double property lookup overhead
+- **Fix Required:** Use documented Jellyfin API for UserViewQuery initialization
+
+**Priority 3 - Silent Failures**
+- **Issue:** ExportLogger.cs:77-80, 100-103 catches all exceptions without logging
+- **Impact:** Makes debugging difficult, violations go unnoticed
+- **Fix Required:** Log at warning level minimum
+
+**Priority 4 - Security**
+- **Issue:** UserExporter.cs:277-286 fallback grants ALL libraries on failure
+- **Impact:** Potential unauthorized library access during migration
+- **Fix Required:** Return empty list on failure or throw exception
+
+**Priority 5 - Cancellation**
+- **Issue:** Database operations don't respect cancellation tokens
+- **Impact:** Long-running exports can't be canceled cleanly
+- **Fix Required:** Add cancellation checks in database loops
 
 ## Troubleshooting
 
