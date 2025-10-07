@@ -16,6 +16,10 @@ public class PluginConfiguration : BasePluginConfiguration
     public PluginConfiguration()
     {
         ExportDirectory = string.Empty;
+        VerifyDirectory = string.Empty;
+        ImportDirectory = string.Empty;
+
+        Mode = "Export";
 
         IncludeUsers = true;
         IncludeUserPasswordHashes = false;
@@ -34,6 +38,21 @@ public class PluginConfiguration : BasePluginConfiguration
     /// Gets or sets the export directory for generated JSON files. If empty, a default under the Jellyfin data path is used.
     /// </summary>
     public string ExportDirectory { get; set; }
+
+    /// <summary>
+    /// Gets or sets the directory to verify.
+    /// </summary>
+    public string? VerifyDirectory { get; set; }
+
+    /// <summary>
+    /// Gets or sets the directory to import.
+    /// </summary>
+    public string? ImportDirectory { get; set; }
+
+    /// <summary>
+    /// Gets or sets the current operation mode: Export, Verify, Import.
+    /// </summary>
+    public string Mode { get; set; }
 
     // No server URL or API key required; plugin runs in-process.
 
@@ -58,7 +77,7 @@ public class PluginConfiguration : BasePluginConfiguration
     public bool IncludePermissions { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether to export watch history (from SQLite) filtered by selected users/libraries.
+    /// Gets or sets a value indicating whether to export watch history (via IUserDataManager) filtered by selected users/libraries.
     /// </summary>
     public bool IncludeWatchHistory { get; set; }
 
@@ -75,7 +94,7 @@ public class PluginConfiguration : BasePluginConfiguration
     public List<string> SelectedUserIds { get; set; }
 
     /// <summary>
-    /// Gets or sets selected usernames (for SQLite filtering).
+    /// Gets or sets selected usernames (for filtering).
     /// </summary>
     [SuppressMessage("Usage", "CA2227:Collection properties should be read only", Justification = "Configuration needs settable collection for serialization")]
     [SuppressMessage("Design", "CA1002:Do not expose generic lists", Justification = "Used for configuration serialization")]
@@ -89,7 +108,7 @@ public class PluginConfiguration : BasePluginConfiguration
     public List<string> SelectedLibraryIds { get; set; }
 
     /// <summary>
-    /// Gets or sets selected library paths (for SQLite filtering of watched history).
+    /// Gets or sets selected library paths (used for filtering of watched history).
     /// </summary>
     [SuppressMessage("Usage", "CA2227:Collection properties should be read only", Justification = "Configuration needs settable collection for serialization")]
     [SuppressMessage("Design", "CA1002:Do not expose generic lists", Justification = "Used for configuration serialization")]
@@ -109,4 +128,30 @@ public class PluginConfiguration : BasePluginConfiguration
     /// Gets or sets the UTC timestamp of the last export completion.
     /// </summary>
     public DateTime? LastExportUtc { get; set; }
+
+    /// <summary>
+    /// Gets or sets the last export ZIP as base64. This enables client download without server file access.
+    /// Large exports may increase configuration size; use for convenience.
+    /// </summary>
+    public string? LastExportZipBase64 { get; set; }
+
+    /// <summary>
+    /// Gets or sets the last uploaded import ZIP as base64. Used to transfer the archive from the dashboard to the server.
+    /// </summary>
+    public string? LastImportZipBase64 { get; set; }
+
+    /// <summary>
+    /// Gets or sets the last import analysis JSON result produced by the server.
+    /// </summary>
+    public string? LastImportAnalysisJson { get; set; }
+
+    /// <summary>
+    /// Gets or sets the last import extraction path on server.
+    /// </summary>
+    public string? LastImportExtractPath { get; set; }
+
+    /// <summary>
+    /// Gets or sets the UTC timestamp of the last import analysis.
+    /// </summary>
+    public DateTime? LastImportUtc { get; set; }
 }

@@ -4,7 +4,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Jellyfin.Plugin.Template.Configuration;
 using MediaBrowser.Common.Configuration;
+using MediaBrowser.Controller.Devices;
 using MediaBrowser.Controller.Library;
+using MediaBrowser.Controller.Session;
 using MediaBrowser.Model.Tasks;
 using Microsoft.Extensions.Logging;
 
@@ -20,6 +22,9 @@ public class ExportMigrationTask : IScheduledTask
     private readonly IUserManager _userManager;
     private readonly ILibraryManager _libraryManager;
     private readonly IUserViewManager _userViewManager;
+    private readonly IUserDataManager _userDataManager;
+    private readonly IDeviceManager _deviceManager;
+    private readonly ISessionManager _sessionManager;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ExportMigrationTask"/> class.
@@ -29,13 +34,19 @@ public class ExportMigrationTask : IScheduledTask
     /// <param name="userManager">Instance of <see cref="IUserManager"/>.</param>
     /// <param name="libraryManager">Instance of <see cref="ILibraryManager"/>.</param>
     /// <param name="userViewManager">Instance of <see cref="IUserViewManager"/>.</param>
-    public ExportMigrationTask(IApplicationPaths paths, ILogger<ExportMigrationTask> logger, IUserManager userManager, ILibraryManager libraryManager, IUserViewManager userViewManager)
+    /// <param name="userDataManager">Instance of <see cref="IUserDataManager"/>.</param>
+    /// <param name="deviceManager">Instance of <see cref="IDeviceManager"/>.</param>
+    /// <param name="sessionManager">Instance of <see cref="ISessionManager"/>.</param>
+    public ExportMigrationTask(IApplicationPaths paths, ILogger<ExportMigrationTask> logger, IUserManager userManager, ILibraryManager libraryManager, IUserViewManager userViewManager, IUserDataManager userDataManager, IDeviceManager deviceManager, ISessionManager sessionManager)
     {
         _paths = paths;
         _logger = logger;
         _userManager = userManager;
         _libraryManager = libraryManager;
         _userViewManager = userViewManager;
+        _userDataManager = userDataManager;
+        _deviceManager = deviceManager;
+        _sessionManager = sessionManager;
     }
 
     /// <inheritdoc />
@@ -45,7 +56,7 @@ public class ExportMigrationTask : IScheduledTask
     public string Key => "JellyfinMigratorExport";
 
     /// <inheritdoc />
-    public string Description => "Minimal export: users only (scoped down for reliability)";
+    public string Description => "Run migration operation (Export/Verify)";
 
     /// <inheritdoc />
     public string Category => "Migration";
@@ -61,7 +72,7 @@ public class ExportMigrationTask : IScheduledTask
     public async Task ExecuteAsync(IProgress<double> progress, CancellationToken cancellationToken)
     {
         var cfg = Plugin.Instance?.Configuration ?? new PluginConfiguration();
-        var service = new ExportService(_paths, Microsoft.Extensions.Logging.Abstractions.NullLogger<ExportService>.Instance, _userManager, _libraryManager, _userViewManager);
+        var service = new ExportService(_paths, Microsoft.Extensions.Logging.Abstractions.NullLogger<ExportService>.Instance, _userManager, _libraryManager, _userViewManager, _userDataManager, _deviceManager, _sessionManager);
 
         try
         {

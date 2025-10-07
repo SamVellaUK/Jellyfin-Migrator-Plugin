@@ -52,25 +52,33 @@ public class UserExporter
     /// Exports user data to the specified output path.
     /// </summary>
     /// <param name="outputPath">The output file path.</param>
-    /// <param name="filterUserIds">Optional list of user IDs to filter.</param>
+    /// <param name="config">Plugin configuration with export settings.</param>
     /// <param name="cancellationToken">Cancellation token.</param>
     /// <returns>The number of users exported.</returns>
-    public async Task<int> ExportUsersAsync(string outputPath, IList<string>? filterUserIds, CancellationToken cancellationToken)
+    public async Task<int> ExportUsersAsync(string outputPath, Configuration.PluginConfiguration config, CancellationToken cancellationToken)
     {
         _exportLogger.Log("Starting user export via Jellyfin services");
 
         try
         {
-            // Get plugin configuration to know which libraries are selected
-            var config = Jellyfin.Plugin.Template.Plugin.Instance?.Configuration ?? new Configuration.PluginConfiguration();
-
             // Get library mapping
             var libraryMap = GetLibraryMapping();
 
-            // Get password hashes from database
-            var passwordHashes = GetPasswordHashesFromDatabase();
+            // Get password hashes from database if configured
+            Dictionary<string, string?> passwordHashes;
+            if (config.IncludeUserPasswordHashes)
+            {
+                _exportLogger.Log("Password hash export enabled");
+                passwordHashes = GetPasswordHashesFromDatabase();
+            }
+            else
+            {
+                _exportLogger.Log("Password hash export disabled");
+                passwordHashes = new Dictionary<string, string?>();
+            }
 
-            // Get users
+            // Get users with filtering
+            var filterUserIds = config.SelectedUserIds;
             var users = GetUsers(filterUserIds, libraryMap, passwordHashes, config);
 
             await WriteJsonAsync(outputPath, users, cancellationToken).ConfigureAwait(false);
@@ -137,7 +145,108 @@ public class UserExporter
             // Get password hash for this user
             var passwordHash = passwordHashes.TryGetValue(username, out var hash) ? hash : null;
 
-            users.Add(new { id, username, passwordHash, libraries });
+            // Get primary image tag
+            string? primaryImageTag = null;
+            try
+            {
+                primaryImageTag = (user as dynamic)?.PrimaryImageTag;
+                _exportLogger.Log($"User {username}: primaryImageTag = {primaryImageTag ?? "null"}");
+            }
+            catch (Exception ex)
+            {
+                _exportLogger.Log($"User {username}: Could not get primaryImageTag - {ex.Message}");
+            }
+
+            // Get policy information (compatible with Jellyfin 10.9+ where User.Policy may not exist)
+            var lastLoginDate = user.LastLoginDate;
+            object? policyObj = TryGetProperty(user, "Policy");
+
+            bool isAdministrator = false;
+            bool isDisabled = false;
+            bool isHidden = false;
+            bool enableAllFolders = false;
+            bool enableRemoteAccess = true;
+            object? blockedTagsObj = null;
+            object? maxParentalRatingObj = null;
+            object? enabledFoldersObj = null;
+
+            if (policyObj is not null)
+            {
+                isAdministrator = TryGetBool(policyObj, "IsAdministrator") ?? false;
+                isDisabled = TryGetBool(policyObj, "IsDisabled") ?? false;
+                isHidden = TryGetBool(policyObj, "IsHidden") ?? false;
+                enableAllFolders = TryGetBool(policyObj, "EnableAllFolders") ?? false;
+                enableRemoteAccess = TryGetBool(policyObj, "EnableRemoteAccess") ?? true;
+                blockedTagsObj = TryGetProperty(policyObj, "BlockedTags");
+                maxParentalRatingObj = TryGetProperty(policyObj, "MaxParentalRating");
+                enabledFoldersObj = TryGetProperty(policyObj, "EnabledFolders");
+            }
+            else
+            {
+                // Fallback: attempt to read common flags from the user itself if present
+                isAdministrator = TryGetBool(user, "IsAdministrator") ?? false;
+                isDisabled = TryGetBool(user, "IsDisabled") ?? false;
+                isHidden = TryGetBool(user, "IsHidden") ?? false;
+            }
+
+            _exportLogger.Log($"User {username}: isAdministrator={isAdministrator}, isDisabled={isDisabled}, isHidden={isHidden}, lastLoginDate={lastLoginDate}");
+
+            var policyExport = new
+            {
+                isAdministrator,
+                isDisabled,
+                isHidden,
+                enableAllFolders,
+                blockedTags = blockedTagsObj,
+                maxParentalRating = maxParentalRatingObj,
+                enableRemoteAccess,
+                allowedFolders = enabledFoldersObj
+            };
+
+            if (policyObj is not null)
+            {
+                _exportLogger.Log($"User {username}: Policy - enableAllFolders={enableAllFolders}, blockedTags={(blockedTagsObj as Array)?.Length ?? 0}, maxParentalRating={maxParentalRatingObj ?? "null"}");
+            }
+            else
+            {
+                _exportLogger.Log($"User {username}: Policy not available on entity type; using fallback flags only");
+            }
+
+            // Get configuration/preferences safely
+            object? configuration = TryGetProperty(user, "Configuration");
+            string? audioLanguagePreference = TryGetString(configuration, "AudioLanguagePreference");
+            string? subtitleLanguagePreference = TryGetString(configuration, "SubtitleLanguagePreference");
+            string? theme = TryGetString(configuration, "Theme");
+            bool displayMissingEpisodes = TryGetBool(configuration, "DisplayMissingEpisodes") ?? false;
+            object? orderedViews = TryGetProperty(configuration, "OrderedViews");
+            bool enableNextEpisodeAutoPlay = TryGetBool(configuration, "EnableNextEpisodeAutoPlay") ?? false;
+
+            var configExport = new
+            {
+                audioLanguagePreference,
+                subtitleLanguagePreference,
+                theme,
+                displayMissingEpisodes,
+                orderedViews,
+                enableNextEpisodeAutoPlay
+            };
+
+            _exportLogger.Log($"User {username}: Configuration - audioLang={audioLanguagePreference ?? "null"}, subtitleLang={subtitleLanguagePreference ?? "null"}, theme={theme ?? "null"}, autoPlay={enableNextEpisodeAutoPlay}");
+
+            users.Add(new
+            {
+                id,
+                username,
+                primaryImageTag,
+                isAdministrator,
+                isDisabled,
+                isHidden,
+                lastLoginDate,
+                policy = policyExport,
+                configuration = configExport,
+                passwordHash,
+                libraries
+            });
         }
 
         return users;
@@ -242,14 +351,9 @@ public class UserExporter
 
         try
         {
-            // Create a UserViewQuery for this user - check what properties are actually available
+            // Create a UserViewQuery for this user
             var query = new UserViewQuery();
-
-            // Try different ways to set the user
-            if (query.GetType().GetProperty("User") != null)
-            {
-                query.GetType().GetProperty("User")?.SetValue(query, user);
-            }
+            query.GetType().GetProperty("User")?.SetValue(query, user);
 
             // Get all libraries/views the user can access
             var views = _userViewManager.GetUserViews(query);
@@ -289,5 +393,57 @@ public class UserExporter
 
         using var fs = File.Create(path);
         await JsonSerializer.SerializeAsync(fs, data, JsonOptions, cancellationToken).ConfigureAwait(false);
+    }
+
+    private static object? TryGetProperty(object? obj, string propertyName)
+    {
+        if (obj is null)
+        {
+            return null;
+        }
+
+        try
+        {
+            var prop = obj.GetType().GetProperty(propertyName);
+            return prop?.GetValue(obj);
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    private static bool? TryGetBool(object? obj, string propertyName)
+    {
+        var value = TryGetProperty(obj, propertyName);
+        if (value is null)
+        {
+            return null;
+        }
+
+        if (value is bool b)
+        {
+            return b;
+        }
+
+        try
+        {
+            return Convert.ToBoolean(value, System.Globalization.CultureInfo.InvariantCulture);
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    private static string? TryGetString(object? obj, string propertyName)
+    {
+        var value = TryGetProperty(obj, propertyName);
+        if (value is null)
+        {
+            return null;
+        }
+
+        return value.ToString();
     }
 }

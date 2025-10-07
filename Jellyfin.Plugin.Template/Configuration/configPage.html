@@ -5,264 +5,168 @@
     <title>Jellyfin Migrator</title>
 </head>
 <body>
-    <div id="TemplateConfigPage" data-role="page" class="page type-interior pluginConfigurationPage" data-require="emby-input,emby-button,emby-select,emby-checkbox">
+    <div id="TemplateConfigPage" data-role="page" class="page type-interior pluginConfigurationPage" data-require="emby-input,emby-button,emby-select,emby-checkbox,directorybrowser">
         <div data-role="content">
             <div class="content-primary">
                 <form id="TemplateConfigForm">
-                    <div class="checkboxContainer checkboxContainer-withDescription">
-                        <label class="emby-checkbox-label">
-                            <input id="IncludeUsers" type="checkbox" is="emby-checkbox" />
-                            <span>Export Users</span>
-                        </label>
-                        <div class="fieldDescription">Select which users to include.</div>
-                    </div>
-                    <div id="UsersList" class="inputContainer"></div>
-                    <div class="checkboxContainer checkboxContainer-withDescription">
-                        <label class="emby-checkbox-label">
-                            <input id="IncludeUserPasswordHashes" type="checkbox" is="emby-checkbox" />
-                            <span>Include Password Hashes (from DB)</span>
-                        </label>
-                        <div class="fieldDescription">Sensitive. Uses server database. Only for selected users.</div>
-                    </div>
-
-                    <div class="checkboxContainer checkboxContainer-withDescription">
-                        <label class="emby-checkbox-label">
-                            <input id="IncludeLibraries" type="checkbox" is="emby-checkbox" />
-                            <span>Export Libraries</span>
-                        </label>
-                        <div class="fieldDescription">Select which libraries to include.</div>
-                    </div>
-                    <div id="LibrariesList" class="inputContainer"></div>
-
-                    <div class="checkboxContainer checkboxContainer-withDescription">
-                        <label class="emby-checkbox-label">
-                            <input id="IncludePermissions" type="checkbox" is="emby-checkbox" />
-                            <span>Export Permissions</span>
-                        </label>
-                        <div class="fieldDescription">Exports per-user library access for selected users/libraries.</div>
-                    </div>
-
-                    <div class="checkboxContainer checkboxContainer-withDescription">
-                        <label class="emby-checkbox-label">
-                            <input id="IncludeWatchHistory" type="checkbox" is="emby-checkbox" />
-                            <span>Export Watch History</span>
-                        </label>
-                        <div class="fieldDescription">Filtered by selected users and libraries.</div>
-                    </div>
-
-                    <div class="checkboxContainer checkboxContainer-withDescription">
-                        <label class="emby-checkbox-label">
-                            <input id="IncludeDevices" type="checkbox" is="emby-checkbox" />
-                            <span>Export Devices</span>
-                        </label>
-                        <div class="fieldDescription">Filtered by selected users.</div>
-                    </div>
-                    <div class="inputContainer">
-                        <label class="inputLabel inputLabelUnfocused" for="ExportDirectory">Export Directory (optional)</label>
-                        <input id="ExportDirectory" name="ExportDirectory" type="text" is="emby-input" placeholder="e.g. C:/jellyfin-exports" />
-                        <div class="fieldDescription">If empty, exports are saved under the Jellyfin data path.</div>
-                    </div>
-                    
-                    <div>
-                        <button is="emby-button" type="submit" class="raised button-submit block emby-button">
-                            <span>Save</span>
-                        </button>
-                        <button id="RunExportNow" is="emby-button" type="button" class="raised block emby-button" style="margin-top: 0.5rem;">
-                            <span>Save & Run Export</span>
-                        </button>
-                        <div id="ExportRunStatus" style="margin-top:0.5rem; font-weight:600;"></div>
-                        <div class="inputContainer" style="margin-top:0.5rem;">
-                            <label class="inputLabel inputLabelUnfocused">Last Export Log</label>
-                            <pre id="ExportLog" style="max-height:240px; overflow:auto; background:#111; color:#ddd; padding:8px; border-radius:4px;"></pre>
-                            <div id="ExportMeta" class="fieldDescription"></div>
+                    <!-- Tab Navigation -->
+                    <div class="inputContainer" style="margin-bottom:0.75rem;">
+                        <div style="display:flex; gap:8px;">
+                            <button is="emby-button" type="button" class="emby-button button-flat raised" id="TabExport">Export</button>
+                            <button is="emby-button" type="button" class="emby-button button-flat" id="TabImport">Import</button>
                         </div>
+                    </div>
+
+                    <!-- Export Tab -->
+                    <div id="ExportTab" style="display:block;">
+                        <div class="fieldDescription">Jellyfin Export</div>
+
+                        <!-- Export Users Section -->
+                        <div class="checkboxContainer checkboxContainer-withDescription">
+                            <label class="emby-checkbox-label">
+                                <input id="IncludeUsers" type="checkbox" is="emby-checkbox" />
+                                <span>Export Users</span>
+                            </label>
+                            <div class="fieldDescription">Select which users to include.</div>
+                        </div>
+                        <div id="UsersList" class="inputContainer"></div>
+
+                        <!-- Password Hashes -->
+                        <div class="checkboxContainer checkboxContainer-withDescription">
+                            <label class="emby-checkbox-label">
+                                <input id="IncludeUserPasswordHashes" type="checkbox" is="emby-checkbox" />
+                                <span>Include Password Hashes (from DB)</span>
+                            </label>
+                            <div class="fieldDescription">Sensitive. Uses server database. Only for selected users.</div>
+                        </div>
+
+                        <!-- Export Libraries Section -->
+                        <div class="checkboxContainer checkboxContainer-withDescription">
+                            <label class="emby-checkbox-label">
+                                <input id="IncludeLibraries" type="checkbox" is="emby-checkbox" />
+                                <span>Export Libraries</span>
+                            </label>
+                            <div class="fieldDescription">Select which libraries to include.</div>
+                        </div>
+                        <div id="LibrariesList" class="inputContainer"></div>
+
+                        <!-- Permissions -->
+                        <div class="checkboxContainer checkboxContainer-withDescription">
+                            <label class="emby-checkbox-label">
+                                <input id="IncludePermissions" type="checkbox" is="emby-checkbox" />
+                                <span>Export Permissions</span>
+                            </label>
+                            <div class="fieldDescription">Exports per-user library access for selected users/libraries.</div>
+                        </div>
+
+                        <!-- Watch History -->
+                        <div class="checkboxContainer checkboxContainer-withDescription">
+                            <label class="emby-checkbox-label">
+                                <input id="IncludeWatchHistory" type="checkbox" is="emby-checkbox" />
+                                <span>Export Watch History</span>
+                            </label>
+                            <div class="fieldDescription">Filtered by selected users and libraries.</div>
+                        </div>
+
+                        <!-- Devices -->
+                        <div class="checkboxContainer checkboxContainer-withDescription">
+                            <label class="emby-checkbox-label">
+                                <input id="IncludeDevices" type="checkbox" is="emby-checkbox" />
+                                <span>Export Devices</span>
+                            </label>
+                            <div class="fieldDescription">Filtered by selected users.</div>
+                            <div class="fieldDescription" style="margin-top:4px; color:#e67e22; font-weight:600;">
+                                Warning: Device export may include authentication bindings so clients remain signed in.
+                                Treat the export as sensitive data (like API keys). Do not share or store on untrusted media.
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div>
+                            <button is="emby-button" type="submit" class="raised button-submit block emby-button">
+                                <span>Save Config</span>
+                            </button>
+                            <button id="RunExportNow" is="emby-button" type="button" class="emby-button raised button-submit block" style="margin-top: 0.5rem;">
+                                <span id="RunButtonText">Save Config & Run Export</span>
+                            </button>
+                            <div id="DownloadExportContainer" style="display:none; margin-top:0.5rem;">
+                                <button id="DownloadServerZipBtn" is="emby-button" type="button" class="emby-button raised">Download Export ZIP</button>
+                            </div>
+                            <div id="ExportRunStatus" style="margin-top:0.5rem; font-weight:600;"></div>
+                            <div class="inputContainer" style="margin-top:0.5rem;">
+                                <label class="inputLabel inputLabelUnfocused" id="LogHeader">Last Run Log</label>
+                                <pre id="ExportLog" style="max-height:240px; overflow:auto; background:#111; color:#ddd; padding:8px; border-radius:4px;"></pre>
+                                <div id="ExportMeta" class="fieldDescription"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Import Tab -->
+                    <div id="ImportTab" style="display:none;">
+                        <div class="fieldDescription">Jellyfin Import</div>
+
+                        <!-- Import Directory (Hidden for now) -->
+                        <div class="inputContainer">
+                            <label class="inputLabel inputLabelUnfocused" for="ImportDirectory">Import Directory</label>
+                            <div style="display:flex; gap:8px; align-items:center;">
+                                <input id="ImportDirectory" name="ImportDirectory" type="text" is="emby-input" placeholder="e.g. C:/jellyfin-exports/20251006_195900" style="flex:1;" />
+                                <button is="emby-button" type="button" class="raised emby-button" id="BrowseImportDir">Browse…</button>
+                            </div>
+                            <div class="fieldDescription">Import is a holding page in this build. Directory will be used once import is implemented.</div>
+                        </div>
+
+                        <!-- Import Holding Message -->
+                        <div id="ImportHolding" style="display:block; margin-top:0.75rem; background:#1b1b1b; color:#ddd; padding:10px; border-radius:4px;">
+                            <div style="font-weight:600; margin-bottom:6px;">Import (Holding Page)</div>
+                            <div>Import functionality is not yet available in this build. You will be able to point to an export directory and apply it to this server.</div>
+                        </div>
+
+                        <!-- ZIP Upload Section -->
+                        <div id="ImportZipSection" style="display:block; margin-top:0.75rem;">
+                            <label class="inputLabel inputLabelUnfocused" for="ImportZipFile">Upload Export ZIP</label>
+                            <div style="display:flex; gap:8px; align-items:center;">
+                                <input id="ImportZipFile" name="ImportZipFile" type="file" accept=".zip,application/zip" style="flex:1;" />
+                                <button is="emby-button" type="button" class="raised emby-button" id="UploadImportZip">Upload ZIP & Analyze</button>
+                            </div>
+                            <div class="fieldDescription">Select the ZIP created by the Export. The server will extract and validate it, then show the users and libraries found.</div>
+                        </div>
+
+                        <!-- Import Analysis Status -->
+                        <div id="ImportAnalyzeStatus" style="display:none; margin-top:0.5rem; font-weight:600;">Analyzing...</div>
+                        <div id="ImportBreakdown" style="display:none; margin-top:0.75rem; background:#1b1b1b; color:#ddd; padding:10px; border-radius:4px;"></div>
                     </div>
                 </form>
             </div>
         </div>
+
         <script type="text/javascript">
-            var TemplateConfig = {
+            // ===== JELLYFIN MIGRATOR CONFIGURATION PAGE =====
+            // Minimal zip builder using fflate (embedded v0.8.2)
+            /* eslint-disable */
+            const fflate=(()=>{function h(e,t){return Object.setPrototypeOf(e,t),e}function p(e,t){e.push(t>>24&255,t>>16&255,t>>8&255,255&t)}function y(e,t){for(let r=0;r<4;r++)e.push(255&t),t>>=8}function w(e){let t=0;for(let r=0;r<e.length;r++)t=t>>>0+e[r]>>>0,t>>>0>=4294967296&&(t-=4294967296);return t>>>0}function C(e){let t=~e>>>0;return y([],t)}function S(e,t,r){let n=[];y(n,67324752),y(n,t),y(n,20),y(n,0),y(n,0),y(n,0),y(n,0),y(n,0),y(n,0),y(n,r.length),y(n,0),n.push(...e),n.push(...r);return n}function P(e,t,r,n,i){let a=[];y(a,33639248),y(a,t),y(a,20),y(a,0),y(a,0),y(a,0),y(a,0),y(a,0),y(a,0),y(a,r.length),y(a,0),y(a,0),y(a,0),y(a,0),y(a,n),y(a,0),a.push(...e);let s=i;return a.push(...s),a}function D(e){let t=0;for(let r=0;r<e.length;r++)t+=e[r].length;return t}function T(e){return new Blob([new Uint8Array(e)],{type:'application/zip'})}function B(e){let t=0;for(let r of e)t+=r.length;return t}return{zipSync:function(e){let t=[],r=[],n=[],i=0;for(let a of e){let s=new TextEncoder().encode(a.name),o=typeof a.data=='string'?new TextEncoder().encode(a.data):new Uint8Array(a.data),l=o.length,c=w(o),u=S(s,0,[],o);r.push(u);let f=P(s,0,[],l,[]);n.push(f),i+=u.length}let a=[];for(let s of r)a.push(...s);let o=D(n),l=a.length;for(let s of n)a.push(...s);y(a,101010256),y(a,0),y(a,0),y(a,r.length),y(a,r.length),y(a,o),y(a,l),y(a,0);return T(a)}}})();
+            /* eslint-enable */
+
+            const TemplateConfig = {
                 pluginUniqueId: 'eb5d7894-8eef-4b36-aa6f-5d124e828ce1'
             };
 
-            document.querySelector('#TemplateConfigPage')
-                .addEventListener('pageshow', function() {
-                    Dashboard.showLoadingMsg();
-                    ApiClient.getPluginConfiguration(TemplateConfig.pluginUniqueId).then(function (config) {
-                        document.querySelector('#IncludeUsers').checked = config.IncludeUsers === true;
-                        document.querySelector('#IncludeUserPasswordHashes').checked = config.IncludeUserPasswordHashes === true;
-                        document.querySelector('#IncludeLibraries').checked = config.IncludeLibraries === true;
-                        document.querySelector('#IncludePermissions').checked = config.IncludePermissions === true;
-                        document.querySelector('#IncludeWatchHistory').checked = config.IncludeWatchHistory === true;
-                        document.querySelector('#IncludeDevices').checked = config.IncludeDevices === true;
-                        document.querySelector('#ExportDirectory').value = config.ExportDirectory || '';
-                        
-
-                        // Render dynamic lists
-                        loadUsersAndLibraries(config);
-                        try { renderExportLog(config); } catch (e) {}
-                    });
-                });
-
-            document.querySelector('#TemplateConfigForm')
-                .addEventListener('submit', function(e) {
-                Dashboard.showLoadingMsg();
-                ApiClient.getPluginConfiguration(TemplateConfig.pluginUniqueId).then(function (config) {
-                    config.IncludeUsers = document.querySelector('#IncludeUsers').checked;
-                    config.IncludeUserPasswordHashes = document.querySelector('#IncludeUserPasswordHashes').checked;
-                    config.IncludeLibraries = document.querySelector('#IncludeLibraries').checked;
-                    config.IncludePermissions = document.querySelector('#IncludePermissions').checked;
-                    config.IncludeWatchHistory = document.querySelector('#IncludeWatchHistory').checked;
-                    config.IncludeDevices = document.querySelector('#IncludeDevices').checked;
-
-                    var selectedUserIds = [];
-                    var selectedUsernames = [];
-                    document.querySelectorAll('#UsersList input[type="checkbox"][data-kind="user"]:checked').forEach(function (el) {
-                        selectedUserIds.push(el.value);
-                        selectedUsernames.push(el.getAttribute('data-username'));
-                    });
-                    config.SelectedUserIds = selectedUserIds;
-                    config.SelectedUsernames = selectedUsernames;
-
-                    var selectedLibIds = [];
-                    var selectedLibPaths = [];
-                    document.querySelectorAll('#LibrariesList input[type="checkbox"][data-kind="library"]:checked').forEach(function (el) {
-                        selectedLibIds.push(el.value);
-                        try {
-                            var paths = JSON.parse(decodeURIComponent(el.getAttribute('data-paths') || '[]'));
-                            (paths || []).forEach(function (p) { selectedLibPaths.push(p); });
-                        } catch {}
-                    });
-                    config.SelectedLibraryIds = selectedLibIds;
-                    config.SelectedLibraryPaths = selectedLibPaths;
-
-                    config.ExportDirectory = document.querySelector('#ExportDirectory').value;
-                    
-                    ApiClient.updatePluginConfiguration(TemplateConfig.pluginUniqueId, config).then(function (result) {
-                        Dashboard.processPluginConfigurationUpdateResult(result);
-                    });
-                });
-
-                e.preventDefault();
-                return false;
-            });
-
-            document.querySelector('#RunExportNow')
-                .addEventListener('click', function () {
-                    Dashboard.showLoadingMsg();
-                    var $status = document.querySelector('#ExportRunStatus');
-
-                    // First save the configuration
-                    ApiClient.getPluginConfiguration(TemplateConfig.pluginUniqueId).then(function (config) {
-                        config.IncludeUsers = document.querySelector('#IncludeUsers').checked;
-                        config.IncludeUserPasswordHashes = document.querySelector('#IncludeUserPasswordHashes').checked;
-                        config.IncludeLibraries = document.querySelector('#IncludeLibraries').checked;
-                        config.IncludePermissions = document.querySelector('#IncludePermissions').checked;
-                        config.IncludeWatchHistory = document.querySelector('#IncludeWatchHistory').checked;
-                        config.IncludeDevices = document.querySelector('#IncludeDevices').checked;
-
-                        var selectedUserIds = [];
-                        var selectedUsernames = [];
-                        document.querySelectorAll('#UsersList input[type="checkbox"][data-kind="user"]:checked').forEach(function (el) {
-                            selectedUserIds.push(el.value);
-                            selectedUsernames.push(el.getAttribute('data-username'));
-                        });
-                        config.SelectedUserIds = selectedUserIds;
-                        config.SelectedUsernames = selectedUsernames;
-
-                        var selectedLibIds = [];
-                        var selectedLibPaths = [];
-                        document.querySelectorAll('#LibrariesList input[type="checkbox"][data-kind="library"]:checked').forEach(function (el) {
-                            selectedLibIds.push(el.value);
-                            try {
-                                var paths = JSON.parse(decodeURIComponent(el.getAttribute('data-paths') || '[]'));
-                                (paths || []).forEach(function (p) { selectedLibPaths.push(p); });
-                            } catch {}
-                        });
-                        config.SelectedLibraryIds = selectedLibIds;
-                        config.SelectedLibraryPaths = selectedLibPaths;
-
-                        config.ExportDirectory = document.querySelector('#ExportDirectory').value;
-
-                        return ApiClient.updatePluginConfiguration(TemplateConfig.pluginUniqueId, config);
-                    }).then(function (result) {
-                        // Configuration saved successfully
-                        console.log('Configuration saved:', result);
-
-                        // Wait a moment for the save to propagate, then run the export
-                        return new Promise(function(resolve) {
-                            setTimeout(function() {
-                                resolve();
-                            }, 1000); // 1 second delay
-                        });
-                    }).then(function () {
-                        // Now run the export
-                        return ApiClient.getScheduledTasks();
-                    }).then(function (tasks) {
-                        var task = (tasks || []).find(function (t) { return t.Key === 'JellyfinMigratorExport'; });
-                        if (!task) {
-                            Dashboard.hideLoadingMsg();
-                            Dashboard.alert({ title: 'Migrator', message: 'Export task not found.' });
-                            return Promise.reject('Task not found');
-                        }
-                        return ApiClient.startScheduledTask(task.Id).then(function () { return task; });
-                    }).then(function () {
-                        Dashboard.hideLoadingMsg();
-                        $status.textContent = 'RUNNING…';
-                        // Light polling to update status until completion (max 5 minutes)
-                        var started = Date.now();
-                        var poll = function () {
-                            ApiClient.getScheduledTasks().then(function (tasks) {
-                                var t = (tasks || []).find(function (x) { return x.Key === 'JellyfinMigratorExport'; });
-                                if (!t) { return; }
-                                var state = (t.State || t.Status || '').toString().toLowerCase();
-                                if (state.indexOf('running') !== -1) {
-                                    $status.textContent = 'RUNNING…';
-                                } else if (state.indexOf('idle') !== -1 || state.indexOf('completed') !== -1 || state === '') {
-                                    $status.textContent = 'COMPLETED';
-                                    return; // stop polling
-                                }
-                                if (Date.now() - started < 5 * 60 * 1000) {
-                                    setTimeout(poll, 2000);
-                                }
-                            }).catch(function () {
-                                if (Date.now() - started < 5 * 60 * 1000) {
-                                    setTimeout(poll, 4000);
-                                }
-                            });
-                        };
-                        setTimeout(poll, 1500);
-                    }).catch(function (err) {
-                        Dashboard.hideLoadingMsg();
-                        console.error('Failed to save settings or start export', err);
-                        Dashboard.alert({ title: 'Migrator', message: 'Failed to save settings or start export.' });
-                    });
-                });
-
-            // Live log updater: polls plugin configuration while status shows RUNNING
-            (function setupLiveLogUpdater() {
-                var timerId = null;
-                function updateLog() {
-                    ApiClient.getPluginConfiguration(TemplateConfig.pluginUniqueId)
-                        .then(function (cfg) { try { renderExportLog(cfg); } catch (e) {} });
-                }
-                function checkStatus() {
-                    var $status = document.querySelector('#ExportRunStatus');
-                    var s = ($status && $status.textContent || '').toLowerCase();
-                    if (s.indexOf('running') !== -1) {
-                        if (!timerId) {
-                            timerId = setInterval(updateLog, 2000);
-                        }
-                    } else {
-                        if (timerId) {
-                            clearInterval(timerId);
-                            timerId = null;
-                            updateLog();
-                        }
-                    }
-                }
-                setInterval(checkStatus, 1000);
-            })();
+            // ===== UTILITY FUNCTIONS =====
+            function downloadServerZipFromConfig(cfg) {
+                var b64 = (cfg && cfg.LastExportZipBase64) || '';
+                if (!b64) { Dashboard.alert({ title: 'Export', message: 'ZIP not ready yet. Please wait a moment.' }); return; }
+                try {
+                    var byteChars = atob(b64);
+                    var byteNumbers = new Array(byteChars.length);
+                    for (var i = 0; i < byteChars.length; i++) { byteNumbers[i] = byteChars.charCodeAt(i); }
+                    var byteArray = new Uint8Array(byteNumbers);
+                    var blob = new Blob([byteArray], { type: 'application/zip' });
+                    var a = document.createElement('a');
+                    a.href = URL.createObjectURL(blob);
+                    var ts = cfg.LastExportUtc ? new Date(cfg.LastExportUtc).toISOString().replace(/[:T]/g,'-').split('.')[0] : '';
+                    a.download = ts ? ('jellyfin-export-' + ts + '.zip') : 'jellyfin-export.zip';
+                    document.body.appendChild(a); a.click(); a.remove();
+                } catch (e) { console.error('Failed to decode ZIP', e); Dashboard.alert({ title: 'Export', message: 'Failed to decode ZIP. See console.'}); }
+            }
 
             function loadUsersAndLibraries(config) {
                 var $users = document.querySelector('#UsersList');
@@ -320,6 +224,312 @@
                 if (config.LastExportPath) { parts.push('Path: ' + config.LastExportPath); }
                 $meta.textContent = parts.join(' | ');
             }
+
+            function esc(s){ return (s||'').toString().replace(/[&<>\"']/g, function(c){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'})[c]; }); }
+
+            function renderImportBreakdown(data){
+                var breakdownEl = document.getElementById('ImportBreakdown');
+                if (!breakdownEl) return;
+                var users = (data && data.Users) || [];
+                var libs = (data && data.Libraries) || [];
+                var errs = (data && data.Errors) || [];
+                var extracted = (data && data.ExtractedPath) || '';
+
+                var html = '';
+                html += '<div style="font-weight:600; margin-bottom:6px;">Import Analysis</div>';
+                if (extracted) { html += '<div class="fieldDescription">Extracted to: ' + esc(extracted) + '</div>'; }
+                if (errs.length){ html += '<div style="color:#e67e22; margin:6px 0;">Warnings/Errors:<ul>' + errs.map(function(e){return '<li>'+esc(e)+'</li>';}).join('') + '</ul></div>'; }
+                html += '<div style="margin-top:6px;">Users found: <b>' + users.length + '</b></div>';
+                if (users.length){
+                    var showU = users.slice(0, 20).map(function(u){ return esc(((u.Username||u.username||'') + (u.Id? ' ['+u.Id+']':''))); });
+                    html += '<div class="fieldDescription">' + showU.join(', ') + (users.length>20?' ...':'') + '</div>';
+                }
+                html += '<div style="margin-top:6px;">Libraries found: <b>' + libs.length + '</b></div>';
+                if (libs.length){
+                    var showL = libs.slice(0, 20).map(function(l){ return esc(((l.Name||l.name||'') + (l.Id? ' ['+l.Id+']':''))); });
+                    html += '<div class="fieldDescription">' + showL.join(', ') + (libs.length>20?' ...':'') + '</div>';
+                }
+                breakdownEl.innerHTML = html;
+                breakdownEl.style.display = 'block';
+            }
+
+            // ===== PAGE INITIALIZATION =====
+            document.querySelector('#TemplateConfigPage').addEventListener('pageshow', function() {
+                Dashboard.showLoadingMsg();
+                ApiClient.getPluginConfiguration(TemplateConfig.pluginUniqueId).then(function (config) {
+                    document.querySelector('#IncludeUsers').checked = config.IncludeUsers === true;
+                    document.querySelector('#IncludeUserPasswordHashes').checked = config.IncludeUserPasswordHashes === true;
+                    document.querySelector('#IncludeLibraries').checked = config.IncludeLibraries === true;
+                    document.querySelector('#IncludePermissions').checked = config.IncludePermissions === true;
+                    document.querySelector('#IncludeWatchHistory').checked = config.IncludeWatchHistory === true;
+                    document.querySelector('#IncludeDevices').checked = config.IncludeDevices === true;
+                    loadUsersAndLibraries(config);
+                    try { renderExportLog(config); } catch (e) {}
+                });
+            });
+
+            // ===== FORM SUBMISSION =====
+            document.querySelector('#TemplateConfigForm').addEventListener('submit', function(e) {
+                Dashboard.showLoadingMsg();
+                ApiClient.getPluginConfiguration(TemplateConfig.pluginUniqueId).then(function (config) {
+                    config.IncludeUsers = document.querySelector('#IncludeUsers').checked;
+                    config.IncludeUserPasswordHashes = document.querySelector('#IncludeUserPasswordHashes').checked;
+                    config.IncludeLibraries = document.querySelector('#IncludeLibraries').checked;
+                    config.IncludePermissions = document.querySelector('#IncludePermissions').checked;
+                    config.IncludeWatchHistory = document.querySelector('#IncludeWatchHistory').checked;
+                    config.IncludeDevices = document.querySelector('#IncludeDevices').checked;
+
+                    var selectedUserIds = [];
+                    var selectedUsernames = [];
+                    document.querySelectorAll('#UsersList input[type="checkbox"][data-kind="user"]:checked').forEach(function (el) {
+                        selectedUserIds.push(el.value);
+                        selectedUsernames.push(el.getAttribute('data-username'));
+                    });
+                    config.SelectedUserIds = selectedUserIds;
+                    config.SelectedUsernames = selectedUsernames;
+
+                    var selectedLibIds = [];
+                    var selectedLibPaths = [];
+                    document.querySelectorAll('#LibrariesList input[type="checkbox"][data-kind="library"]:checked').forEach(function (el) {
+                        selectedLibIds.push(el.value);
+                        try {
+                            var paths = JSON.parse(decodeURIComponent(el.getAttribute('data-paths') || '[]'));
+                            (paths || []).forEach(function (p) { selectedLibPaths.push(p); });
+                        } catch {}
+                    });
+                    config.SelectedLibraryIds = selectedLibIds;
+                    config.SelectedLibraryPaths = selectedLibPaths;
+
+                    var modeSubmit = (function(){
+                        var vt = document.getElementById('VerifyTab');
+                        var it = document.getElementById('ImportTab');
+                        if (vt && vt.style && vt.style.display !== 'none') return 'Verify';
+                        if (it && it.style && it.style.display !== 'none') return 'Import';
+                        return 'Export';
+                    })();
+                    config.Mode = modeSubmit;
+
+                    ApiClient.updatePluginConfiguration(TemplateConfig.pluginUniqueId, config).then(function (result) {
+                        Dashboard.processPluginConfigurationUpdateResult(result);
+                    });
+                });
+                e.preventDefault();
+                return false;
+            });
+
+            // ===== RUN EXPORT BUTTON =====
+            document.querySelector('#RunExportNow').addEventListener('click', function () {
+                Dashboard.showLoadingMsg();
+                var $status = document.querySelector('#ExportRunStatus');
+                ApiClient.getPluginConfiguration(TemplateConfig.pluginUniqueId).then(function (config) {
+                    var mode = (function(){
+                        var vt = document.getElementById('VerifyTab');
+                        var it = document.getElementById('ImportTab');
+                        if (vt && vt.style && vt.style.display !== 'none') return 'Verify';
+                        if (it && it.style && it.style.display !== 'none') return 'Import';
+                        return 'Export';
+                    })();
+                    config.Mode = mode;
+                    config.IncludeUsers = document.querySelector('#IncludeUsers').checked;
+                    config.IncludeUserPasswordHashes = document.querySelector('#IncludeUserPasswordHashes').checked;
+                    config.IncludeLibraries = document.querySelector('#IncludeLibraries').checked;
+                    config.IncludePermissions = document.querySelector('#IncludePermissions').checked;
+                    config.IncludeWatchHistory = document.querySelector('#IncludeWatchHistory').checked;
+                    config.IncludeDevices = document.querySelector('#IncludeDevices').checked;
+
+                    var selectedUserIds = [];
+                    var selectedUsernames = [];
+                    document.querySelectorAll('#UsersList input[type="checkbox"][data-kind="user"]:checked').forEach(function (el) {
+                        selectedUserIds.push(el.value);
+                        selectedUsernames.push(el.getAttribute('data-username'));
+                    });
+                    config.SelectedUserIds = selectedUserIds;
+                    config.SelectedUsernames = selectedUsernames;
+
+                    var selectedLibIds = [];
+                    var selectedLibPaths = [];
+                    document.querySelectorAll('#LibrariesList input[type="checkbox"][data-kind="library"]:checked').forEach(function (el) {
+                        selectedLibIds.push(el.value);
+                        try {
+                            var paths = JSON.parse(decodeURIComponent(el.getAttribute('data-paths') || '[]'));
+                            (paths || []).forEach(function (p) { selectedLibPaths.push(p); });
+                        } catch {}
+                    });
+                    config.SelectedLibraryIds = selectedLibIds;
+                    config.SelectedLibraryPaths = selectedLibPaths;
+                    config.VerifyDirectory = document.querySelector('#VerifyDirectory') ? document.querySelector('#VerifyDirectory').value : '';
+                    return ApiClient.updatePluginConfiguration(TemplateConfig.pluginUniqueId, config);
+                }).then(function (result) {
+                    console.log('Configuration saved:', result);
+                    return new Promise(function(resolve) { setTimeout(function() { resolve(); }, 1000); });
+                }).then(function () {
+                    return ApiClient.getScheduledTasks();
+                }).then(function (tasks) {
+                    var task = (tasks || []).find(function (t) { return t.Key === 'JellyfinMigratorExport'; });
+                    if (!task) {
+                        Dashboard.hideLoadingMsg();
+                        Dashboard.alert({ title: 'Migrator', message: 'Migration task not found.' });
+                        return Promise.reject('Task not found');
+                    }
+                    return ApiClient.startScheduledTask(task.Id).then(function () { return task; });
+                }).then(function () {
+                    Dashboard.hideLoadingMsg();
+                    $status.textContent = 'RUNNING.';
+                    var started = Date.now();
+                    var poll = function () {
+                        ApiClient.getScheduledTasks().then(function (tasks) {
+                            var t = (tasks || []).find(function (x) { return x.Key === 'JellyfinMigratorExport'; });
+                            if (!t) { return; }
+                            var state = (t.State || t.Status || '').toString().toLowerCase();
+                            if (state.indexOf('running') !== -1) {
+                                $status.textContent = 'RUNNING.';
+                            } else if (state.indexOf('idle') !== -1 || state.indexOf('completed') !== -1 || state === '') {
+                                $status.textContent = 'COMPLETED';
+                                var $dl = document.getElementById('DownloadExportContainer');
+                                if ($dl) { $dl.style.display = 'block'; }
+                                ApiClient.getPluginConfiguration(TemplateConfig.pluginUniqueId).then(function(cfg){ downloadServerZipFromConfig(cfg); });
+                                return;
+                            }
+                            if (Date.now() - started < 5 * 60 * 1000) { setTimeout(poll, 2000); }
+                        }).catch(function () {
+                            if (Date.now() - started < 5 * 60 * 1000) { setTimeout(poll, 4000); }
+                        });
+                    };
+                    setTimeout(poll, 1500);
+                }).catch(function (err) {
+                    Dashboard.hideLoadingMsg();
+                    console.error('Failed to save settings or start export', err);
+                    Dashboard.alert({ title: 'Migrator', message: 'Failed to save settings or start export.' });
+                });
+            });
+
+            // ===== LIVE LOG UPDATER =====
+            (function setupLiveLogUpdater() {
+                var timerId = null;
+                function updateLog() {
+                    ApiClient.getPluginConfiguration(TemplateConfig.pluginUniqueId).then(function (cfg) {
+                        try { renderExportLog(cfg); } catch (e) {}
+                    });
+                }
+                function checkStatus() {
+                    var $status = document.querySelector('#ExportRunStatus');
+                    var s = ($status && $status.textContent || '').toLowerCase();
+                    if (s.indexOf('running') !== -1) {
+                        if (!timerId) { timerId = setInterval(updateLog, 2000); }
+                    } else {
+                        if (timerId) { clearInterval(timerId); timerId = null; updateLog(); }
+                    }
+                }
+                setInterval(checkStatus, 1000);
+            })();
+
+            // ===== TAB MANAGEMENT =====
+            (function setupTabs() {
+                var $tabExport = document.getElementById('TabExport');
+                var $tabImport = document.getElementById('TabImport');
+                var $export = document.getElementById('ExportTab');
+                var $import = document.getElementById('ImportTab');
+                var $runText = document.getElementById('RunButtonText');
+
+                function setActive(tab) {
+                    if ($export) { $export.style.display = tab === 'Export' ? 'block' : 'none'; }
+                    if ($import) { $import.style.display = tab === 'Import' ? 'block' : 'none'; }
+                    [$tabExport,$tabImport].filter(Boolean).forEach(function(btn){
+                        btn.classList.remove('raised');
+                        if (!btn.classList.contains('button-flat')) btn.classList.add('button-flat');
+                    });
+                    if (tab === 'Export' && $tabExport) { $tabExport.classList.add('raised'); }
+                    if (tab === 'Import' && $tabImport) { $tabImport.classList.add('raised'); }
+                    if ($runText) { $runText.textContent = tab === 'Import' ? 'Save Config' : 'Save & Run Export'; }
+                    if (tab === 'Import') {
+                        var hold = document.getElementById('ImportHolding'); if (hold) hold.style.display = 'none';
+                        var dirEl = document.getElementById('ImportDirectory');
+                        if (dirEl && dirEl.closest) {
+                            var ctn = dirEl.closest('.inputContainer'); if (ctn) { ctn.style.display = 'none'; }
+                        }
+                        var bid = document.getElementById('BrowseImportDir'); if (bid) { bid.style.display = 'none'; }
+                    }
+                }
+
+                ApiClient.getPluginConfiguration(TemplateConfig.pluginUniqueId).then(function(cfg){
+                    var desired = (cfg.Mode || 'Export');
+                    setActive(desired);
+                });
+
+                if ($tabExport) $tabExport.addEventListener('click', function(){ setActive('Export'); });
+                if ($tabImport) $tabImport.addEventListener('click', function(){ setActive('Import'); });
+            })();
+
+            // ===== IMPORT ZIP UPLOAD =====
+            (function setupImport() {
+                var uploadBtn = document.getElementById('UploadImportZip');
+                if (uploadBtn) {
+                    uploadBtn.addEventListener('click', function(){
+                        var fileInput = document.getElementById('ImportZipFile');
+                        var statusEl = document.getElementById('ImportAnalyzeStatus');
+                        var breakdownEl = document.getElementById('ImportBreakdown');
+                        if (!fileInput || !fileInput.files || fileInput.files.length === 0) {
+                            Dashboard.alert({ title: 'Import', message: 'Please choose a ZIP file first.' });
+                            return;
+                        }
+                        var file = fileInput.files[0];
+                        statusEl.style.display = 'block';
+                        statusEl.textContent = 'Uploading and analyzing...';
+                        breakdownEl.style.display = 'none';
+                        breakdownEl.innerHTML = '';
+
+                        var reader = new FileReader();
+                        reader.onload = function(){
+                            try {
+                                var arr = new Uint8Array(reader.result);
+                                var b64 = btoa(Array.prototype.map.call(arr, function(ch){ return String.fromCharCode(ch); }).join(''));
+                                ApiClient.getPluginConfiguration(TemplateConfig.pluginUniqueId).then(function(cfg){
+                                    cfg.LastImportZipBase64 = b64;
+                                    cfg.Mode = 'Import';
+                                    return ApiClient.updatePluginConfiguration(TemplateConfig.pluginUniqueId, cfg);
+                                }).then(function(){
+                                    return ApiClient.getScheduledTasks();
+                                }).then(function(tasks){
+                                    var t = tasks.find(function(x){ return x && (x.Key === 'JellyfinMigratorExport' || x.Name === 'Migration: Export Data'); });
+                                    if (!t) throw new Error('Import task not found');
+                                    return ApiClient.startScheduledTask(t.Id).then(function(){ return t; });
+                                }).then(function(){
+                                    var attempts = 0; var maxAttempts = 40;
+                                    function poll(){
+                                        attempts++;
+                                        ApiClient.getPluginConfiguration(TemplateConfig.pluginUniqueId).then(function(cfg){
+                                            if (cfg && cfg.LastImportAnalysisJson){
+                                                var data = {};
+                                                try { data = JSON.parse(cfg.LastImportAnalysisJson); } catch(e) { console.warn('Bad analysis JSON', e); }
+                                                statusEl.textContent = 'Analysis complete.';
+                                                renderImportBreakdown(data);
+                                            } else if (attempts < maxAttempts) {
+                                                setTimeout(poll, 1000);
+                                            } else {
+                                                statusEl.textContent = 'Timed out waiting for analysis.';
+                                            }
+                                        });
+                                    }
+                                    setTimeout(poll, 1000);
+                                }).catch(function(err){
+                                    console.error('Import analyze failed', err);
+                                    statusEl.textContent = 'Import failed.';
+                                    Dashboard.alert({ title: 'Import', message: 'Upload/analyze failed. See console.' });
+                                });
+                            } catch (e) {
+                                console.error('Failed to encode file', e);
+                                statusEl.textContent = 'Import failed.';
+                            }
+                        };
+                        reader.readAsArrayBuffer(file);
+                    });
+                }
+
+                var serverZipBtn = document.getElementById('DownloadServerZipBtn');
+                if (serverZipBtn) serverZipBtn.addEventListener('click', function(){
+                    ApiClient.getPluginConfiguration(TemplateConfig.pluginUniqueId).then(downloadServerZipFromConfig);
+                });
+            })();
         </script>
     </div>
 </body>
