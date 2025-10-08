@@ -1,0 +1,25 @@
+role: you are an expert c# developer expert at using service APIs and importing data from JSON for system migrations 
+
+Instruction: you are to work on the code in Jellyfin.Plugin.Template and expand the import file process so that libraries are imported.
+The import process should take the new paths from the GUI and use those to build new libraries. The libraries should be refreshed and then the user informed when the refresh has completed. 
+Once the import has completed, take the library settings from the JSON file and apply those to the new libnrary
+All actions should be verbose logged
+The log should be displayed at the bottom of the page - see the export tab for an example
+
+If you need any further clarification then ask
+
+
+Constriants: 
+ - Keep code clean and to the point
+ - Avoid long or deeply nested logic steps. Branch them out into separate functions
+ - Ensure verbose logging is applied at all steps
+
+
+role: you are an expert c# developer expert at using service APIs and importing data from JSON for system migrations 
+
+your task is to fix the import section of this migration plugin. It is supposed to import a library, start a scan, wait for the scan to complete and then respond to the user. 
+This is not happening.
+use the file Docs/library-scans.md for information on how to do this
+
+do not run a build once the fix is complete - i will do this myself
+

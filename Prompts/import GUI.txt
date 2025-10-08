@@ -1,0 +1,19 @@
+role: you are an expert c# developer expert at using service APIs and importing data from JSON for system migrations 
+
+Instruction: you are to work on the code in Jellyfin.Plugin.Template\Export and expand the import file process so that all user, user persmissions and libraries are shown, similar to how the exports view displays the data.
+Users and the libraries they have permission to should be selectable
+Libraries need to be selectable
+Library paths need to be editable. Read the paths from the source file - example in @Exports\libraries.json
+
+
+Constriants: 
+ - Keep code clean and to the point
+ - Avoid long or deeply nested logic steps. this should be easy
+ - Ensure verbose logging is applied at all steps
+
+
+a few tweaks and fixes
+
+1. remove the IDs
+2. enable checkbox ticking
+3. ensure the style and layout is like the export tab

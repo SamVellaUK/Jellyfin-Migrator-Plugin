@@ -335,7 +335,23 @@ internal sealed class LibraryImporter
                     try
                     {
                         // AddVirtualFolder is the actual API method available
-                        _libraryManager.AddVirtualFolder(name, null, options, false);
+                        // Second parameter is the collection type - convert string to CollectionTypeOptions enum
+                        MediaBrowser.Model.Entities.CollectionTypeOptions? collectionTypeEnum = null;
+                        if (!string.IsNullOrWhiteSpace(collectionType))
+                        {
+                            // Try to parse the collection type string to enum
+                            if (Enum.TryParse<MediaBrowser.Model.Entities.CollectionTypeOptions>(collectionType, true, out var parsedType))
+                            {
+                                collectionTypeEnum = parsedType;
+                                _exportLogger.Log($"Collection type parsed: {collectionTypeEnum}");
+                            }
+                            else
+                            {
+                                _exportLogger.Log($"⚠ WARNING: Could not parse collection type '{collectionType}', will set to null");
+                            }
+                        }
+
+                        _libraryManager.AddVirtualFolder(name, collectionTypeEnum, options, false);
                         _exportLogger.Log("✓ Virtual folder created successfully");
                     }
                     catch (Exception ex)
@@ -687,22 +703,24 @@ internal sealed class LibraryImporter
                 }
             });
 
-            // Trigger the scan
-            _exportLogger.Log("Triggering library scan...");
-            _ = Task.Run(async () =>
-            {
-                try
-                {
-                    await folder.ValidateChildren(progress, cancellationToken).ConfigureAwait(false);
-                }
-                catch (Exception ex)
-                {
-                    _exportLogger.Log($"ValidateChildren error: {ex.Message}");
-                }
-            }, cancellationToken);
+            // Trigger the scan and wait for completion
+            _exportLogger.Log("Starting library scan...");
+            _exportLogger.Log("This operation will not complete until the scan is fully finished.");
 
-            // Wait for scan to complete by polling item count
-            _exportLogger.Log("Polling for scan completion by monitoring item count...");
+            // Start ValidateChildren - this is the actual scan operation
+            try
+            {
+                await folder.ValidateChildren(progress, cancellationToken).ConfigureAwait(false);
+                _exportLogger.Log("ValidateChildren completed");
+            }
+            catch (Exception ex)
+            {
+                _exportLogger.LogError($"ValidateChildren error: {ex.Message}", ex);
+                throw;
+            }
+
+            // Additional verification: wait for item count to stabilize
+            _exportLogger.Log("Verifying scan completion by monitoring item count...");
             await WaitForLibraryScanCompletionAsync(folder, cancellationToken).ConfigureAwait(false);
 
             var duration = DateTime.Now - startTime;
@@ -726,46 +744,48 @@ internal sealed class LibraryImporter
 
     private async Task WaitForLibraryScanCompletionAsync(Folder folder, CancellationToken cancellationToken)
     {
-        _exportLogger.Log("Monitoring item count to detect scan completion...");
-
-        // Poll for item count to stabilize (as per library-scans.md documentation)
+        // Poll for item count to stabilize (as documented in library-scans.md)
+        // This provides additional verification that the scan has truly completed
         int lastCount = -1;
         int stableCount = 0;
         const int stableThreshold = 3; // Number of times count must not change
         const int pollIntervalMs = 2000; // Check every 2 seconds
-        var maxWaitTime = TimeSpan.FromMinutes(60);
+        var maxWaitTime = TimeSpan.FromSeconds(30); // Only wait 30 seconds for verification
         var startTime = DateTime.Now;
+
+        _exportLogger.Log("Waiting for item count to stabilize as final verification...");
 
         while (stableCount < stableThreshold)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            // Check timeout
+            // Check timeout - this is just verification after ValidateChildren completes
             if (DateTime.Now - startTime > maxWaitTime)
             {
-                _exportLogger.Log($"⚠ WARNING: Scan timeout after {maxWaitTime.TotalMinutes} minutes");
-                _exportLogger.Log("Import will continue, but scan may still be in progress.");
+                _exportLogger.Log("Item count verification timeout - proceeding anyway since ValidateChildren completed");
                 return;
             }
 
-            // Get current item count
+            // Get current item count from folder (use GetRecursiveChildren for total count)
             int currentCount = 0;
             try
             {
-                var children = folder.GetChildren();
-                currentCount = children?.Count() ?? 0;
-                _exportLogger.Log($"Current item count: {currentCount} (previous: {lastCount}, stable: {stableCount}/{stableThreshold})");
+                var children = folder.GetRecursiveChildren();
+                currentCount = children?.Count ?? 0;
+                _exportLogger.Log($"Verification - Item count: {currentCount} (previous: {lastCount}, stable: {stableCount}/{stableThreshold})");
             }
             catch (Exception ex)
             {
                 _exportLogger.Log($"Error getting item count: {ex.Message}");
+                // If we can't get count, just proceed since ValidateChildren already completed
+                return;
             }
 
             // Check if count is stable
             if (currentCount == lastCount)
             {
                 stableCount++;
-                _exportLogger.Log($"Item count unchanged ({stableCount}/{stableThreshold} checks stable)");
+                _exportLogger.Log($"Item count stable ({stableCount}/{stableThreshold} checks)");
             }
             else
             {
@@ -778,6 +798,6 @@ internal sealed class LibraryImporter
             await Task.Delay(pollIntervalMs, cancellationToken).ConfigureAwait(false);
         }
 
-        _exportLogger.Log($"✓ Item count stable at {lastCount} items - scan appears complete");
+        _exportLogger.Log($"✓ Item count verified as stable at {lastCount} items");
     }
 }

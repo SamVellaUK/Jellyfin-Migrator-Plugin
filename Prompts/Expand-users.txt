@@ -1,0 +1,12 @@
+role: you are an expert c# developer expert at using service APIs and exporting data to JSON for system migrations 
+
+Instruction: you are to work on the code in Jellyfin.Plugin.Template\Export and expand the user export to include a number of new fields as described in the documentation
+
+Context: Use Docs\userexport.md for API help and Docs\userfields.md for a list of fields to export from Jellyfin
+
+Examples: Examples are contained in the context files
+
+Constriants: 
+ - Keep code clean and to the point
+ - Avoid long or deepl nested logic steps. this should be easy
+ - Ensure verbose logging is applied at all steps
