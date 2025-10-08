@@ -10,7 +10,7 @@
         "dependencies": {
           "Jellyfin.Controller": "10.9.11",
           "Jellyfin.Model": "10.9.11",
-          "Microsoft.Data.Sqlite": "8.0.8",
+          "Microsoft.Data.Sqlite": "8.0.20",
           "SerilogAnalyzer": "0.15.0",
           "SmartAnalyzers.MultithreadingAnalyzer": "1.1.31",
           "StyleCop.Analyzers": "1.2.0-beta.556"
@@ -164,20 +164,20 @@
           "Microsoft.Extensions.Options": "8.0.0"
         }
       },
-      "Microsoft.Data.Sqlite/8.0.8": {
+      "Microsoft.Data.Sqlite/8.0.20": {
         "dependencies": {
-          "Microsoft.Data.Sqlite.Core": "8.0.8",
+          "Microsoft.Data.Sqlite.Core": "8.0.20",
           "SQLitePCLRaw.bundle_e_sqlite3": "2.1.6"
         }
       },
-      "Microsoft.Data.Sqlite.Core/8.0.8": {
+      "Microsoft.Data.Sqlite.Core/8.0.20": {
         "dependencies": {
           "SQLitePCLRaw.core": "2.1.6"
         },
         "runtime": {
           "lib/net8.0/Microsoft.Data.Sqlite.dll": {
-            "assemblyVersion": "8.0.8.0",
-            "fileVersion": "8.0.824.36704"
+            "assemblyVersion": "8.0.20.0",
+            "fileVersion": "8.0.2025.41910"
           }
         }
       },
@@ -534,19 +534,19 @@
       "path": "microsoft.aspnetcore.httpoverrides/2.2.0",
       "hashPath": "microsoft.aspnetcore.httpoverrides.2.2.0.nupkg.sha512"
     },
-    "Microsoft.Data.Sqlite/8.0.8": {
+    "Microsoft.Data.Sqlite/8.0.20": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Ao+kD9lZpZvvvfLHMR4/UviFGXaWhQ9AVT4fYMl62XWgIPuVIhZqLysmDNiXbsz6Pb87iyyElX2xSfigzKNZNg==",
-      "path": "microsoft.data.sqlite/8.0.8",
-      "hashPath": "microsoft.data.sqlite.8.0.8.nupkg.sha512"
+      "sha512": "sha512-k2mM6VuzvNlmrXPCXm+78Y+jgUifiaPdL9TpuSpJ73fLj3ErYq1CqCgDZR/BfBcvAXJrDYWGPrQ775okL62XEA==",
+      "path": "microsoft.data.sqlite/8.0.20",
+      "hashPath": "microsoft.data.sqlite.8.0.20.nupkg.sha512"
     },
-    "Microsoft.Data.Sqlite.Core/8.0.8": {
+    "Microsoft.Data.Sqlite.Core/8.0.20": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-qHInO2EvOcPhjgboP0TGnXM7rASdvWXrw6jAH8Yuz5YP82VTje7d/NKiX1i+dVbE3+G3JuW1kqNVB8yLvsqgYA==",
-      "path": "microsoft.data.sqlite.core/8.0.8",
-      "hashPath": "microsoft.data.sqlite.core.8.0.8.nupkg.sha512"
+      "sha512": "sha512-rsceqxvqaCKbASZahYa8chNdEtCghU2JErugi+Ngs/ds2QJrQixsSomGSFCR7219xQXMiz2pSrWshwm/DHqqNw==",
+      "path": "microsoft.data.sqlite.core/8.0.20",
+      "hashPath": "microsoft.data.sqlite.core.8.0.20.nupkg.sha512"
     },
     "Microsoft.Extensions.Caching.Abstractions/2.0.0": {
       "type": "package",

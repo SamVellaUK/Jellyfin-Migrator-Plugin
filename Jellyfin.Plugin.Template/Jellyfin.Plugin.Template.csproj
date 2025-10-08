@@ -8,12 +8,17 @@
     <Nullable>enable</Nullable>
     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
     <CodeAnalysisRuleSet>../jellyfin.ruleset</CodeAnalysisRuleSet>
+    <!-- Cross-platform build settings -->
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <RuntimeIdentifier></RuntimeIdentifier>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Jellyfin.Controller" Version="10.9.11" />
-    <PackageReference Include="Jellyfin.Model" Version="10.9.11" />
-    <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.8" />
+    <!-- Use version ranges for broader Jellyfin compatibility -->
+    <!-- 10.9.* works with 10.9.x and 10.10.x (backward compatible APIs) -->
+    <PackageReference Include="Jellyfin.Controller" Version="10.9.*" />
+    <PackageReference Include="Jellyfin.Model" Version="10.9.*" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.*" />
   </ItemGroup>
 
   <ItemGroup>

@@ -7,12 +7,15 @@ This file contains configuration and context for the Claude Code AI assistant wh
 **Project Name:** Jellyfin Migrator Plugin
 **Type:** C# .NET Jellyfin Plugin
 **Purpose:** Export user data, library permissions, passwords, and other migration data from Jellyfin servers
+**Platform Support:** Cross-platform (Windows, Linux, macOS)
 
 ## Build & Development Commands
 
 ### Build Commands
-```bash
-# Build the project (run as administrator)
+
+**Windows:**
+```powershell
+# Build and install (run as administrator)
 ./build.ps1 -Rebuild -Install -Restart
 
 # Build only (no install/restart)
@@ -20,6 +23,21 @@ dotnet build
 
 # Clean build
 dotnet clean && dotnet build
+```
+
+**Linux:**
+```bash
+# Build and install (requires PowerShell Core and sudo)
+pwsh ./build.ps1 -Rebuild -Install -Restart
+
+# Build only
+dotnet build
+
+# Clean build
+dotnet clean && dotnet build
+
+# Force Linux platform detection
+pwsh ./build.ps1 -Platform Linux -Install -Restart
 ```
 
 ### Test Commands
@@ -53,6 +71,36 @@ Jellyfin.Plugin.Template/
 - **Web UI:** Configuration interface for selecting users and export options
 - **API Support:** Can be triggered programmatically via Jellyfin's scheduled task API
 - **Logging:** Comprehensive logging for debugging and monitoring
+- **Cross-Platform:** Runs on Windows, Linux, and macOS with automatic platform detection
+
+## Cross-Platform Support
+
+### Platform Compatibility
+✅ **Windows** - Full support with Windows Service management
+✅ **Linux** - Full support with systemd service management
+✅ **macOS** - Should work (untested)
+
+### Build Configuration
+- Target: **.NET 8.0** (cross-platform runtime)
+- Platform: **AnyCPU** (platform-agnostic IL code)
+- Deployment: **Framework-dependent** (requires .NET runtime on target)
+- No native dependencies or platform-specific P/Invoke
+
+### Default Installation Paths
+- **Windows:** `C:\ProgramData\Jellyfin\Server\plugins\Migrator`
+- **Linux:** `/var/lib/jellyfin/plugins/Migrator`
+
+### Service Management
+- **Windows:** Uses Windows Service API (`JellyfinServer` service)
+- **Linux:** Uses systemd API (`jellyfin` service via `systemctl`)
+
+### Build Script Features
+- Automatic platform detection via `$IsLinux` / `$IsWindows`
+- Cross-platform file operations (PowerShell cmdlets vs shell commands)
+- Platform-aware service restart (Windows Service vs systemd)
+- Proper Linux permissions handling (chown jellyfin:jellyfin)
+
+See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed cross-platform deployment instructions.
 
 ## Development Notes
 
@@ -66,7 +114,9 @@ Jellyfin.Plugin.Template/
 - **Case Sensitivity:** Database GUIDs have dashes, config GUIDs don't - use normalized comparison
 - **Async Operations:** Always use ConfigureAwait(false) and proper async patterns
 - **SQL Injection:** Use parameterized queries, avoid dynamic SQL construction
-- **File Paths:** Use absolute paths, handle Windows path separators
+- **File Paths:** Use absolute paths, cross-platform path handling (Path.Combine, not hardcoded separators)
+- **Platform Detection:** Build script auto-detects OS; can override with -Platform parameter
+- **Linux Permissions:** Plugin files must be owned by jellyfin:jellyfin user/group
 
 ### Architecture
 - **ExportService:** Simple coordinator that manages the export workflow

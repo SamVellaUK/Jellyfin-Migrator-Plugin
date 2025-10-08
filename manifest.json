@@ -1,0 +1,20 @@
+[
+  {
+    "guid": "eb5d7894-8eef-4b36-aa6f-5d124e828ce1",
+    "name": "Migrator",
+    "description": "Export user data, library permissions, passwords, and other migration data from Jellyfin servers",
+    "overview": "Jellyfin Migrator Plugin - Export and migrate user data between servers",
+    "owner": "YOUR-GITHUB-USERNAME",
+    "category": "General",
+    "versions": [
+      {
+        "version": "1.0.0.0",
+        "changelog": "Cross-platform release supporting Windows, Linux, and Docker installations. Build once, deploy anywhere.",
+        "targetAbi": "10.9.0.0",
+        "sourceUrl": "https://github.com/YOUR-GITHUB-USERNAME/Jellyfin-Migrator-Plugin/releases/download/v1.0.0.0/jellyfin-migrator-1.0.0.0.zip",
+        "checksum": "REPLACE-WITH-MD5-HASH",
+        "timestamp": "2025-10-08T00:00:00Z"
+      }
+    ]
+  }
+]

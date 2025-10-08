@@ -1,14 +1,33 @@
 ﻿<#
-    Jellyfin Migrator Plugin - Build Script
+    Jellyfin Migrator Plugin - Cross-Platform Build Script
+
+    Supports both Windows and Linux deployments with automatic platform detection.
 
     Usage examples:
+      # Basic build (auto-detects platform)
       ./build.ps1                    # Restore, build, publish (Release -> ./publish)
+
+      # Development builds
       ./build.ps1 -Configuration Debug -Output out\debug
       ./build.ps1 -Clean             # Clean before building
       ./build.ps1 -NoRestore         # Skip restore (faster for repeat builds)
-      ./build.ps1 -Install           # Also copy to Jellyfin plugins folder
-      ./build.ps1 -Install -InstallPath 'C:\Path\to\plugins\Migrator'
-      ./build.ps1 -Install -Restart  # Copy and restart Jellyfin service
+
+      # Windows installation
+      ./build.ps1 -Install           # Install to C:\ProgramData\Jellyfin\Server\plugins\Migrator
+      ./build.ps1 -Install -InstallPath 'C:\Custom\Path\plugins\Migrator'
+      ./build.ps1 -Install -Restart  # Install and restart JellyfinServer service
+
+      # Linux installation (requires PowerShell Core and sudo)
+      ./build.ps1 -Install           # Install to /var/lib/jellyfin/plugins/Migrator
+      ./build.ps1 -Install -InstallPath '/usr/share/jellyfin/plugins/Migrator'
+      ./build.ps1 -Install -Restart  # Install and restart jellyfin systemd service
+
+      # Force specific platform
+      ./build.ps1 -Platform Linux    # Force Linux paths/service management
+      ./build.ps1 -Platform Windows  # Force Windows paths/service management
+
+      # Full rebuild with installation
+      ./build.ps1 -Rebuild -Install -Restart
 #>
 
 param(
@@ -23,17 +42,58 @@ param(
 
     [switch]$Install,
 
-    [string]$InstallPath = 'C:\ProgramData\Jellyfin\Server\plugins\Migrator',
+    [string]$InstallPath = '',
 
     [switch]$Restart,
 
-    [string]$ServiceName = 'JellyfinServer',
+    [string]$ServiceName = '',
 
-    [switch]$Rebuild
+    [switch]$Rebuild,
+
+    [ValidateSet('Auto','Windows','Linux')]
+    [string]$Platform = 'Auto'
 )
 
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
+
+# Detect OS platform
+function Get-TargetPlatform {
+    if ($Platform -ne 'Auto') { return $Platform }
+
+    # PowerShell Core (6.0+) has $IsLinux, $IsWindows, $IsMacOS
+    # Windows PowerShell 5.1 only has $env:OS
+    if (Test-Path variable:IsLinux) {
+        if ($IsLinux) { return 'Linux' }
+        if ($IsMacOS) { return 'Linux' }  # macOS uses same approach as Linux
+        if ($IsWindows) { return 'Windows' }
+    }
+
+    # Fallback for Windows PowerShell 5.1
+    if ($env:OS -eq 'Windows_NT') { return 'Windows' }
+
+    throw "Unable to detect platform. Please specify -Platform explicitly."
+}
+
+$DetectedPlatform = Get-TargetPlatform
+Write-Host "Target platform: $DetectedPlatform"
+
+# Set default paths based on platform
+if ([string]::IsNullOrEmpty($InstallPath)) {
+    if ($DetectedPlatform -eq 'Linux') {
+        $InstallPath = '/var/lib/jellyfin/plugins/Migrator'
+    } else {
+        $InstallPath = 'C:\ProgramData\Jellyfin\Server\plugins\Migrator'
+    }
+}
+
+if ([string]::IsNullOrEmpty($ServiceName)) {
+    if ($DetectedPlatform -eq 'Linux') {
+        $ServiceName = 'jellyfin'
+    } else {
+        $ServiceName = 'JellyfinServer'
+    }
+}
 
 function Run([string]$File, [string[]]$Arguments) {
     Write-Host ">> $File $($Arguments -join ' ')"
@@ -44,6 +104,11 @@ function Run([string]$File, [string[]]$Arguments) {
 }
 
 function Restart-JellyfinService([string]$Name, [int]$TimeoutSeconds = 60) {
+    if ($DetectedPlatform -eq 'Linux') {
+        Restart-SystemdService -Name $Name -TimeoutSeconds $TimeoutSeconds
+        return
+    }
+
     try {
         $svc = Get-Service -Name $Name -ErrorAction Stop
     } catch {
@@ -75,6 +140,11 @@ function Restart-JellyfinService([string]$Name, [int]$TimeoutSeconds = 60) {
 }
 
 function Stop-JellyfinService([string]$Name, [int]$TimeoutSeconds = 60) {
+    if ($DetectedPlatform -eq 'Linux') {
+        Stop-SystemdService -Name $Name -TimeoutSeconds $TimeoutSeconds
+        return
+    }
+
     try { $svc = Get-Service -Name $Name -ErrorAction Stop } catch { Write-Warning "Service '$Name' not found. Skipping stop."; return }
     if ($svc.Status -ne 'Stopped') {
         Write-Host "Stopping service '$Name'..."
@@ -91,6 +161,11 @@ function Stop-JellyfinService([string]$Name, [int]$TimeoutSeconds = 60) {
 }
 
 function Start-JellyfinService([string]$Name, [int]$TimeoutSeconds = 60) {
+    if ($DetectedPlatform -eq 'Linux') {
+        Start-SystemdService -Name $Name -TimeoutSeconds $TimeoutSeconds
+        return
+    }
+
     try { $svc = Get-Service -Name $Name -ErrorAction Stop } catch { Write-Warning "Service '$Name' not found. Skipping start."; return }
     if ($svc.Status -ne 'Running') {
         Write-Host "Starting service '$Name'..."
@@ -103,6 +178,60 @@ function Start-JellyfinService([string]$Name, [int]$TimeoutSeconds = 60) {
         Write-Host "Service '$Name' is Running."
     } else {
         Write-Host "Service '$Name' already Running."
+    }
+}
+
+# Linux systemd service management functions
+function Restart-SystemdService([string]$Name, [int]$TimeoutSeconds = 60) {
+    Write-Host "Restarting systemd service '$Name'..."
+    try {
+        $output = sudo systemctl restart $Name 2>&1
+        if ($LASTEXITCODE -ne 0) {
+            throw "systemctl restart failed: $output"
+        }
+        Start-Sleep -Seconds 2
+        $status = sudo systemctl is-active $Name 2>&1
+        if ($status -ne 'active') {
+            throw "Service '$Name' is not active after restart (status: $status)"
+        }
+        Write-Host "Service '$Name' restarted successfully."
+    } catch {
+        Write-Error "Failed to restart systemd service '$Name'. You may need to run with sudo. $_"
+        throw
+    }
+}
+
+function Stop-SystemdService([string]$Name, [int]$TimeoutSeconds = 60) {
+    Write-Host "Stopping systemd service '$Name'..."
+    try {
+        $output = sudo systemctl stop $Name 2>&1
+        if ($LASTEXITCODE -ne 0) {
+            Write-Warning "systemctl stop had non-zero exit: $output"
+        }
+        Start-Sleep -Seconds 1
+        Write-Host "Service '$Name' stopped."
+    } catch {
+        Write-Error "Failed to stop systemd service '$Name'. $_"
+        throw
+    }
+}
+
+function Start-SystemdService([string]$Name, [int]$TimeoutSeconds = 60) {
+    Write-Host "Starting systemd service '$Name'..."
+    try {
+        $output = sudo systemctl start $Name 2>&1
+        if ($LASTEXITCODE -ne 0) {
+            throw "systemctl start failed: $output"
+        }
+        Start-Sleep -Seconds 2
+        $status = sudo systemctl is-active $Name 2>&1
+        if ($status -ne 'active') {
+            throw "Service '$Name' is not active after start (status: $status)"
+        }
+        Write-Host "Service '$Name' started successfully."
+    } catch {
+        Write-Error "Failed to start systemd service '$Name'. $_"
+        throw
     }
 }
 
@@ -123,9 +252,17 @@ try {
     if ($Clean) { Run 'dotnet' @('clean', $sln, '-c', $Configuration) }
     if (-not $NoRestore) { Run 'dotnet' @('restore', $sln) }
 
-    if ($Rebuild) { Run 'dotnet' @('build', $sln, '-c', $Configuration, '-t:Rebuild') } else { Run 'dotnet' @('build', $sln, '-c', $Configuration) }
+    # Build with AnyCPU for cross-platform compatibility
+    if ($Rebuild) {
+        Run 'dotnet' @('build', $sln, '-c', $Configuration, '-t:Rebuild')
+    } else {
+        Run 'dotnet' @('build', $sln, '-c', $Configuration)
+    }
+
     if (-not (Test-Path $Output)) { New-Item -ItemType Directory -Path $Output | Out-Null }
-    Run 'dotnet' @('publish', $proj, '-c', $Configuration, '-o', $Output)
+
+    # Publish without runtime identifier (framework-dependent, cross-platform)
+    Run 'dotnet' @('publish', $proj, '-c', $Configuration, '-o', $Output, '--no-build')
 
     $full = (Resolve-Path $Output).Path
     Write-Host "Build complete. Publish output: $full"
@@ -133,38 +270,77 @@ try {
     if ($Install) {
         try {
             Write-Host "Installing to: $InstallPath"
-            if (-not (Test-Path $InstallPath)) { New-Item -ItemType Directory -Path $InstallPath -Force | Out-Null }
+
+            # Create install directory (with sudo on Linux if needed)
+            if (-not (Test-Path $InstallPath)) {
+                if ($DetectedPlatform -eq 'Linux') {
+                    Write-Host "Creating plugin directory (may require sudo)..."
+                    $mkdirResult = sudo mkdir -p $InstallPath 2>&1
+                    if ($LASTEXITCODE -ne 0) {
+                        throw "Failed to create directory: $mkdirResult"
+                    }
+                    # Set permissions for jellyfin user
+                    sudo chown -R jellyfin:jellyfin $InstallPath 2>&1 | Out-Null
+                } else {
+                    New-Item -ItemType Directory -Path $InstallPath -Force | Out-Null
+                }
+            }
 
             # Stop service before replacing plugin files (prevents file locks)
             if ($Restart) { Stop-JellyfinService -Name $ServiceName }
 
             # Clean out existing plugin files completely
             Write-Host "Removing existing files in: $InstallPath"
-            Get-ChildItem -Path $InstallPath -Force -ErrorAction SilentlyContinue | ForEach-Object {
-                try { Remove-Item -LiteralPath $_.FullName -Recurse -Force -ErrorAction Stop } catch { Write-Warning "Could not remove '$($_.FullName)': $_" }
+            if ($DetectedPlatform -eq 'Linux') {
+                sudo rm -rf "$InstallPath/*" 2>&1 | Out-Null
+            } else {
+                Get-ChildItem -Path $InstallPath -Force -ErrorAction SilentlyContinue | ForEach-Object {
+                    try { Remove-Item -LiteralPath $_.FullName -Recurse -Force -ErrorAction Stop } catch { Write-Warning "Could not remove '$($_.FullName)': $_" }
+                }
             }
 
             # Copy all published files first
             Write-Host "Copying published files to install path..."
-            Copy-Item -Path (Join-Path $full '*') -Destination $InstallPath -Recurse -Force
+            if ($DetectedPlatform -eq 'Linux') {
+                sudo cp -r "$full/*" $InstallPath/ 2>&1
+                if ($LASTEXITCODE -ne 0) {
+                    throw "Failed to copy files to $InstallPath"
+                }
+                sudo chown -R jellyfin:jellyfin $InstallPath 2>&1 | Out-Null
+            } else {
+                Copy-Item -Path (Join-Path $full '*') -Destination $InstallPath -Recurse -Force
+            }
 
             # Remove runtime subfolders deployed by publish that are not needed and can conflict on server
             foreach ($d in @('runtimes')) {
                 $dp = Join-Path $InstallPath $d
                 if (Test-Path $dp) {
-                    try { Remove-Item -LiteralPath $dp -Recurse -Force -ErrorAction Stop } catch { Write-Warning "Could not remove dir '$dp': $_" }
+                    if ($DetectedPlatform -eq 'Linux') {
+                        sudo rm -rf $dp 2>&1 | Out-Null
+                    } else {
+                        try { Remove-Item -LiteralPath $dp -Recurse -Force -ErrorAction Stop } catch { Write-Warning "Could not remove dir '$dp': $_" }
+                    }
                 }
             }
 
             # Strict prune: keep ONLY whitelisted DLLs; remove everything else (and known metadata files)
             Write-Host "Pruning non-whitelisted assemblies from install path..."
             Get-ChildItem -Path $InstallPath -File -ErrorAction SilentlyContinue | ForEach-Object {
+                $shouldRemove = $false
                 if ($_.Extension -ieq '.dll') {
                     if ($whitelist -notcontains $_.Name) {
-                        try { Remove-Item -LiteralPath $_.FullName -Force -ErrorAction Stop } catch { Write-Warning "Could not remove '$($_.Name)': $_" }
+                        $shouldRemove = $true
                     }
                 } elseif ($_.Name -like '*.deps.json' -or $_.Name -like '*.runtimeconfig.json' -or $_.Name -like '*.pdb' -or $_.Name -like '*.xml') {
-                    try { Remove-Item -LiteralPath $_.FullName -Force -ErrorAction Stop } catch { Write-Warning "Could not remove '$($_.Name)': $_" }
+                    $shouldRemove = $true
+                }
+
+                if ($shouldRemove) {
+                    if ($DetectedPlatform -eq 'Linux') {
+                        sudo rm -f "$($_.FullName)" 2>&1 | Out-Null
+                    } else {
+                        try { Remove-Item -LiteralPath $_.FullName -Force -ErrorAction Stop } catch { Write-Warning "Could not remove '$($_.Name)': $_" }
+                    }
                 }
             }
 

@@ -1,0 +1,9 @@
+role:
+you are a jellyfin plugin guru 
+
+instructions:
+The build script @build.ps1 needs to have a generic target architecture that can load on windows and linux devices. 
+I want you to 
+- check that this project is suitable for that - i belive it is 
+- If the project does meet the criteria then modify the build process so it can be deployed to linux jellyfin installs
+
