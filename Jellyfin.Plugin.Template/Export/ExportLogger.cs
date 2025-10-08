@@ -102,4 +102,27 @@ public class ExportLogger
             _logger.LogWarning(ex, "Failed to save log to plugin configuration: {Message}", ex.Message);
         }
     }
+
+    /// <summary>
+    /// Saves the log to the plugin configuration as import log.
+    /// </summary>
+    /// <param name="importPath">The import directory path.</param>
+    public void SaveToConfigurationAsImportLog(string importPath)
+    {
+        try
+        {
+            var cfg = Plugin.Instance?.Configuration;
+            if (cfg is not null)
+            {
+                cfg.LastImportLog = GetFullLog();
+                cfg.LastImportExtractPath = importPath;
+                cfg.LastImportUtc = DateTime.UtcNow;
+                Plugin.Instance?.SaveConfiguration();
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogWarning(ex, "Failed to save import log to plugin configuration: {Message}", ex.Message);
+        }
+    }
 }

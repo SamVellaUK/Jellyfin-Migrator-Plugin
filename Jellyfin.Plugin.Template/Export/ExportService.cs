@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Reflection;
 using System.Text.Json;
 using System.Threading;
@@ -12,6 +13,7 @@ using MediaBrowser.Common.Configuration;
 using MediaBrowser.Controller.Devices;
 using MediaBrowser.Controller.Library;
 using MediaBrowser.Controller.Session;
+using MediaBrowser.Model.Tasks;
 using Microsoft.Extensions.Logging;
 
 namespace Jellyfin.Plugin.Template.Export;
@@ -29,6 +31,7 @@ public class ExportService
     private readonly IUserDataManager _userDataManager;
     private readonly IDeviceManager _deviceManager;
     private readonly ISessionManager _sessionManager;
+    private readonly ITaskManager _taskManager;
     private static readonly System.Text.Json.JsonSerializerOptions JsonSerializerOptionsCached = new()
     {
         WriteIndented = false,
@@ -45,7 +48,8 @@ public class ExportService
     /// <param name="userDataManager">User data manager for retrieving per-user item data.</param>
     /// <param name="deviceManager">Device manager for enumerating registered devices.</param>
     /// <param name="sessionManager">Session manager for enumerating device-user auth bindings.</param>
-    public ExportService(IApplicationPaths paths, ILogger<ExportService> logger, IUserManager userManager, ILibraryManager libraryManager, IUserViewManager userViewManager, IUserDataManager userDataManager, IDeviceManager deviceManager, ISessionManager sessionManager)
+    /// <param name="taskManager">Task manager for monitoring scheduled tasks.</param>
+    public ExportService(IApplicationPaths paths, ILogger<ExportService> logger, IUserManager userManager, ILibraryManager libraryManager, IUserViewManager userViewManager, IUserDataManager userDataManager, IDeviceManager deviceManager, ISessionManager sessionManager, ITaskManager taskManager)
     {
         _paths = paths;
         _logger = logger;
@@ -55,6 +59,7 @@ public class ExportService
         _userDataManager = userDataManager;
         _deviceManager = deviceManager;
         _sessionManager = sessionManager;
+        _taskManager = taskManager;
     }
 
     /// <summary>
@@ -175,7 +180,7 @@ public class ExportService
             using var ms = new MemoryStream(bytes, writable: false);
 
             var importLogger = Microsoft.Extensions.Logging.Abstractions.NullLogger<Import.ImportService>.Instance;
-            var svc = new Import.ImportService(_paths, importLogger);
+            var svc = new Import.ImportService(_paths, importLogger, _libraryManager, _taskManager);
             var result = await svc.ProcessZipAsync(ms, cancellationToken).ConfigureAwait(false);
 
             // Persist analysis in configuration for the dashboard to read
@@ -190,10 +195,88 @@ public class ExportService
             }
 
             exportLogger.Log("Import analysis finished. Results saved to configuration.");
+
+            // Check if we should proceed with actual import
+            if (config.ImportIncludeLibraries && !string.IsNullOrWhiteSpace(config.ImportLibraryPathMappingsJson))
+            {
+                exportLogger.Log("=== Proceeding with Library Import ===");
+                await ExecuteLibraryImportAsync(config, result, exportLogger, svc, cancellationToken).ConfigureAwait(false);
+            }
+            else
+            {
+                exportLogger.Log("Library import not configured. Analysis only completed.");
+            }
+
+            // Save import log
+            exportLogger.SaveToConfigurationAsImportLog(result.ExtractedPath ?? string.Empty);
         }
         catch (Exception ex)
         {
             exportLogger.LogError($"Import processing failed: {ex.Message}", ex);
+            exportLogger.SaveToConfigurationAsImportLog(string.Empty);
+        }
+    }
+
+    private async Task ExecuteLibraryImportAsync(
+        PluginConfiguration config,
+        Import.ImportService.ImportAnalysisResult analysisResult,
+        ExportLogger exportLogger,
+        Import.ImportService svc,
+        CancellationToken cancellationToken)
+    {
+        try
+        {
+            // Parse path mappings from JSON
+            Dictionary<string, List<string>>? pathMappings = null;
+            if (!string.IsNullOrWhiteSpace(config.ImportLibraryPathMappingsJson))
+            {
+                pathMappings = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, List<string>>>(
+                    config.ImportLibraryPathMappingsJson);
+            }
+
+            if (pathMappings == null || pathMappings.Count == 0)
+            {
+                exportLogger.LogError("No path mappings provided for library import");
+                return;
+            }
+
+            // Filter selected libraries
+            var selectedLibIds = config.ImportSelectedLibraryIds ?? new List<string>();
+            var librariesToImport = analysisResult.Libraries
+                .Where(lib => selectedLibIds.Contains(lib.Id ?? string.Empty, StringComparer.OrdinalIgnoreCase))
+                .ToList();
+
+            if (librariesToImport.Count == 0)
+            {
+                exportLogger.LogError("No libraries selected for import");
+                return;
+            }
+
+            exportLogger.Log($"Libraries selected for import: {librariesToImport.Count}");
+            foreach (var lib in librariesToImport)
+            {
+                exportLogger.Log($"  - {lib.Name} (ID: {lib.Id})");
+            }
+
+            // Execute import
+            if (string.IsNullOrWhiteSpace(analysisResult.ExtractedPath))
+            {
+                exportLogger.LogError("Extracted path is missing");
+                return;
+            }
+
+            var importedCount = await svc.ExecuteImportAsync(
+                analysisResult.ExtractedPath,
+                librariesToImport,
+                pathMappings,
+                exportLogger,
+                cancellationToken).ConfigureAwait(false);
+
+            exportLogger.Log($"=== Import Complete: {importedCount}/{librariesToImport.Count} libraries imported ===");
+        }
+        catch (Exception ex)
+        {
+            exportLogger.LogError($"Library import execution failed: {ex.Message}", ex);
         }
     }
 

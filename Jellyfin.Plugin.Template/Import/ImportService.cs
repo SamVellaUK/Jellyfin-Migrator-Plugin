@@ -7,7 +7,10 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Jellyfin.Plugin.Template.Export;
 using MediaBrowser.Common.Configuration;
+using MediaBrowser.Controller.Library;
+using MediaBrowser.Model.Tasks;
 using Microsoft.Extensions.Logging;
 
 namespace Jellyfin.Plugin.Template.Import;
@@ -19,11 +22,15 @@ internal sealed class ImportService
 {
     private readonly IApplicationPaths _paths;
     private readonly ILogger<ImportService> _logger;
+    private readonly ILibraryManager? _libraryManager;
+    private readonly ITaskManager? _taskManager;
 
-    internal ImportService(IApplicationPaths paths, ILogger<ImportService> logger)
+    internal ImportService(IApplicationPaths paths, ILogger<ImportService> logger, ILibraryManager? libraryManager = null, ITaskManager? taskManager = null)
     {
         _paths = paths;
         _logger = logger;
+        _libraryManager = libraryManager;
+        _taskManager = taskManager;
     }
 
     /// <summary>
@@ -297,6 +304,49 @@ internal sealed class ImportService
         }
 
         _logger.LogInformation("Import: Successfully parsed {Count} libraries", libCount);
+    }
+
+    /// <summary>
+    /// Executes the actual import process based on selected libraries and path mappings.
+    /// </summary>
+    /// <param name="extractedPath">Path to extracted export data.</param>
+    /// <param name="selectedLibraries">Libraries selected for import.</param>
+    /// <param name="pathMappings">Mapping of library ID to new paths.</param>
+    /// <param name="exportLogger">Logger for verbose output.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>Number of libraries imported.</returns>
+    internal async Task<int> ExecuteImportAsync(
+        string extractedPath,
+        List<ImportLibrary> selectedLibraries,
+        Dictionary<string, List<string>> pathMappings,
+        ExportLogger exportLogger,
+        CancellationToken cancellationToken)
+    {
+        if (_libraryManager == null)
+        {
+            exportLogger.LogError("Library manager not available for import");
+            return 0;
+        }
+
+        if (_taskManager == null)
+        {
+            exportLogger.LogError("Task manager not available for import");
+            return 0;
+        }
+
+        exportLogger.Log("=== Starting Library Import Execution ===");
+        exportLogger.Log($"Extracted path: {extractedPath}");
+        exportLogger.Log($"Libraries to import: {selectedLibraries.Count}");
+
+        var importer = new LibraryImporter(_libraryManager, _taskManager, exportLogger, _logger);
+        var count = await importer.ImportLibrariesAsync(
+            extractedPath,
+            selectedLibraries,
+            pathMappings,
+            cancellationToken).ConfigureAwait(false);
+
+        exportLogger.Log("=== Library Import Execution Completed ===");
+        return count;
     }
 
     internal sealed class ImportAnalysisResult

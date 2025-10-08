@@ -22,12 +22,19 @@
       ./build.ps1 -Install -InstallPath '/usr/share/jellyfin/plugins/Migrator'
       ./build.ps1 -Install -Restart  # Install and restart jellyfin systemd service
 
+      # Docker installation
+      ./build.ps1 -Docker            # Install to Docker volume and restart container
+      ./build.ps1 -Docker -DockerVolumePath 'D:\custom\path\plugins\Migrator_1.0.0.0'
+      ./build.ps1 -Docker -DockerContainer 'my-jellyfin'
+
       # Force specific platform
       ./build.ps1 -Platform Linux    # Force Linux paths/service management
       ./build.ps1 -Platform Windows  # Force Windows paths/service management
 
       # Full rebuild with installation
       ./build.ps1 -Rebuild -Install -Restart
+      ./build.ps1 -Rebuild -Docker   # Rebuild and deploy to Docker
+      ./build.ps1 -Rebuild -Install -Restart -Docker  # Deploy to both Windows and Docker
 #>
 
 param(
@@ -51,7 +58,13 @@ param(
     [switch]$Rebuild,
 
     [ValidateSet('Auto','Windows','Linux')]
-    [string]$Platform = 'Auto'
+    [string]$Platform = 'Auto',
+
+    [switch]$Docker,
+
+    [string]$DockerVolumePath = 'D:\media-stack\jellyfin\server\plugins\Migrator_1.0.0.0',
+
+    [string]$DockerContainer = 'jellyfin'
 )
 
 $ErrorActionPreference = 'Stop'
@@ -266,6 +279,71 @@ try {
 
     $full = (Resolve-Path $Output).Path
     Write-Host "Build complete. Publish output: $full"
+
+    if ($Docker) {
+        Write-Host "Installing to Docker volume: $DockerVolumePath"
+
+        # Create directory if it doesn't exist
+        if (-not (Test-Path $DockerVolumePath)) {
+            New-Item -ItemType Directory -Path $DockerVolumePath -Force | Out-Null
+        }
+
+        # Clean existing files
+        Write-Host "Removing existing files..."
+        Remove-Item "$DockerVolumePath\*" -Force -ErrorAction SilentlyContinue
+
+        # Copy whitelisted DLLs only
+        Write-Host "Copying plugin files..."
+        foreach ($file in $whitelist) {
+            $srcFile = Join-Path $full $file
+            if (Test-Path $srcFile) {
+                Copy-Item $srcFile -Destination $DockerVolumePath
+                Write-Host "  Copied: $file"
+            }
+        }
+
+        # Restart Docker container
+        Write-Host "Restarting Docker container '$DockerContainer'..."
+        docker restart $DockerContainer | Out-Null
+
+        # Wait for container to be healthy
+        Write-Host "Waiting for container to start..."
+        $timeout = 60
+        $elapsed = 0
+        $healthy = $false
+
+        while ($elapsed -lt $timeout) {
+            Start-Sleep -Seconds 2
+            $elapsed += 2
+
+            # Check if container is running
+            $state = docker inspect -f '{{.State.Running}}' $DockerContainer 2>&1
+            if ($state -eq 'true') {
+                # Give it a few more seconds for Jellyfin to initialize
+                Start-Sleep -Seconds 3
+                $healthy = $true
+                break
+            }
+        }
+
+        if ($healthy) {
+            Write-Host "Container '$DockerContainer' is running."
+            Write-Host ""
+            Write-Host "Checking for plugin in logs..."
+            Start-Sleep -Seconds 2
+            $logs = docker logs $DockerContainer 2>&1 | Select-String -Pattern "Migrator" | Select-Object -Last 5
+            if ($logs) {
+                $logs | ForEach-Object { Write-Host "  $_" -ForegroundColor Green }
+            } else {
+                Write-Warning "Plugin not found in logs yet. Check dashboard in 30 seconds."
+            }
+        } else {
+            Write-Warning "Container did not become healthy within ${timeout}s"
+        }
+
+        Write-Host ""
+        Write-Host "Done! Check: http://localhost:9096/web/index.html#!/dashboard/plugins" -ForegroundColor Cyan
+    }
 
     if ($Install) {
         try {

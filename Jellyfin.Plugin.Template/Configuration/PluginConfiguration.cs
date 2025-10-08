@@ -154,4 +154,26 @@ public class PluginConfiguration : BasePluginConfiguration
     /// Gets or sets the UTC timestamp of the last import analysis.
     /// </summary>
     public DateTime? LastImportUtc { get; set; }
+
+    /// <summary>
+    /// Gets or sets the selected library IDs for import.
+    /// </summary>
+    [SuppressMessage("Usage", "CA2227:Collection properties should be read only", Justification = "Configuration needs settable collection for serialization")]
+    [SuppressMessage("Design", "CA1002:Do not expose generic lists", Justification = "Used for configuration serialization")]
+    public List<string>? ImportSelectedLibraryIds { get; set; }
+
+    /// <summary>
+    /// Gets or sets the library path mappings for import (JSON serialized dictionary of library ID to paths).
+    /// </summary>
+    public string? ImportLibraryPathMappingsJson { get; set; }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether to include libraries in import.
+    /// </summary>
+    public bool ImportIncludeLibraries { get; set; }
+
+    /// <summary>
+    /// Gets or sets the last import log text.
+    /// </summary>
+    public string? LastImportLog { get; set; }
 }

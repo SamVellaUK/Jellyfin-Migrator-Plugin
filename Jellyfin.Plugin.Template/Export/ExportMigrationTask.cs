@@ -25,6 +25,7 @@ public class ExportMigrationTask : IScheduledTask
     private readonly IUserDataManager _userDataManager;
     private readonly IDeviceManager _deviceManager;
     private readonly ISessionManager _sessionManager;
+    private readonly ITaskManager _taskManager;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ExportMigrationTask"/> class.
@@ -37,7 +38,8 @@ public class ExportMigrationTask : IScheduledTask
     /// <param name="userDataManager">Instance of <see cref="IUserDataManager"/>.</param>
     /// <param name="deviceManager">Instance of <see cref="IDeviceManager"/>.</param>
     /// <param name="sessionManager">Instance of <see cref="ISessionManager"/>.</param>
-    public ExportMigrationTask(IApplicationPaths paths, ILogger<ExportMigrationTask> logger, IUserManager userManager, ILibraryManager libraryManager, IUserViewManager userViewManager, IUserDataManager userDataManager, IDeviceManager deviceManager, ISessionManager sessionManager)
+    /// <param name="taskManager">Instance of <see cref="ITaskManager"/>.</param>
+    public ExportMigrationTask(IApplicationPaths paths, ILogger<ExportMigrationTask> logger, IUserManager userManager, ILibraryManager libraryManager, IUserViewManager userViewManager, IUserDataManager userDataManager, IDeviceManager deviceManager, ISessionManager sessionManager, ITaskManager taskManager)
     {
         _paths = paths;
         _logger = logger;
@@ -47,6 +49,7 @@ public class ExportMigrationTask : IScheduledTask
         _userDataManager = userDataManager;
         _deviceManager = deviceManager;
         _sessionManager = sessionManager;
+        _taskManager = taskManager;
     }
 
     /// <inheritdoc />
@@ -72,7 +75,7 @@ public class ExportMigrationTask : IScheduledTask
     public async Task ExecuteAsync(IProgress<double> progress, CancellationToken cancellationToken)
     {
         var cfg = Plugin.Instance?.Configuration ?? new PluginConfiguration();
-        var service = new ExportService(_paths, Microsoft.Extensions.Logging.Abstractions.NullLogger<ExportService>.Instance, _userManager, _libraryManager, _userViewManager, _userDataManager, _deviceManager, _sessionManager);
+        var service = new ExportService(_paths, Microsoft.Extensions.Logging.Abstractions.NullLogger<ExportService>.Instance, _userManager, _libraryManager, _userViewManager, _userDataManager, _deviceManager, _sessionManager, _taskManager);
 
         try
         {

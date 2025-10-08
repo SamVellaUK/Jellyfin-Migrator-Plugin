@@ -125,6 +125,26 @@
             Gets or sets the UTC timestamp of the last import analysis.
             </summary>
         </member>
+        <member name="P:Jellyfin.Plugin.Template.Configuration.PluginConfiguration.ImportSelectedLibraryIds">
+            <summary>
+            Gets or sets the selected library IDs for import.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.Template.Configuration.PluginConfiguration.ImportLibraryPathMappingsJson">
+            <summary>
+            Gets or sets the library path mappings for import (JSON serialized dictionary of library ID to paths).
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.Template.Configuration.PluginConfiguration.ImportIncludeLibraries">
+            <summary>
+            Gets or sets a value indicating whether to include libraries in import.
+            </summary>
+        </member>
+        <member name="P:Jellyfin.Plugin.Template.Configuration.PluginConfiguration.LastImportLog">
+            <summary>
+            Gets or sets the last import log text.
+            </summary>
+        </member>
         <member name="T:Jellyfin.Plugin.Template.Export.DeviceExporter">
             <summary>
             Exports registered devices, optionally filtered by selected users.
@@ -192,12 +212,18 @@
             </summary>
             <param name="exportRoot">The export root directory.</param>
         </member>
+        <member name="M:Jellyfin.Plugin.Template.Export.ExportLogger.SaveToConfigurationAsImportLog(System.String)">
+            <summary>
+            Saves the log to the plugin configuration as import log.
+            </summary>
+            <param name="importPath">The import directory path.</param>
+        </member>
         <member name="T:Jellyfin.Plugin.Template.Export.ExportMigrationTask">
             <summary>
             A scheduled task to run the migration export.
             </summary>
         </member>
-        <member name="M:Jellyfin.Plugin.Template.Export.ExportMigrationTask.#ctor(MediaBrowser.Common.Configuration.IApplicationPaths,Microsoft.Extensions.Logging.ILogger{Jellyfin.Plugin.Template.Export.ExportMigrationTask},MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Library.ILibraryManager,MediaBrowser.Controller.Library.IUserViewManager,MediaBrowser.Controller.Library.IUserDataManager,MediaBrowser.Controller.Devices.IDeviceManager,MediaBrowser.Controller.Session.ISessionManager)">
+        <member name="M:Jellyfin.Plugin.Template.Export.ExportMigrationTask.#ctor(MediaBrowser.Common.Configuration.IApplicationPaths,Microsoft.Extensions.Logging.ILogger{Jellyfin.Plugin.Template.Export.ExportMigrationTask},MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Library.ILibraryManager,MediaBrowser.Controller.Library.IUserViewManager,MediaBrowser.Controller.Library.IUserDataManager,MediaBrowser.Controller.Devices.IDeviceManager,MediaBrowser.Controller.Session.ISessionManager,MediaBrowser.Model.Tasks.ITaskManager)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Plugin.Template.Export.ExportMigrationTask"/> class.
             </summary>
@@ -209,6 +235,7 @@
             <param name="userDataManager">Instance of <see cref="T:MediaBrowser.Controller.Library.IUserDataManager"/>.</param>
             <param name="deviceManager">Instance of <see cref="T:MediaBrowser.Controller.Devices.IDeviceManager"/>.</param>
             <param name="sessionManager">Instance of <see cref="T:MediaBrowser.Controller.Session.ISessionManager"/>.</param>
+            <param name="taskManager">Instance of <see cref="T:MediaBrowser.Model.Tasks.ITaskManager"/>.</param>
         </member>
         <member name="P:Jellyfin.Plugin.Template.Export.ExportMigrationTask.Name">
             <inheritdoc />
@@ -233,7 +260,7 @@
             Simplified export service that coordinates user export operations.
             </summary>
         </member>
-        <member name="M:Jellyfin.Plugin.Template.Export.ExportService.#ctor(MediaBrowser.Common.Configuration.IApplicationPaths,Microsoft.Extensions.Logging.ILogger{Jellyfin.Plugin.Template.Export.ExportService},MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Library.ILibraryManager,MediaBrowser.Controller.Library.IUserViewManager,MediaBrowser.Controller.Library.IUserDataManager,MediaBrowser.Controller.Devices.IDeviceManager,MediaBrowser.Controller.Session.ISessionManager)">
+        <member name="M:Jellyfin.Plugin.Template.Export.ExportService.#ctor(MediaBrowser.Common.Configuration.IApplicationPaths,Microsoft.Extensions.Logging.ILogger{Jellyfin.Plugin.Template.Export.ExportService},MediaBrowser.Controller.Library.IUserManager,MediaBrowser.Controller.Library.ILibraryManager,MediaBrowser.Controller.Library.IUserViewManager,MediaBrowser.Controller.Library.IUserDataManager,MediaBrowser.Controller.Devices.IDeviceManager,MediaBrowser.Controller.Session.ISessionManager,MediaBrowser.Model.Tasks.ITaskManager)">
             <summary>
             Initializes a new instance of the <see cref="T:Jellyfin.Plugin.Template.Export.ExportService"/> class.
             </summary>
@@ -245,6 +272,7 @@
             <param name="userDataManager">User data manager for retrieving per-user item data.</param>
             <param name="deviceManager">Device manager for enumerating registered devices.</param>
             <param name="sessionManager">Session manager for enumerating device-user auth bindings.</param>
+            <param name="taskManager">Task manager for monitoring scheduled tasks.</param>
         </member>
         <member name="M:Jellyfin.Plugin.Template.Export.ExportService.RunAsync(Jellyfin.Plugin.Template.Configuration.PluginConfiguration,System.IProgress{System.Double},System.Threading.CancellationToken)">
             <summary>
@@ -365,6 +393,41 @@
             <param name="zipStream">The ZIP file stream to extract and analyze.</param>
             <param name="cancellationToken">Cancellation token.</param>
             <returns>Analysis result containing users, libraries and any errors.</returns>
+        </member>
+        <member name="M:Jellyfin.Plugin.Template.Import.ImportService.ExecuteImportAsync(System.String,System.Collections.Generic.List{Jellyfin.Plugin.Template.Import.ImportService.ImportLibrary},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},Jellyfin.Plugin.Template.Export.ExportLogger,System.Threading.CancellationToken)">
+            <summary>
+            Executes the actual import process based on selected libraries and path mappings.
+            </summary>
+            <param name="extractedPath">Path to extracted export data.</param>
+            <param name="selectedLibraries">Libraries selected for import.</param>
+            <param name="pathMappings">Mapping of library ID to new paths.</param>
+            <param name="exportLogger">Logger for verbose output.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>Number of libraries imported.</returns>
+        </member>
+        <member name="T:Jellyfin.Plugin.Template.Import.LibraryImporter">
+            <summary>
+            Handles importing libraries from export data.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.Template.Import.LibraryImporter.#ctor(MediaBrowser.Controller.Library.ILibraryManager,MediaBrowser.Model.Tasks.ITaskManager,Jellyfin.Plugin.Template.Export.ExportLogger,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Jellyfin.Plugin.Template.Import.LibraryImporter"/> class.
+            </summary>
+            <param name="libraryManager">Library manager service.</param>
+            <param name="taskManager">Task manager service.</param>
+            <param name="exportLogger">Export logger for verbose logging.</param>
+            <param name="logger">Standard logger.</param>
+        </member>
+        <member name="M:Jellyfin.Plugin.Template.Import.LibraryImporter.ImportLibrariesAsync(System.String,System.Collections.Generic.List{Jellyfin.Plugin.Template.Import.ImportService.ImportLibrary},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Threading.CancellationToken)">
+            <summary>
+            Imports libraries from the extracted export data.
+            </summary>
+            <param name="extractedPath">Path to extracted export directory.</param>
+            <param name="selectedLibraries">List of selected libraries to import.</param>
+            <param name="pathMappings">Dictionary mapping old library ID to new paths from GUI.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>Number of libraries imported.</returns>
         </member>
         <member name="T:Jellyfin.Plugin.Template.Plugin">
             <summary>

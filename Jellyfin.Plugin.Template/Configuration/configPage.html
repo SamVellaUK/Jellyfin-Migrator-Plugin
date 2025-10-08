@@ -8,6 +8,9 @@
     <div id="TemplateConfigPage" data-role="page" class="page type-interior pluginConfigurationPage" data-require="emby-input,emby-button,emby-select,emby-checkbox,directorybrowser">
         <div data-role="content">
             <div class="content-primary">
+                <div style="margin-bottom: 1rem; padding: 0.5rem; background: #2a2a2a; border-radius: 4px; font-size: 0.85em; color: #aaa;">
+                    <strong>Plugin Build:</strong> <span id="BuildDate">Loading...</span>
+                </div>
                 <form id="TemplateConfigForm">
                     <!-- Tab Navigation -->
                     <div class="inputContainer" style="margin-bottom:0.75rem;">
@@ -134,6 +137,19 @@
                         <!-- Import Analysis Status -->
                         <div id="ImportAnalyzeStatus" style="display:none; margin-top:0.5rem; font-weight:600;">Analyzing...</div>
                         <div id="ImportBreakdown" style="display:none; margin-top:0.75rem; background:#1b1b1b; color:#ddd; padding:10px; border-radius:4px;"></div>
+
+                        <!-- Import Action Buttons -->
+                        <div id="ImportActionsContainer" style="display:none; margin-top:1rem;">
+                            <button id="RunImportNow" is="emby-button" type="button" class="emby-button raised button-submit block">
+                                <span id="RunImportButtonText">Run Library Import</span>
+                            </button>
+                            <div id="ImportRunStatus" style="margin-top:0.5rem; font-weight:600;"></div>
+                            <div class="inputContainer" style="margin-top:0.5rem;">
+                                <label class="inputLabel inputLabelUnfocused" id="ImportLogHeader">Import Log</label>
+                                <pre id="ImportLog" style="max-height:240px; overflow:auto; background:#111; color:#ddd; padding:8px; border-radius:4px;"></pre>
+                                <div id="ImportMeta" class="fieldDescription"></div>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -420,10 +436,20 @@
 
                 breakdownEl.innerHTML = html;
                 breakdownEl.style.display = 'block';
+
+                // Show import actions container
+                var actionsEl = document.getElementById('ImportActionsContainer');
+                if (actionsEl && (libs.length || users.length)) {
+                    actionsEl.style.display = 'block';
+                }
             }
 
             // ===== PAGE INITIALIZATION =====
             document.querySelector('#TemplateConfigPage').addEventListener('pageshow', function() {
+                // Set build date (updated on each build)
+                var buildDate = new Date().toISOString().replace('T', ' ').substring(0, 19);
+                document.getElementById('BuildDate').textContent = buildDate + ' UTC (Page Load Time)';
+
                 Dashboard.showLoadingMsg();
                 ApiClient.getPluginConfiguration(TemplateConfig.pluginUniqueId).then(function (config) {
                     document.querySelector('#IncludeUsers').checked = config.IncludeUsers === true;
@@ -698,6 +724,152 @@
                 if (serverZipBtn) serverZipBtn.addEventListener('click', function(){
                     ApiClient.getPluginConfiguration(TemplateConfig.pluginUniqueId).then(downloadServerZipFromConfig);
                 });
+
+                // Run Import Now button
+                var runImportBtn = document.getElementById('RunImportNow');
+                if (runImportBtn) runImportBtn.addEventListener('click', function(){
+                    runImportNow();
+                });
+            })();
+
+            // ===== IMPORT EXECUTION =====
+            function runImportNow() {
+                // Show warning dialog first
+                var warningMessage =
+                    '⚠️ IMPORTANT: Library scanning can take several minutes per library.\n\n' +
+                    'Large libraries may take 10-30+ minutes to fully scan.\n\n' +
+                    'Please do NOT close this window or navigate away during the import.\n\n' +
+                    'Progress will be logged in real-time below.\n\n' +
+                    'Click OK to proceed with the import, or Cancel to abort.';
+
+                if (confirm(warningMessage)) {
+                    // User confirmed, proceed with import
+                    executeImport();
+                } else {
+                    // User cancelled
+                    console.log('User cancelled import');
+                }
+            }
+
+            function executeImport() {
+                Dashboard.showLoadingMsg();
+                var $status = document.querySelector('#ImportRunStatus');
+                var $log = document.querySelector('#ImportLog');
+
+                if ($status) $status.textContent = 'Preparing import...';
+                if ($log) $log.textContent = '';
+
+                ApiClient.getPluginConfiguration(TemplateConfig.pluginUniqueId).then(function (config) {
+                    // Collect selected libraries
+                    var selectedLibIds = [];
+                    document.querySelectorAll('input[data-kind="import-library"]:checked').forEach(function (el) {
+                        selectedLibIds.push(el.value);
+                    });
+
+                    if (selectedLibIds.length === 0) {
+                        Dashboard.hideLoadingMsg();
+                        Dashboard.alert({ title: 'Import', message: 'Please select at least one library to import.' });
+                        return Promise.reject('No libraries selected');
+                    }
+
+                    // Collect path mappings
+                    var pathMappings = {};
+                    selectedLibIds.forEach(function(libId) {
+                        var paths = [];
+                        document.querySelectorAll('.import-lib-path[data-lib-id="' + libId + '"]').forEach(function(input) {
+                            var path = input.value.trim();
+                            if (path) paths.push(path);
+                        });
+                        if (paths.length > 0) {
+                            pathMappings[libId] = paths;
+                        }
+                    });
+
+                    // Update config
+                    config.Mode = 'Import';
+                    config.ImportIncludeLibraries = document.querySelector('#ImportIncludeLibraries')?.checked || false;
+                    config.ImportSelectedLibraryIds = selectedLibIds;
+                    config.ImportLibraryPathMappingsJson = JSON.stringify(pathMappings);
+
+                    return ApiClient.updatePluginConfiguration(TemplateConfig.pluginUniqueId, config);
+                }).then(function () {
+                    return new Promise(function(resolve) { setTimeout(function() { resolve(); }, 1000); });
+                }).then(function () {
+                    return ApiClient.getScheduledTasks();
+                }).then(function (tasks) {
+                    var task = (tasks || []).find(function (t) { return t.Key === 'JellyfinMigratorExport'; });
+                    if (!task) {
+                        Dashboard.hideLoadingMsg();
+                        Dashboard.alert({ title: 'Import', message: 'Import task not found.' });
+                        return Promise.reject('Task not found');
+                    }
+                    return ApiClient.startScheduledTask(task.Id).then(function () { return task; });
+                }).then(function () {
+                    Dashboard.hideLoadingMsg();
+                    $status.textContent = 'RUNNING...';
+                    var started = Date.now();
+                    var poll = function () {
+                        ApiClient.getScheduledTasks().then(function (tasks) {
+                            var t = (tasks || []).find(function (x) { return x.Key === 'JellyfinMigratorExport'; });
+                            if (!t) { return; }
+                            var state = (t.State || t.Status || '').toString().toLowerCase();
+                            if (state.indexOf('running') !== -1) {
+                                $status.textContent = 'RUNNING...';
+                            } else if (state.indexOf('idle') !== -1 || state.indexOf('completed') !== -1 || state === '') {
+                                $status.textContent = 'COMPLETED';
+                                renderImportLog();
+                                return;
+                            }
+                            if (Date.now() - started < 10 * 60 * 1000) { setTimeout(poll, 2000); }
+                        }).catch(function () {
+                            if (Date.now() - started < 10 * 60 * 1000) { setTimeout(poll, 4000); }
+                        });
+                    };
+                    setTimeout(poll, 1500);
+                }).catch(function (err) {
+                    Dashboard.hideLoadingMsg();
+                    console.error('Failed to start import', err);
+                    if (err !== 'Task not found' && err !== 'No libraries selected') {
+                        Dashboard.alert({ title: 'Import', message: 'Failed to start import.' });
+                    }
+                });
+            }
+
+            function renderImportLog() {
+                var $log = document.querySelector('#ImportLog');
+                var $meta = document.querySelector('#ImportMeta');
+                if (!$log || !$meta) { return; }
+
+                ApiClient.getPluginConfiguration(TemplateConfig.pluginUniqueId).then(function (cfg) {
+                    var log = (cfg.LastImportLog || cfg.LastExportLog || '').toString();
+                    $log.textContent = log.trim() ? log : '(no import log available)';
+                    var parts = [];
+                    if (cfg.LastImportUtc) {
+                        try { parts.push('Completed: ' + new Date(cfg.LastImportUtc).toLocaleString()); } catch(e) {}
+                    }
+                    if (cfg.LastImportExtractPath) {
+                        parts.push('Path: ' + cfg.LastImportExtractPath);
+                    }
+                    $meta.textContent = parts.join(' | ');
+                });
+            }
+
+            // Live log updater for import
+            (function setupImportLiveLogUpdater() {
+                var timerId = null;
+                function updateLog() {
+                    renderImportLog();
+                }
+                function checkStatus() {
+                    var $status = document.querySelector('#ImportRunStatus');
+                    var s = ($status && $status.textContent || '').toLowerCase();
+                    if (s.indexOf('running') !== -1) {
+                        if (!timerId) { timerId = setInterval(updateLog, 2000); }
+                    } else {
+                        if (timerId) { clearInterval(timerId); timerId = null; updateLog(); }
+                    }
+                }
+                setInterval(checkStatus, 1000);
             })();
         </script>
     </div>
