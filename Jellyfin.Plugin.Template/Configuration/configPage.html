@@ -227,6 +227,76 @@
 
             function esc(s){ return (s||'').toString().replace(/[&<>\"']/g, function(c){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'})[c]; }); }
 
+            function applyBulkPathReplacement() {
+                var findPrefix = document.getElementById('PathFindPrefix');
+                var replacePrefix = document.getElementById('PathReplacePrefix');
+
+                if (!findPrefix || !replacePrefix) return;
+
+                var findVal = findPrefix.value;
+                var replaceVal = replacePrefix.value;
+
+                if (!findVal) {
+                    Dashboard.alert({ title: 'Bulk Path Replacement', message: 'Please enter a path prefix to find.' });
+                    return;
+                }
+
+                if (!replaceVal) {
+                    Dashboard.alert({ title: 'Bulk Path Replacement', message: 'Please enter a replacement path prefix.' });
+                    return;
+                }
+
+                // Normalize the find prefix to handle both slash types
+                var findNormalized = findVal.replace(/\//g, '\\').replace(/\\+/g, '\\');
+                var findForwardSlash = findVal.replace(/\\/g, '/').replace(/\/+/g, '/');
+
+                // Detect target path convention from replacement pattern
+                var targetIsWindows = replaceVal.indexOf('\\') !== -1 || replaceVal.match(/^[A-Za-z]:/);
+                var targetSeparator = targetIsWindows ? '\\' : '/';
+
+                // Get all path inputs
+                var pathInputs = document.querySelectorAll('.import-lib-path');
+                var updatedCount = 0;
+
+                pathInputs.forEach(function(input) {
+                    var currentPath = input.value;
+                    var newPath = currentPath;
+
+                    // Try matching with backslashes
+                    if (newPath.replace(/\//g, '\\').indexOf(findNormalized) === 0) {
+                        newPath = replaceVal + newPath.replace(/\//g, '\\').substring(findNormalized.length);
+                    }
+                    // Try matching with forward slashes
+                    else if (newPath.replace(/\\/g, '/').indexOf(findForwardSlash) === 0) {
+                        newPath = replaceVal + newPath.replace(/\\/g, '/').substring(findForwardSlash.length);
+                    }
+
+                    // Normalize separators in the result
+                    if (targetIsWindows) {
+                        newPath = newPath.replace(/\//g, '\\').replace(/\\+/g, '\\');
+                    } else {
+                        newPath = newPath.replace(/\\/g, '/').replace(/\/+/g, '/');
+                    }
+
+                    if (newPath !== currentPath) {
+                        input.value = newPath;
+                        updatedCount++;
+                    }
+                });
+
+                if (updatedCount > 0) {
+                    Dashboard.alert({
+                        title: 'Bulk Path Replacement',
+                        message: 'Updated ' + updatedCount + ' path(s) successfully. Path separators normalized to ' + (targetIsWindows ? 'Windows (\\)' : 'Linux (/)') + ' style.'
+                    });
+                } else {
+                    Dashboard.alert({
+                        title: 'Bulk Path Replacement',
+                        message: 'No paths matched the find prefix "' + findVal + '".'
+                    });
+                }
+            }
+
             function renderImportBreakdown(data){
                 var breakdownEl = document.getElementById('ImportBreakdown');
                 if (!breakdownEl) return;
@@ -285,6 +355,27 @@
                 html += '</label>';
                 html += '<div class="fieldDescription">Select which libraries to import.</div>';
                 html += '</div>';
+
+                // Path Replacement Tool
+                if (libs.length && libs.some(function(l){ return (l.Locations || []).length > 0; })) {
+                    html += '<div style="margin-bottom:1rem; padding:10px; background:#2a2a2a; border-radius:4px;">';
+                    html += '<div style="font-weight:600; margin-bottom:6px;">Bulk Path Replacement</div>';
+                    html += '<div class="fieldDescription" style="margin-bottom:8px;">Replace a common path prefix across all library paths. Useful for migrating between different systems.</div>';
+                    html += '<div style="display:flex; gap:8px; align-items:flex-end; flex-wrap:wrap;">';
+                    html += '<div style="flex:1; min-width:200px;">';
+                    html += '<label class="inputLabel inputLabelUnfocused" style="font-size:0.85em;">Find Path Prefix</label>';
+                    html += '<input type="text" is="emby-input" id="PathFindPrefix" placeholder="e.g. F:\\Media\\" style="width:100%;" />';
+                    html += '</div>';
+                    html += '<div style="flex:1; min-width:200px;">';
+                    html += '<label class="inputLabel inputLabelUnfocused" style="font-size:0.85em;">Replace With</label>';
+                    html += '<input type="text" is="emby-input" id="PathReplacePrefix" placeholder="e.g. /media/" style="width:100%;" />';
+                    html += '</div>';
+                    html += '<button type="button" is="emby-button" class="raised emby-button" onclick="applyBulkPathReplacement()" style="margin-bottom:2px;">Apply to All Paths</button>';
+                    html += '</div>';
+                    html += '<div class="fieldDescription" style="margin-top:6px; font-size:0.8em; color:#999;">Note: Path separators will be auto-normalized based on the replacement pattern (/ for Linux/Unix, \\ for Windows).</div>';
+                    html += '</div>';
+                }
+
                 html += '<div id="ImportLibrariesList" class="inputContainer">';
                 html += '<div class="fieldDescription">Select libraries to import</div>';
 
