@@ -1,0 +1,183 @@
+[
+  {
+    "ids": {
+      "id": "5c3cf62527013e40df1daec4835a3c5c",
+      "type": "Episode",
+      "name": "Endgaming",
+      "providerIds": {
+        "Imdb": "tt37024696"
+      },
+      "path": "F:\\Media\\TV Shows Chris\\Clarkson\u0027s Farm\\Season 4\\Clarkson\u0027s Farm - S04E05 - Endgaming WEBRip-1080p.mkv",
+      "productionYear": 2025,
+      "seriesName": "Clarkson\u0027s Farm",
+      "seasonNumber": 4,
+      "episodeNumber": 5
+    },
+    "played": true,
+    "playCount": 3,
+    "isFavorite": false,
+    "playbackPositionTicks": 0,
+    "lastPlayedUtc": "2025-06-10T21:09:44.7617356Z"
+  },
+  {
+    "ids": {
+      "id": "08f93331951bddaa0483d6fcaa5acab6",
+      "type": "Episode",
+      "name": "Cottaging",
+      "providerIds": {
+        "Imdb": "tt37025371"
+      },
+      "path": "F:\\Media\\TV Shows Chris\\Clarkson\u0027s Farm\\Season 4\\Clarkson\u0027s Farm - S04E04 - Cottaging HDTV-1080p.mkv",
+      "productionYear": 2025,
+      "seriesName": "Clarkson\u0027s Farm",
+      "seasonNumber": 4,
+      "episodeNumber": 4
+    },
+    "played": true,
+    "playCount": 1,
+    "isFavorite": false,
+    "playbackPositionTicks": 0,
+    "lastPlayedUtc": "2025-06-09T20:48:16.3451021Z"
+  },
+  {
+    "ids": {
+      "id": "4163a044fa6c53f1ee45c0f8b7cfa9c2",
+      "type": "Episode",
+      "name": "Hurrying",
+      "providerIds": {
+        "Imdb": "tt37024704"
+      },
+      "path": "F:\\Media\\TV Shows Chris\\Clarkson\u0027s Farm\\Season 4\\Clarkson\u0027s Farm - S04E07 - Hurrying WEBDL-1080p.mkv",
+      "productionYear": 2025,
+      "seriesName": "Clarkson\u0027s Farm",
+      "seasonNumber": 4,
+      "episodeNumber": 7
+    },
+    "played": true,
+    "playCount": 2,
+    "isFavorite": false,
+    "playbackPositionTicks": 0,
+    "lastPlayedUtc": "2025-06-11T20:06:36.9794482Z"
+  },
+  {
+    "ids": {
+      "id": "5706d247b6a6179d4859cd261e8ac80b",
+      "type": "Episode",
+      "name": "Solo-ing",
+      "providerIds": {
+        "Imdb": "tt30255432"
+      },
+      "path": "F:\\Media\\TV Shows Chris\\Clarkson\u0027s Farm\\Season 4\\Clarkson\u0027s Farm - S04E01 - Solo-ing HDTV-1080p.mkv",
+      "productionYear": 2025,
+      "seriesName": "Clarkson\u0027s Farm",
+      "seasonNumber": 4,
+      "episodeNumber": 1
+    },
+    "played": true,
+    "playCount": 4,
+    "isFavorite": false,
+    "playbackPositionTicks": 0,
+    "lastPlayedUtc": "2025-10-04T17:04:19.6648135Z"
+  },
+  {
+    "ids": {
+      "id": "447f978eaa93f61f1aaf397fa004db51",
+      "type": "Episode",
+      "name": "Splurging",
+      "providerIds": {
+        "Imdb": "tt37024699"
+      },
+      "path": "F:\\Media\\TV Shows Chris\\Clarkson\u0027s Farm\\Season 4\\Clarkson\u0027s Farm - S04E06 - Splurging HDTV-1080p.mkv",
+      "productionYear": 2025,
+      "seriesName": "Clarkson\u0027s Farm",
+      "seasonNumber": 4,
+      "episodeNumber": 6
+    },
+    "played": true,
+    "playCount": 1,
+    "isFavorite": false,
+    "playbackPositionTicks": 0,
+    "lastPlayedUtc": "2025-06-10T21:09:52.4425355Z"
+  },
+  {
+    "ids": {
+      "id": "20b14eb459b068a664006d6cb14f77ad",
+      "type": "Episode",
+      "name": "Pubbing",
+      "providerIds": {
+        "Imdb": "tt36855797"
+      },
+      "path": "F:\\Media\\TV Shows Chris\\Clarkson\u0027s Farm\\Season 4\\Clarkson\u0027s Farm - S04E02 - Pubbing HDTV-1080p.mkv",
+      "productionYear": 2025,
+      "seriesName": "Clarkson\u0027s Farm",
+      "seasonNumber": 4,
+      "episodeNumber": 2
+    },
+    "played": true,
+    "playCount": 4,
+    "isFavorite": false,
+    "playbackPositionTicks": 0,
+    "lastPlayedUtc": "2025-10-04T17:43:57.4718765Z"
+  },
+  {
+    "ids": {
+      "id": "2ba331d2edb4361fb23e27b43c02bede",
+      "type": "Episode",
+      "name": "Crawling",
+      "providerIds": {
+        "Imdb": "tt37025275"
+      },
+      "path": "F:\\Media\\TV Shows Chris\\Clarkson\u0027s Farm\\Season 4\\Clarkson\u0027s Farm - S04E03 - Crawling HDTV-1080p.mkv",
+      "productionYear": 2025,
+      "seriesName": "Clarkson\u0027s Farm",
+      "seasonNumber": 4,
+      "episodeNumber": 3
+    },
+    "played": false,
+    "playCount": 4,
+    "isFavorite": false,
+    "playbackPositionTicks": 5753080000,
+    "lastPlayedUtc": "2025-10-04T18:44:51.9178352Z"
+  },
+  {
+    "ids": {
+      "id": "825b64f95da9451c73139f88ca57ec34",
+      "type": "Episode",
+      "name": "Landlording",
+      "providerIds": {
+        "Imdb": "tt37024709"
+      },
+      "path": "F:\\Media\\TV Shows Chris\\Clarkson\u0027s Farm\\Season 4\\Clarkson\u0027s Farm - S04E08 - Landlording WEBDL-1080p.mkv",
+      "productionYear": 2025,
+      "seriesName": "Clarkson\u0027s Farm",
+      "seasonNumber": 4,
+      "episodeNumber": 8
+    },
+    "played": true,
+    "playCount": 1,
+    "isFavorite": false,
+    "playbackPositionTicks": 0,
+    "lastPlayedUtc": "2025-06-11T20:51:33.8742363Z"
+  },
+  {
+    "ids": {
+      "id": "43028bfdb9362b4cd850f84448f66ccb",
+      "type": "Episode",
+      "name": "Stick or Twist",
+      "providerIds": {
+        "Tvdb": "10345021",
+        "Imdb": "tt32125918"
+      },
+      "path": "F:\\Media\\TV Shows Chris\\MobLand\\Season 1\\MobLand - S01E01 - Stick or Twist HDTV-1080p.mkv",
+      "productionYear": 2025,
+      "seriesName": "MobLand",
+      "seasonNumber": 1,
+      "episodeNumber": 1
+    },
+    "played": false,
+    "playCount": 1,
+    "isFavorite": false,
+    "playbackPositionTicks": 2736300000,
+    "lastPlayedUtc": "2025-06-14T20:25:21.999642Z"
+  }
+]

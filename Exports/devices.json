@@ -1,0 +1,1208 @@
+{
+  "TokensIncluded": true,
+  "Devices": [
+    {
+      "Id": "21a0243e4ced3b701527d17edb910ea53ed39515",
+      "LastUserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+      "LastUserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+      "LastUserName": "Family",
+      "AppName": "Android TV",
+      "AppVersion": "0.18.11",
+      "DateLastActivity": "2025-10-06T23:56:37.4708223Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+          "UserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+          "UserName": "Family",
+          "Token": "def47bfe578e4353a8082e3f25e8dcb8",
+          "Client": "Android TV",
+          "LastActivity": "2025-10-06T23:56:37.4708223Z"
+        }
+      ]
+    },
+    {
+      "Id": "baae50594a6d64499c329c23a851a882bcd2e9b1",
+      "LastUserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+      "LastUserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+      "LastUserName": "Family",
+      "AppName": "Android TV",
+      "AppVersion": "0.18.11",
+      "DateLastActivity": "2025-10-06T22:03:09.8997642Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": null
+    },
+    {
+      "Id": "TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzE0MC4wLjAuMCBTYWZhcmkvNTM3LjM2IEVkZy8xNDAuMC4wLjB8MTc1ODM5ODYyMDk5NQ11",
+      "LastUserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+      "LastUserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+      "LastUserName": "Family",
+      "AppName": "Jellyfin Web",
+      "AppVersion": "10.10.6",
+      "DateLastActivity": "2025-10-05T22:18:43.3803317Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+          "UserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+          "UserName": "Family",
+          "Token": "3358403b4ab8427a80fbd7ce7678ac5d",
+          "Client": "Jellyfin Web",
+          "LastActivity": "2025-10-05T22:18:43.3803317Z"
+        }
+      ]
+    },
+    {
+      "Id": "9d81b72876c14d7124f77724c46aa63f5daa5ccc",
+      "LastUserId": "d127603eda444b95b69b896d35170a30",
+      "LastUserIdDashed": "d127603e-da44-4b95-b69b-896d35170a30",
+      "LastUserName": "Chris",
+      "AppName": "Android TV",
+      "AppVersion": "0.18.11",
+      "DateLastActivity": "2025-10-04T18:43:49.0970739Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "d127603eda444b95b69b896d35170a30",
+          "UserIdDashed": "d127603e-da44-4b95-b69b-896d35170a30",
+          "UserName": "Chris",
+          "Token": "2902abe1dd664e87a7fcd223577545c5",
+          "Client": "Android TV",
+          "LastActivity": "2025-10-04T18:43:49.0970739Z"
+        }
+      ]
+    },
+    {
+      "Id": "a36fc559d12f288c",
+      "LastUserId": "d127603eda444b95b69b896d35170a30",
+      "LastUserIdDashed": "d127603e-da44-4b95-b69b-896d35170a30",
+      "LastUserName": "Chris",
+      "AppName": "Jellyfin Android",
+      "AppVersion": "2.6.3",
+      "DateLastActivity": "2025-10-04T17:02:13.7475296Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "d127603eda444b95b69b896d35170a30",
+          "UserIdDashed": "d127603e-da44-4b95-b69b-896d35170a30",
+          "UserName": "Chris",
+          "Token": "0edc7c84e1ed4d03a82e3f4afaaafbbe",
+          "Client": "Jellyfin Android",
+          "LastActivity": "2025-10-04T17:02:13.7475296Z"
+        }
+      ]
+    },
+    {
+      "Id": "902efa0c4ed5d48933989e37f4a85d5d53e9917a",
+      "LastUserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+      "LastUserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+      "LastUserName": "Family",
+      "AppName": "Android TV",
+      "AppVersion": "0.18.11",
+      "DateLastActivity": "2025-10-01T11:07:50.0333074Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+          "UserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+          "UserName": "Family",
+          "Token": "3ab39ad1d87c4569a81e7f88c8c40f25",
+          "Client": "Android TV",
+          "LastActivity": "2025-10-01T11:07:50.0333074Z"
+        }
+      ]
+    },
+    {
+      "Id": "1cb753169e3ee0f5e06821f79d8d0107d1abfe31",
+      "LastUserId": "d127603eda444b95b69b896d35170a30",
+      "LastUserIdDashed": "d127603e-da44-4b95-b69b-896d35170a30",
+      "LastUserName": "Chris",
+      "AppName": "Android TV",
+      "AppVersion": "0.18.10",
+      "DateLastActivity": "2025-09-30T20:40:09.6194409Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "d127603eda444b95b69b896d35170a30",
+          "UserIdDashed": "d127603e-da44-4b95-b69b-896d35170a30",
+          "UserName": "Chris",
+          "Token": "30d1665d4e5a4a3582e0659a2db76db9",
+          "Client": "Android TV",
+          "LastActivity": "2025-09-30T20:40:09.6194409Z"
+        }
+      ]
+    },
+    {
+      "Id": "343d152fc26989b6",
+      "LastUserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+      "LastUserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+      "LastUserName": "Family",
+      "AppName": "Jellyfin Android",
+      "AppVersion": "2.6.3",
+      "DateLastActivity": "2025-09-24T16:54:24.3591009Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+          "UserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+          "UserName": "Family",
+          "Token": "097797899ee24d8a8aefe49cfbc4e4d5",
+          "Client": "Jellyfin Android",
+          "LastActivity": "2025-09-24T16:54:24.3591009Z"
+        }
+      ]
+    },
+    {
+      "Id": "302fc87eea41213d7759fb1e8745c3d97be7ab1e",
+      "LastUserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+      "LastUserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+      "LastUserName": "Family",
+      "AppName": "Android TV",
+      "AppVersion": "0.18.11",
+      "DateLastActivity": "2025-09-20T23:24:18.5171468Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+          "UserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+          "UserName": "Family",
+          "Token": "31e0623aa01d4f0dac2c27652c86be1e",
+          "Client": "Android TV",
+          "LastActivity": "2025-09-20T23:24:18.5171468Z"
+        }
+      ]
+    },
+    {
+      "Id": "d45174b4d4dac7437106409a982e2f1bfc6d914f",
+      "LastUserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+      "LastUserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+      "LastUserName": "Family",
+      "AppName": "Android TV",
+      "AppVersion": "0.18.11",
+      "DateLastActivity": "2025-09-20T20:55:52.9522711Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+          "UserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+          "UserName": "Family",
+          "Token": "0e053f2a60f849d285e000a9e7ea02d7",
+          "Client": "Android TV",
+          "LastActivity": "2025-09-20T20:55:52.9522711Z"
+        }
+      ]
+    },
+    {
+      "Id": "4d7cb879-2ee1-496b-bcfd-52fc84743a3d",
+      "LastUserId": "b8b1798df21941bd9fdcdafce23097a3",
+      "LastUserIdDashed": "b8b1798d-f219-41bd-9fdc-dafce23097a3",
+      "LastUserName": "Mitra",
+      "AppName": "Jellyfin Mobile (iPadOS)",
+      "AppVersion": "1.6.1",
+      "DateLastActivity": "2025-09-06T21:07:55.5353359Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "b8b1798df21941bd9fdcdafce23097a3",
+          "UserIdDashed": "b8b1798d-f219-41bd-9fdc-dafce23097a3",
+          "UserName": "Mitra",
+          "Token": "af7084f8cab649ed8c3ce17f6b9086dc",
+          "Client": "Jellyfin Mobile (iPadOS)",
+          "LastActivity": "2025-09-06T21:07:55.5353359Z"
+        }
+      ]
+    },
+    {
+      "Id": "TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzEzOS4wLjAuMCBTYWZhcmkvNTM3LjM2IEVkZy8xMzkuMC4wLjB8MTc1Njc1ODc4MDY5NQ11",
+      "LastUserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+      "LastUserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+      "LastUserName": "Family",
+      "AppName": "Jellyfin Web",
+      "AppVersion": "10.10.6",
+      "DateLastActivity": "2025-09-02T15:35:46.7938357Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+          "UserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+          "UserName": "Family",
+          "Token": "45e613f0f1e747b4943f1d1bf01551dd",
+          "Client": "Jellyfin Web",
+          "LastActivity": "2025-09-02T15:35:46.7938357Z"
+        }
+      ]
+    },
+    {
+      "Id": "TW96aWxsYS81LjAgKFgxMTsgTGludXggeDg2XzY0KSBBcHBsZVdlYktpdC81MzcuMzYgKEtIVE1MLCBsaWtlIEdlY2tvKSBDaHJvbWUvMTM2LjAuNzEwMy45MiBTYWZhcmkvNTM3LjM2fDE3NTY3NDY4ODAwNjk1",
+      "LastUserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+      "LastUserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+      "LastUserName": "Family",
+      "AppName": "Jellyfin Web",
+      "AppVersion": "10.10.6",
+      "DateLastActivity": "2025-09-01T17:36:19.8342092Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+          "UserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+          "UserName": "Family",
+          "Token": "53d4a84b0979482594f2e7a5af93738e",
+          "Client": "Jellyfin Web",
+          "LastActivity": "2025-09-01T17:36:19.8342092Z"
+        }
+      ]
+    },
+    {
+      "Id": "TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzEzOS4wLjAuMCBTYWZhcmkvNTM3LjM2IEVkZy8xMzkuMC4wLjB8MTc1NTEyMTIzMzAwMA11",
+      "LastUserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+      "LastUserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+      "LastUserName": "Family",
+      "AppName": "Jellyfin Web",
+      "AppVersion": "10.10.6",
+      "DateLastActivity": "2025-08-13T21:40:51.6672263Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+          "UserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+          "UserName": "Family",
+          "Token": "731fd7206c7b4ed783c475720cad5caa",
+          "Client": "Jellyfin Web",
+          "LastActivity": "2025-08-13T21:40:51.6672263Z"
+        }
+      ]
+    },
+    {
+      "Id": "TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzEzOS4wLjAuMCBTYWZhcmkvNTM3LjM2IEVkZy8xMzkuMC4wLjB8MTc1NDg1NjE2MDMyOQ11",
+      "LastUserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+      "LastUserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+      "LastUserName": "Family",
+      "AppName": "Jellyfin Web",
+      "AppVersion": "10.10.6",
+      "DateLastActivity": "2025-08-12T20:42:40.0717161Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+          "UserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+          "UserName": "Family",
+          "Token": "cd4c74228e3e406b8be817005bc66ff4",
+          "Client": "Jellyfin Web",
+          "LastActivity": "2025-08-12T20:42:40.0717161Z"
+        }
+      ]
+    },
+    {
+      "Id": "TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzEzOC4wLjAuMCBTYWZhcmkvNTM3LjM2IEVkZy8xMzguMC4wLjB8MTc1NDUxMjMxMDk5MQ11",
+      "LastUserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+      "LastUserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+      "LastUserName": "Family",
+      "AppName": "Jellyfin Web",
+      "AppVersion": "10.10.6",
+      "DateLastActivity": "2025-08-10T19:53:14.564803Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+          "UserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+          "UserName": "Family",
+          "Token": "367484799c704dffa07339967ca65f9d",
+          "Client": "Jellyfin Web",
+          "LastActivity": "2025-08-10T19:53:14.564803Z"
+        }
+      ]
+    },
+    {
+      "Id": "TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzEzOC4wLjAuMCBTYWZhcmkvNTM3LjM2IEVkZy8xMzguMC4wLjB8MTc1NDA4MTY0MjcxNg11",
+      "LastUserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+      "LastUserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+      "LastUserName": "Family",
+      "AppName": "Jellyfin Web",
+      "AppVersion": "10.10.6",
+      "DateLastActivity": "2025-08-02T21:13:53.1139914Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+          "UserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+          "UserName": "Family",
+          "Token": "a895a31ef4cc412d8a496293d91d5998",
+          "Client": "Jellyfin Web",
+          "LastActivity": "2025-08-02T21:13:53.1139914Z"
+        }
+      ]
+    },
+    {
+      "Id": "TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzEzOC4wLjAuMCBTYWZhcmkvNTM3LjM2IEVkZy8xMzguMC4wLjB8MTc1MzU2MjcxMTI0Ng11",
+      "LastUserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+      "LastUserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+      "LastUserName": "Family",
+      "AppName": "Jellyfin Web",
+      "AppVersion": "10.10.6",
+      "DateLastActivity": "2025-07-26T22:21:54.219016Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+          "UserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+          "UserName": "Family",
+          "Token": "933264f6398540e5903b3c5ad92249f2",
+          "Client": "Jellyfin Web",
+          "LastActivity": "2025-07-26T22:21:54.219016Z"
+        }
+      ]
+    },
+    {
+      "Id": "2e4a2cac-5157-4bbe-bbbb-81cf0cb26bfe",
+      "LastUserId": "b8b1798df21941bd9fdcdafce23097a3",
+      "LastUserIdDashed": "b8b1798d-f219-41bd-9fdc-dafce23097a3",
+      "LastUserName": "Mitra",
+      "AppName": "Jellyfin Mobile (iOS)",
+      "AppVersion": "1.6.1",
+      "DateLastActivity": "2025-07-21T22:17:15.951216Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "b8b1798df21941bd9fdcdafce23097a3",
+          "UserIdDashed": "b8b1798d-f219-41bd-9fdc-dafce23097a3",
+          "UserName": "Mitra",
+          "Token": "b0079b2ac6d648e9ac3b8eeeb23b9e2b",
+          "Client": "Jellyfin Mobile (iOS)",
+          "LastActivity": "2025-07-21T22:17:15.951216Z"
+        }
+      ]
+    },
+    {
+      "Id": "TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzEzNy4wLjAuMCBTYWZhcmkvNTM3LjM2IEVkZy8xMzcuMC4wLjB8MTc1MDYxNTg0MDk1Mg11",
+      "LastUserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+      "LastUserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+      "LastUserName": "Family",
+      "AppName": "Jellyfin Web",
+      "AppVersion": "10.10.6",
+      "DateLastActivity": "2025-06-23T13:13:10.1484288Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+          "UserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+          "UserName": "Family",
+          "Token": "ae7ea9ae5fde4ebaa5f68bc59610c05f",
+          "Client": "Jellyfin Web",
+          "LastActivity": "2025-06-23T13:13:10.1484288Z"
+        }
+      ]
+    },
+    {
+      "Id": "TW96aWxsYS81LjAgKExpbnV4OyBBbmRyb2lkIDk7IEFGVFNTUykgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgU2lsay8xMzYuMy4zIGxpa2UgQ2hyb21lLzEzNi4wLjcxMDMuMTU5IFNhZmFyaS81MzcuMzZ8MTc0OTQxNTY0NDQ3NQ11",
+      "LastUserId": "d127603eda444b95b69b896d35170a30",
+      "LastUserIdDashed": "d127603e-da44-4b95-b69b-896d35170a30",
+      "LastUserName": "Chris",
+      "AppName": "Jellyfin Web",
+      "AppVersion": "10.10.6",
+      "DateLastActivity": "2025-06-09T21:36:30.4205928Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "d127603eda444b95b69b896d35170a30",
+          "UserIdDashed": "d127603e-da44-4b95-b69b-896d35170a30",
+          "UserName": "Chris",
+          "Token": "c4556483c7224a4091c8c8090fcdf826",
+          "Client": "Jellyfin Web",
+          "LastActivity": "2025-06-09T21:36:30.4205928Z"
+        }
+      ]
+    },
+    {
+      "Id": "TW96aWxsYS81LjAgKExpbnV4OyBBbmRyb2lkIDEwOyBLKSBBcHBsZVdlYktpdC81MzcuMzYgKEtIVE1MLCBsaWtlIEdlY2tvKSBDaHJvbWUvMTM3LjAuMC4wIE1vYmlsZSBTYWZhcmkvNTM3LjM2fDE3NDk0MDM5ODMyNjk1",
+      "LastUserId": "d127603eda444b95b69b896d35170a30",
+      "LastUserIdDashed": "d127603e-da44-4b95-b69b-896d35170a30",
+      "LastUserName": "Chris",
+      "AppName": "Jellyfin Web",
+      "AppVersion": "10.10.6",
+      "DateLastActivity": "2025-06-08T18:03:32.7082484Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "d127603eda444b95b69b896d35170a30",
+          "UserIdDashed": "d127603e-da44-4b95-b69b-896d35170a30",
+          "UserName": "Chris",
+          "Token": "e667435e4e8b4baba793562b40ff860c",
+          "Client": "Jellyfin Web",
+          "LastActivity": "2025-06-08T18:03:32.7082484Z"
+        }
+      ]
+    },
+    {
+      "Id": "c5d64b217d74c2d5d29ac619df65a7e1dcc26ee3",
+      "LastUserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+      "LastUserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+      "LastUserName": "Family",
+      "AppName": "Android TV",
+      "AppVersion": "0.18.9",
+      "DateLastActivity": "2025-06-07T14:51:32.2094035Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+          "UserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+          "UserName": "Family",
+          "Token": "efec6d16acab4d4284d40b692fbc1973",
+          "Client": "Android TV",
+          "LastActivity": "2025-06-07T14:51:32.2094035Z"
+        }
+      ]
+    },
+    {
+      "Id": "TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzEzNy4wLjAuMCBTYWZhcmkvNTM3LjM2fDE3NDkwNjU4NDQ1MjM1",
+      "LastUserId": "d127603eda444b95b69b896d35170a30",
+      "LastUserIdDashed": "d127603e-da44-4b95-b69b-896d35170a30",
+      "LastUserName": "Chris",
+      "AppName": "Jellyfin Web",
+      "AppVersion": "10.10.6",
+      "DateLastActivity": "2025-06-04T19:37:31.3638602Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "d127603eda444b95b69b896d35170a30",
+          "UserIdDashed": "d127603e-da44-4b95-b69b-896d35170a30",
+          "UserName": "Chris",
+          "Token": "5410e0fedc2342bf8e54353cec5fec07",
+          "Client": "Jellyfin Web",
+          "LastActivity": "2025-06-04T19:37:31.3638602Z"
+        }
+      ]
+    },
+    {
+      "Id": "TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzEzNy4wLjAuMCBTYWZhcmkvNTM3LjM2fDE3NDkwNjU1OTA4MTU1",
+      "LastUserId": "d127603eda444b95b69b896d35170a30",
+      "LastUserIdDashed": "d127603e-da44-4b95-b69b-896d35170a30",
+      "LastUserName": "Chris",
+      "AppName": "Jellyfin Web",
+      "AppVersion": "10.10.6",
+      "DateLastActivity": "2025-06-04T19:33:31.4312885Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "d127603eda444b95b69b896d35170a30",
+          "UserIdDashed": "d127603e-da44-4b95-b69b-896d35170a30",
+          "UserName": "Chris",
+          "Token": "c8a26aaf162d47ab9316865e69424d7c",
+          "Client": "Jellyfin Web",
+          "LastActivity": "2025-06-04T19:33:31.4312885Z"
+        }
+      ]
+    },
+    {
+      "Id": "TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzEzNi4wLjAuMCBTYWZhcmkvNTM3LjM2IEVkZy8xMzYuMC4wLjB8MTc0ODc5NzI5MDY0OA11",
+      "LastUserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+      "LastUserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+      "LastUserName": "Family",
+      "AppName": "Jellyfin Web",
+      "AppVersion": "10.10.6",
+      "DateLastActivity": "2025-06-02T09:53:01.2724087Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+          "UserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+          "UserName": "Family",
+          "Token": "c81354d0433c49b29b83b09dfd82dc19",
+          "Client": "Jellyfin Web",
+          "LastActivity": "2025-06-02T09:53:01.2724087Z"
+        }
+      ]
+    },
+    {
+      "Id": "TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzEzNi4wLjAuMCBTYWZhcmkvNTM3LjM2IEVkZy8xMzYuMC4wLjB8MTc0Nzg1OTcwOTA3MA11",
+      "LastUserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+      "LastUserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+      "LastUserName": "Family",
+      "AppName": "Jellyfin Web",
+      "AppVersion": "10.10.6",
+      "DateLastActivity": "2025-05-21T22:57:40.2137845Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+          "UserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+          "UserName": "Family",
+          "Token": "e03442f24e8c41f9b6283a85a2d917e9",
+          "Client": "Jellyfin Web",
+          "LastActivity": "2025-05-21T22:57:40.2137845Z"
+        }
+      ]
+    },
+    {
+      "Id": "ec9496816e456975b56c9e2560605f4c4a4e1b07",
+      "LastUserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+      "LastUserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+      "LastUserName": "Family",
+      "AppName": "Android TV",
+      "AppVersion": "0.18.8",
+      "DateLastActivity": "2025-05-16T20:35:48.232313Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+          "UserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+          "UserName": "Family",
+          "Token": "6c3c8ea0bfe440839249530eda4cfd40",
+          "Client": "Android TV",
+          "LastActivity": "2025-05-16T20:35:48.232313Z"
+        }
+      ]
+    },
+    {
+      "Id": "TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzEzNC4wLjAuMCBTYWZhcmkvNTM3LjM2fDE3NDI3NjcyODEyNzU1",
+      "LastUserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+      "LastUserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+      "LastUserName": "Family",
+      "AppName": "Jellyfin Web",
+      "AppVersion": "10.10.6",
+      "DateLastActivity": "2025-05-13T15:50:39.9126771Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+          "UserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+          "UserName": "Family",
+          "Token": "acc033ef3acf4aca8509715a929cdf6f",
+          "Client": "Jellyfin Web",
+          "LastActivity": "2025-05-13T15:50:39.9126771Z"
+        }
+      ]
+    },
+    {
+      "Id": "TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgaHRwYy1sYXVuY2hlci8xLjAuMCBDaHJvbWUvMTM2LjAuNzEwMy40OSBFbGVjdHJvbi8zNi4yLjAgU2FmYXJpLzUzNy4zNnwxNzQ3MTQ0ODg3Nzc1",
+      "LastUserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+      "LastUserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+      "LastUserName": "Family",
+      "AppName": "Jellyfin Web",
+      "AppVersion": "10.10.6",
+      "DateLastActivity": "2025-05-13T14:01:52.9359943Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+          "UserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+          "UserName": "Family",
+          "Token": "ee668acfc01d4a028f08ab26f8e97bc4",
+          "Client": "Jellyfin Web",
+          "LastActivity": "2025-05-13T14:01:52.9359943Z"
+        }
+      ]
+    },
+    {
+      "Id": "TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzEzNS4wLjAuMCBTYWZhcmkvNTM3LjM2IEVkZy8xMzUuMC4wLjB8MTc0NTUyMzYxNzkzMA11",
+      "LastUserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+      "LastUserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+      "LastUserName": "Family",
+      "AppName": "Jellyfin Web",
+      "AppVersion": "10.10.6",
+      "DateLastActivity": "2025-05-11T17:47:48.8202655Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+          "UserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+          "UserName": "Family",
+          "Token": "15fea10eb01c410bb5d11980f13aa735",
+          "Client": "Jellyfin Web",
+          "LastActivity": "2025-05-11T17:47:48.8202655Z"
+        }
+      ]
+    },
+    {
+      "Id": "TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzEzNS4wLjAuMCBTYWZhcmkvNTM3LjM2fDE3NDYwMTA4MjY3MDE1",
+      "LastUserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+      "LastUserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+      "LastUserName": "Family",
+      "AppName": "Jellyfin Web",
+      "AppVersion": "10.10.6",
+      "DateLastActivity": "2025-04-30T11:00:52.5944455Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+          "UserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+          "UserName": "Family",
+          "Token": "a8ba03ff595b49a79488a90266a41988",
+          "Client": "Jellyfin Web",
+          "LastActivity": "2025-04-30T11:00:52.5944455Z"
+        }
+      ]
+    },
+    {
+      "Id": "TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzEzNS4wLjAuMCBTYWZhcmkvNTM3LjM2IEVkZy8xMzUuMC4wLjB8MTc0NTI2NjE1MTI4NA11",
+      "LastUserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+      "LastUserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+      "LastUserName": "Family",
+      "AppName": "Jellyfin Web",
+      "AppVersion": "10.10.6",
+      "DateLastActivity": "2025-04-24T19:39:00.255577Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+          "UserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+          "UserName": "Family",
+          "Token": "981eedaf13114c37a4edc6d7f575147f",
+          "Client": "Jellyfin Web",
+          "LastActivity": "2025-04-24T19:39:00.255577Z"
+        }
+      ]
+    },
+    {
+      "Id": "TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzEzNS4wLjAuMCBTYWZhcmkvNTM3LjM2IEVkZy8xMzUuMC4wLjB8MTc0NDkyMjk4OTU5NQ11",
+      "LastUserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+      "LastUserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+      "LastUserName": "Family",
+      "AppName": "Jellyfin Web",
+      "AppVersion": "10.10.6",
+      "DateLastActivity": "2025-04-20T10:28:54.6742364Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+          "UserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+          "UserName": "Family",
+          "Token": "2bf8ed054882487ca944ea7a308eeab5",
+          "Client": "Jellyfin Web",
+          "LastActivity": "2025-04-20T10:28:54.6742364Z"
+        }
+      ]
+    },
+    {
+      "Id": "TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzEzNS4wLjAuMCBTYWZhcmkvNTM3LjM2IEVkZy8xMzUuMC4wLjB8MTc0NDE2NjA3NjEzMw11",
+      "LastUserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+      "LastUserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+      "LastUserName": "Family",
+      "AppName": "Jellyfin Web",
+      "AppVersion": "10.10.6",
+      "DateLastActivity": "2025-04-16T19:40:43.7744989Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+          "UserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+          "UserName": "Family",
+          "Token": "ad310a9c89c440db89b34c94772d8712",
+          "Client": "Jellyfin Web",
+          "LastActivity": "2025-04-16T19:40:43.7744989Z"
+        }
+      ]
+    },
+    {
+      "Id": "TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzEzNS4wLjAuMCBTYWZhcmkvNTM3LjM2IEVkZy8xMzUuMC4wLjB8MTc0Mzk1MzgxNjQzNw11",
+      "LastUserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+      "LastUserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+      "LastUserName": "Family",
+      "AppName": "Jellyfin Web",
+      "AppVersion": "10.10.6",
+      "DateLastActivity": "2025-04-09T00:53:48.4896904Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+          "UserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+          "UserName": "Family",
+          "Token": "0afeb29693ab4a7ca5c757a0b78ab6cb",
+          "Client": "Jellyfin Web",
+          "LastActivity": "2025-04-09T00:53:48.4896904Z"
+        }
+      ]
+    },
+    {
+      "Id": "TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzEzNS4wLjAuMCBTYWZhcmkvNTM3LjM2IEVkZy8xMzUuMC4wLjB8MTc0Mzk1MzU5MDEzNg11",
+      "LastUserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+      "LastUserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+      "LastUserName": "Family",
+      "AppName": "Jellyfin Web",
+      "AppVersion": "10.10.6",
+      "DateLastActivity": "2025-04-06T15:33:44.362905Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+          "UserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+          "UserName": "Family",
+          "Token": "bfda77a2e22f4be1aaf8086a9259c88b",
+          "Client": "Jellyfin Web",
+          "LastActivity": "2025-04-06T15:33:44.362905Z"
+        }
+      ]
+    },
+    {
+      "Id": "TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzEzNC4wLjAuMCBTYWZhcmkvNTM3LjM2IEVkZy8xMzQuMC4wLjB8MTc0MzAyNTE1MTI5NQ11",
+      "LastUserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+      "LastUserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+      "LastUserName": "Family",
+      "AppName": "Jellyfin Web",
+      "AppVersion": "10.10.6",
+      "DateLastActivity": "2025-04-06T15:28:19.465682Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+          "UserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+          "UserName": "Family",
+          "Token": "ce63a36bf86f4bbd91d0b6eb860dc49f",
+          "Client": "Jellyfin Web",
+          "LastActivity": "2025-04-06T15:28:19.465682Z"
+        }
+      ]
+    },
+    {
+      "Id": "SmVsbHlmaW5NZWRpYVBsYXllciAxLjEyLjAgKHdpbmRvd3MteDg2XzY0IDEwKXwxNzQzMDIxNjQ1Mzc4",
+      "LastUserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+      "LastUserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+      "LastUserName": "Family",
+      "AppName": "Jellyfin Media Player",
+      "AppVersion": "1.12.0",
+      "DateLastActivity": "2025-03-26T21:37:56.8062134Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+          "UserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+          "UserName": "Family",
+          "Token": "b20986208abc4154af58173ca61ab8e7",
+          "Client": "Jellyfin Media Player",
+          "LastActivity": "2025-03-26T21:37:56.8062134Z"
+        }
+      ]
+    },
+    {
+      "Id": "TW96aWxsYS81LjAgKFgxMTsgTGludXggeDg2XzY0KSBBcHBsZVdlYktpdC81MzcuMzYgKEtIVE1MLCBsaWtlIEdlY2tvKSBDaHJvbWUvMTI3LjAuNjUzMy45OSBTYWZhcmkvNTM3LjM2fDE3NDE2MzAwNzkwNDM1",
+      "LastUserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+      "LastUserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+      "LastUserName": "Family",
+      "AppName": "Jellyfin Web",
+      "AppVersion": "10.10.6",
+      "DateLastActivity": "2025-03-18T19:00:36.9537923Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+          "UserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+          "UserName": "Family",
+          "Token": "65ff5ddb1fef44b1b217625fcfd4a5bb",
+          "Client": "Jellyfin Web",
+          "LastActivity": "2025-03-18T19:00:36.9537923Z"
+        }
+      ]
+    },
+    {
+      "Id": "baae50594a6d64499c329c23a851a882bcd2e9b1",
+      "LastUserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+      "LastUserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+      "LastUserName": "Family",
+      "AppName": "Android TV",
+      "AppVersion": "0.18.5",
+      "DateLastActivity": "2025-03-14T22:04:35.6457909Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+          "UserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+          "UserName": "Family",
+          "Token": "1d2e071760544275b11cb34fd3770aec",
+          "Client": "Android TV",
+          "LastActivity": "2025-03-14T22:04:35.6457909Z"
+        },
+        {
+          "UserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+          "UserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+          "UserName": "Family",
+          "Token": "112021a7665346f3891d673cbe33857f",
+          "Client": "Android TV",
+          "LastActivity": "2025-10-06T22:03:09.8997642Z"
+        }
+      ]
+    },
+    {
+      "Id": "0681085425e48f693f3bdf166b8f4daca6e4cb72",
+      "LastUserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+      "LastUserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+      "LastUserName": "Family",
+      "AppName": "Android TV",
+      "AppVersion": "0.18.5",
+      "DateLastActivity": "2025-03-14T22:01:43.1004093Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+          "UserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+          "UserName": "Family",
+          "Token": "04aa61c710f64959a1c96f0e0b849ca4",
+          "Client": "Android TV",
+          "LastActivity": "2025-03-14T22:01:43.1004093Z"
+        }
+      ]
+    },
+    {
+      "Id": "TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzEzNC4wLjAuMCBTYWZhcmkvNTM3LjM2IEVkZy8xMzQuMC4wLjB8MTc0MTgwODQ4NDc0OQ11",
+      "LastUserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+      "LastUserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+      "LastUserName": "Family",
+      "AppName": "Jellyfin Web",
+      "AppVersion": "10.10.6",
+      "DateLastActivity": "2025-03-12T19:41:31.2100038Z",
+      "Capabilities": {
+        "PlayableMediaTypes": [],
+        "SupportedCommands": [],
+        "SupportsMediaControl": false,
+        "SupportsPersistentIdentifier": true,
+        "DeviceProfile": null,
+        "AppStoreUrl": null,
+        "IconUrl": null
+      },
+      "Auth": [
+        {
+          "UserId": "f2f1c24079d743f1a8c884ba7e63f1ab",
+          "UserIdDashed": "f2f1c240-79d7-43f1-a8c8-84ba7e63f1ab",
+          "UserName": "Family",
+          "Token": "1ebb071243544c089be933c05da51cdb",
+          "Client": "Jellyfin Web",
+          "LastActivity": "2025-03-12T19:41:31.2100038Z"
+        }
+      ]
+    }
+  ]
+}

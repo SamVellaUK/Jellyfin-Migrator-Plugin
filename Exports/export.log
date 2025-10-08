@@ -1,0 +1,63 @@
+07:49:12 Migrator Export started
+07:49:12 Plugin build: v0.0.0.0 built 2025-10-07 06:38:12Z
+07:49:12 Data path: C:\ProgramData\Jellyfin\Server\data
+07:49:12 Export directory: C:\ProgramData\Jellyfin\Server\data\plugins\Migrator\exports\20251007_064912
+07:49:12 Selected user IDs filter: [d127603eda444b95b69b896d35170a30, f2f1c24079d743f1a8c884ba7e63f1ab, b8b1798df21941bd9fdcdafce23097a3] (3 specific users)
+07:49:12 Selected library IDs filter: [f137a2dd21bbc1b99aa5c0f6bf02a805, 6253fe09cfc6208f77cada1796a2a47e, a656b907eb3a73532e40e44b968d0225, 235d1385733014225a212efdfa702b70, b2701674644e863dffae182a0f5bad23] (5 specific libraries)
+07:49:12 Starting library definitions export
+07:49:12 Exported 5 libraries with settings -> C:\ProgramData\Jellyfin\Server\data\plugins\Migrator\exports\20251007_064912\libraries.json
+07:49:12 Library definitions export completed. 5 libraries exported.
+07:49:12 Starting user export via Jellyfin services
+07:49:12 Fetching library information...
+07:49:12 Found 5 libraries
+07:49:12 Password hash export enabled
+07:49:12 Extracting password hashes from: C:\ProgramData\Jellyfin\Server\data\jellyfin.db
+07:49:12 Found password hash for user: JellyFin
+07:49:12 Found password hash for user: Family
+07:49:12 Found password hash for user: Mitra
+07:49:12 Found password hash for user: Chris
+07:49:12 Extracted password hashes for 4 users
+07:49:12 Fetching user information...
+07:49:12 User Chris has access to library: Shows Chris (b2701674-644e-863d-ffae-182a0f5bad23)
+07:49:12 User Chris has access to 1 libraries
+07:49:12 Including library: Shows Chris (b2701674644e863dffae182a0f5bad23)
+07:49:12 Filtered libraries: 1 of 1 included
+07:49:12 User Chris: Could not get primaryImageTag - 'Jellyfin.Data.Entities.User' does not contain a definition for 'PrimaryImageTag'
+07:49:12 User Chris: isAdministrator=False, isDisabled=False, isHidden=False, lastLoginDate=04/10/2025 17:02:13
+07:49:12 User Chris: Policy not available on entity type; using fallback flags only
+07:49:12 User Chris: Configuration - audioLang=null, subtitleLang=null, theme=null, autoPlay=False
+07:49:12 User Family has access to library: Movies (f137a2dd-21bb-c1b9-9aa5-c0f6bf02a805)
+07:49:12 User Family has access to library: Shows (a656b907-eb3a-7353-2e40-e44b968d0225)
+07:49:12 User Family has access to 2 libraries
+07:49:12 Including library: Movies (f137a2dd21bbc1b99aa5c0f6bf02a805)
+07:49:12 Including library: Shows (a656b907eb3a73532e40e44b968d0225)
+07:49:12 Filtered libraries: 2 of 2 included
+07:49:12 User Family: Could not get primaryImageTag - 'Jellyfin.Data.Entities.User' does not contain a definition for 'PrimaryImageTag'
+07:49:12 User Family: isAdministrator=False, isDisabled=False, isHidden=False, lastLoginDate=05/10/2025 20:34:49
+07:49:12 User Family: Policy not available on entity type; using fallback flags only
+07:49:12 User Family: Configuration - audioLang=null, subtitleLang=null, theme=null, autoPlay=False
+07:49:12 User Mitra has access to library: Movies - Mitra (6253fe09-cfc6-208f-77ca-da1796a2a47e)
+07:49:12 User Mitra has access to library: Shows - Mitra (235d1385-7330-1422-5a21-2efdfa702b70)
+07:49:12 User Mitra has access to 2 libraries
+07:49:12 Including library: Movies - Mitra (6253fe09cfc6208f77cada1796a2a47e)
+07:49:12 Including library: Shows - Mitra (235d1385733014225a212efdfa702b70)
+07:49:12 Filtered libraries: 2 of 2 included
+07:49:12 User Mitra: Could not get primaryImageTag - 'Jellyfin.Data.Entities.User' does not contain a definition for 'PrimaryImageTag'
+07:49:12 User Mitra: isAdministrator=False, isDisabled=False, isHidden=False, lastLoginDate=12/06/2025 13:32:22
+07:49:12 User Mitra: Policy not available on entity type; using fallback flags only
+07:49:12 User Mitra: Configuration - audioLang=null, subtitleLang=null, theme=null, autoPlay=False
+07:49:12 Exported 3 users
+07:49:12 User export completed. 3 users exported.
+07:49:12 Starting watch-history export to: C:\ProgramData\Jellyfin\Server\data\plugins\Migrator\exports\20251007_064912\watch_history
+07:49:12 Watch-history strategy: IUserDataManager + Library enumeration (no SQLite)
+07:49:12 Discovered 12396 item ids for user-data scan
+07:49:22 Wrote watch history for user 'Chris' (9 items) -> C:\ProgramData\Jellyfin\Server\data\plugins\Migrator\exports\20251007_064912\watch_history\Chris.json
+07:49:22 Wrote watch history for user 'Family' (265 items) -> C:\ProgramData\Jellyfin\Server\data\plugins\Migrator\exports\20251007_064912\watch_history\Family.json
+07:49:22 Wrote watch history for user 'Mitra' (37 items) -> C:\ProgramData\Jellyfin\Server\data\plugins\Migrator\exports\20251007_064912\watch_history\Mitra.json
+07:49:22 Watch-history export completed: 3 file(s) written
+07:49:22 Watch-history export completed. 3 file(s) written.
+07:49:22 Starting device export via IDeviceManager
+07:49:22 Extracting device tokens from: C:\ProgramData\Jellyfin\Server\data\jellyfin.db
+07:49:22 Extracted device tokens for 43 device entries
+07:49:22 Exported 43 device(s) (tokensIncluded=True) -> C:\ProgramData\Jellyfin\Server\data\plugins\Migrator\exports\20251007_064912\devices.json
+07:49:22 Device export completed. 43 device(s) written.

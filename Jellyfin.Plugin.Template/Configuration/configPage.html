@@ -29,7 +29,7 @@
                             </label>
                             <div class="fieldDescription">Select which users to include.</div>
                         </div>
-                        <div id="UsersList" class="inputContainer"></div>
+                        <div id="UsersList" class="inputContainer" style="background:#1b1b1b; color:#ddd; padding:10px; border-radius:4px;"></div>
 
                         <!-- Password Hashes -->
                         <div class="checkboxContainer checkboxContainer-withDescription">
@@ -48,7 +48,7 @@
                             </label>
                             <div class="fieldDescription">Select which libraries to include.</div>
                         </div>
-                        <div id="LibrariesList" class="inputContainer"></div>
+                        <div id="LibrariesList" class="inputContainer" style="background:#1b1b1b; color:#ddd; padding:10px; border-radius:4px;"></div>
 
                         <!-- Permissions -->
                         <div class="checkboxContainer checkboxContainer-withDescription">
@@ -236,19 +236,97 @@
                 var extracted = (data && data.ExtractedPath) || '';
 
                 var html = '';
-                html += '<div style="font-weight:600; margin-bottom:6px;">Import Analysis</div>';
-                if (extracted) { html += '<div class="fieldDescription">Extracted to: ' + esc(extracted) + '</div>'; }
-                if (errs.length){ html += '<div style="color:#e67e22; margin:6px 0;">Warnings/Errors:<ul>' + errs.map(function(e){return '<li>'+esc(e)+'</li>';}).join('') + '</ul></div>'; }
-                html += '<div style="margin-top:6px;">Users found: <b>' + users.length + '</b></div>';
+
+                if (extracted) {
+                    html += '<div class="fieldDescription" style="margin-bottom:12px;">Extracted to: ' + esc(extracted) + '</div>';
+                }
+
+                if (errs.length){
+                    html += '<div style="color:#e67e22; margin:12px 0; padding:8px; background:#2b1810; border-radius:4px;">'+
+                            '<b>Warnings/Errors:</b><ul style="margin:4px 0 0 20px;">' +
+                            errs.map(function(e){return '<li>'+esc(e)+'</li>';}).join('') +
+                            '</ul></div>';
+                }
+
+                // Users Section
+                html += '<div class="checkboxContainer checkboxContainer-withDescription" style="margin-top:1rem;">';
+                html += '<label class="emby-checkbox-label">';
+                html += '<input id="ImportIncludeUsers" type="checkbox" is="emby-checkbox" checked />';
+                html += '<span>Import Users</span>';
+                html += '</label>';
+                html += '<div class="fieldDescription">Select which users to import.</div>';
+                html += '</div>';
+                html += '<div id="ImportUsersList" class="inputContainer">';
+                html += '<div class="fieldDescription">Select users to import</div>';
+
                 if (users.length){
-                    var showU = users.slice(0, 20).map(function(u){ return esc(((u.Username||u.username||'') + (u.Id? ' ['+u.Id+']':''))); });
-                    html += '<div class="fieldDescription">' + showU.join(', ') + (users.length>20?' ...':'') + '</div>';
+                    users.forEach(function(user, idx){
+                        var userId = esc(user.Id || '');
+                        var username = esc(user.Username || 'Unnamed');
+                        var isAdmin = user.IsAdministrator ? ' (Administrator)' : '';
+                        var isDisabled = user.IsDisabled ? ' (Disabled)' : '';
+                        var userLibs = (user.LibraryNames || []).join(', ') || 'All libraries';
+
+                        html += '<label class="emby-checkbox-label" style="display:block;">';
+                        html += '<input data-kind="import-user" type="checkbox" is="emby-checkbox" value="'+userId+'" data-username="'+esc(username)+'" checked />';
+                        html += '<span>' + username + isAdmin + isDisabled + '</span>';
+                        html += '</label>';
+                    });
+                } else {
+                    html += '<div class="fieldDescription">No users found in export.</div>';
                 }
-                html += '<div style="margin-top:6px;">Libraries found: <b>' + libs.length + '</b></div>';
+                html += '</div>';
+
+                // Libraries Section
+                html += '<div class="checkboxContainer checkboxContainer-withDescription" style="margin-top:1rem;">';
+                html += '<label class="emby-checkbox-label">';
+                html += '<input id="ImportIncludeLibraries" type="checkbox" is="emby-checkbox" checked />';
+                html += '<span>Import Libraries</span>';
+                html += '</label>';
+                html += '<div class="fieldDescription">Select which libraries to import.</div>';
+                html += '</div>';
+                html += '<div id="ImportLibrariesList" class="inputContainer">';
+                html += '<div class="fieldDescription">Select libraries to import</div>';
+
                 if (libs.length){
-                    var showL = libs.slice(0, 20).map(function(l){ return esc(((l.Name||l.name||'') + (l.Id? ' ['+l.Id+']':''))); });
-                    html += '<div class="fieldDescription">' + showL.join(', ') + (libs.length>20?' ...':'') + '</div>';
+                    libs.forEach(function(lib, idx){
+                        var libId = esc(lib.Id || '');
+                        var libName = esc(lib.Name || 'Unnamed');
+                        var libType = esc(lib.CollectionType || 'mixed');
+                        var locations = (lib.Locations || []);
+
+                        html += '<div style="margin-bottom:0.75rem;">';
+                        html += '<label class="emby-checkbox-label" style="display:block;">';
+                        html += '<input data-kind="import-library" type="checkbox" is="emby-checkbox" value="'+libId+'" data-name="'+esc(libName)+'" checked />';
+                        html += '<span>' + libName + ' (' + libType + ')</span>';
+                        html += '</label>';
+
+                        if (locations.length) {
+                            html += '<div style="margin-left:24px; margin-top:4px;">';
+                            locations.forEach(function(loc, locIdx){
+                                html += '<div style="margin-bottom:4px;">';
+                                html += '<label class="inputLabel inputLabelUnfocused" style="font-size:0.85em;">Path ' + (locIdx + 1) + '</label>';
+                                html += '<input type="text" is="emby-input" class="import-lib-path" data-lib-id="'+libId+'" data-path-idx="'+locIdx+'" value="'+esc(loc)+'" style="width:100%;" />';
+                                html += '</div>';
+                            });
+                            html += '</div>';
+                        }
+                        html += '</div>';
+                    });
+                } else {
+                    html += '<div class="fieldDescription">No libraries found in export.</div>';
                 }
+                html += '</div>';
+
+                // Permissions Section
+                html += '<div class="checkboxContainer checkboxContainer-withDescription" style="margin-top:1rem;">';
+                html += '<label class="emby-checkbox-label">';
+                html += '<input id="ImportIncludePermissions" type="checkbox" is="emby-checkbox" checked />';
+                html += '<span>Import Permissions</span>';
+                html += '</label>';
+                html += '<div class="fieldDescription">Import per-user library access for selected users/libraries.</div>';
+                html += '</div>';
+
                 breakdownEl.innerHTML = html;
                 breakdownEl.style.display = 'block';
             }

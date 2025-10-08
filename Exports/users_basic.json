@@ -1,0 +1,112 @@
+[
+  {
+    "id": "d127603eda444b95b69b896d35170a30",
+    "username": "Chris",
+    "primaryImageTag": null,
+    "isAdministrator": false,
+    "isDisabled": false,
+    "isHidden": false,
+    "lastLoginDate": "2025-10-04T17:02:13.7136283Z",
+    "policy": {
+      "isAdministrator": false,
+      "isDisabled": false,
+      "isHidden": false,
+      "enableAllFolders": false,
+      "blockedTags": null,
+      "maxParentalRating": null,
+      "enableRemoteAccess": true,
+      "allowedFolders": null
+    },
+    "configuration": {
+      "audioLanguagePreference": null,
+      "subtitleLanguagePreference": null,
+      "theme": null,
+      "displayMissingEpisodes": false,
+      "orderedViews": null,
+      "enableNextEpisodeAutoPlay": false
+    },
+    "passwordHash": "$PBKDF2-SHA512$iterations=210000$D5E223E4ADF35780CC3E4865E04D6A18$226C64D252CE6C50BDDE208841ED49A7163EF5AC80760327BB091A898CAF89E6164D01BC28777950D3AF1A703A9CFE0B8C1B5DD55ACAEFE2EC98B1DE0153F39C",
+    "libraries": [
+      {
+        "id": "b2701674644e863dffae182a0f5bad23",
+        "name": "Shows Chris"
+      }
+    ]
+  },
+  {
+    "id": "f2f1c24079d743f1a8c884ba7e63f1ab",
+    "username": "Family",
+    "primaryImageTag": null,
+    "isAdministrator": false,
+    "isDisabled": false,
+    "isHidden": false,
+    "lastLoginDate": "2025-10-05T20:34:49.6458553Z",
+    "policy": {
+      "isAdministrator": false,
+      "isDisabled": false,
+      "isHidden": false,
+      "enableAllFolders": false,
+      "blockedTags": null,
+      "maxParentalRating": null,
+      "enableRemoteAccess": true,
+      "allowedFolders": null
+    },
+    "configuration": {
+      "audioLanguagePreference": null,
+      "subtitleLanguagePreference": null,
+      "theme": null,
+      "displayMissingEpisodes": false,
+      "orderedViews": null,
+      "enableNextEpisodeAutoPlay": false
+    },
+    "passwordHash": "$PBKDF2-SHA512$iterations=210000$D198ADFDD585750690AF094F93451A10$D04AE7FC5C35ECCA66FBA7EA10C0D998A497D87E8A5131B9FB344B86E31CF98166440250AABEB9A0F79FDEB511D945AE6DF314C9A49FA396E31FC9E666B177FE",
+    "libraries": [
+      {
+        "id": "f137a2dd21bbc1b99aa5c0f6bf02a805",
+        "name": "Movies"
+      },
+      {
+        "id": "a656b907eb3a73532e40e44b968d0225",
+        "name": "Shows"
+      }
+    ]
+  },
+  {
+    "id": "b8b1798df21941bd9fdcdafce23097a3",
+    "username": "Mitra",
+    "primaryImageTag": null,
+    "isAdministrator": false,
+    "isDisabled": false,
+    "isHidden": false,
+    "lastLoginDate": "2025-06-12T13:32:22.9701139Z",
+    "policy": {
+      "isAdministrator": false,
+      "isDisabled": false,
+      "isHidden": false,
+      "enableAllFolders": false,
+      "blockedTags": null,
+      "maxParentalRating": null,
+      "enableRemoteAccess": true,
+      "allowedFolders": null
+    },
+    "configuration": {
+      "audioLanguagePreference": null,
+      "subtitleLanguagePreference": null,
+      "theme": null,
+      "displayMissingEpisodes": false,
+      "orderedViews": null,
+      "enableNextEpisodeAutoPlay": false
+    },
+    "passwordHash": "$PBKDF2-SHA512$iterations=210000$0B9348D2BABF3533A3A277442CE37D9F$20E785F9CF664980412E048A887BBA32BD6EF68D3E026AA6F2198870A79DC1E3103617E50DDFF226ECB0795F2E4858568397DEC8EE2C29325DE3254D1A0ECC6D",
+    "libraries": [
+      {
+        "id": "6253fe09cfc6208f77cada1796a2a47e",
+        "name": "Movies - Mitra"
+      },
+      {
+        "id": "235d1385733014225a212efdfa702b70",
+        "name": "Shows - Mitra"
+      }
+    ]
+  }
+]

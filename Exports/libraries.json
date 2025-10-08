@@ -1,0 +1,566 @@
+[
+  {
+    "Id": "f137a2dd21bbc1b99aa5c0f6bf02a805",
+    "IdDashed": "f137a2dd-21bb-c1b9-9aa5-c0f6bf02a805",
+    "Name": "Movies",
+    "CollectionType": "movies",
+    "Locations": [
+      "F:\\Media\\Movies"
+    ],
+    "PrimaryImageItemId": "f137a2dd21bbc1b99aa5c0f6bf02a805",
+    "RootPath": "C:\\ProgramData\\Jellyfin\\Server\\root\\default\\Movies",
+    "RootPaths": null,
+    "Options": {
+      "Enabled": true,
+      "EnablePhotos": true,
+      "EnableRealtimeMonitor": true,
+      "EnableLUFSScan": true,
+      "EnableChapterImageExtraction": false,
+      "ExtractChapterImagesDuringLibraryScan": false,
+      "EnableTrickplayImageExtraction": false,
+      "ExtractTrickplayImagesDuringLibraryScan": false,
+      "PathInfos": [
+        {
+          "Path": "F:\\Media\\Movies"
+        }
+      ],
+      "SaveLocalMetadata": true,
+      "EnableInternetProviders": false,
+      "EnableAutomaticSeriesGrouping": false,
+      "EnableEmbeddedTitles": true,
+      "EnableEmbeddedExtrasTitles": false,
+      "EnableEmbeddedEpisodeInfos": false,
+      "AutomaticRefreshIntervalDays": 0,
+      "PreferredMetadataLanguage": "en",
+      "MetadataCountryCode": "",
+      "SeasonZeroDisplayName": "Specials",
+      "MetadataSavers": [],
+      "DisabledLocalMetadataReaders": [],
+      "LocalMetadataReaderOrder": [
+        "Nfo"
+      ],
+      "DisabledSubtitleFetchers": [],
+      "SubtitleFetcherOrder": [
+        "Open Subtitles"
+      ],
+      "DisabledMediaSegmentProviders": [],
+      "MediaSegmentProvideOrder": [],
+      "SkipSubtitlesIfEmbeddedSubtitlesPresent": false,
+      "SkipSubtitlesIfAudioTrackMatches": false,
+      "SubtitleDownloadLanguages": [],
+      "RequirePerfectSubtitleMatch": true,
+      "SaveSubtitlesWithMedia": true,
+      "SaveLyricsWithMedia": false,
+      "SaveTrickplayWithMedia": false,
+      "DisabledLyricFetchers": [],
+      "LyricFetcherOrder": [],
+      "PreferNonstandardArtistsTag": false,
+      "UseCustomTagDelimiters": false,
+      "CustomTagDelimiters": [
+        "/",
+        "|",
+        ";",
+        "\\"
+      ],
+      "DelimiterWhitelist": [],
+      "AutomaticallyAddToCollection": true,
+      "AllowEmbeddedSubtitles": 0,
+      "TypeOptions": [
+        {
+          "Type": "Movie",
+          "MetadataFetchers": [
+            "TheMovieDb",
+            "The Open Movie Database"
+          ],
+          "MetadataFetcherOrder": [
+            "TheMovieDb",
+            "The Open Movie Database"
+          ],
+          "ImageFetchers": [
+            "TheMovieDb",
+            "The Open Movie Database",
+            "Embedded Image Extractor",
+            "Screen Grabber"
+          ],
+          "ImageFetcherOrder": [
+            "TheMovieDb",
+            "The Open Movie Database",
+            "Embedded Image Extractor",
+            "Screen Grabber"
+          ],
+          "ImageOptions": []
+        }
+      ]
+    }
+  },
+  {
+    "Id": "6253fe09cfc6208f77cada1796a2a47e",
+    "IdDashed": "6253fe09-cfc6-208f-77ca-da1796a2a47e",
+    "Name": "Movies - Mitra",
+    "CollectionType": "movies",
+    "Locations": [
+      "F:\\Media\\Movies Mitra"
+    ],
+    "PrimaryImageItemId": "6253fe09cfc6208f77cada1796a2a47e",
+    "RootPath": "C:\\ProgramData\\Jellyfin\\Server\\root\\default\\Movies - Mitra",
+    "RootPaths": null,
+    "Options": {
+      "Enabled": true,
+      "EnablePhotos": true,
+      "EnableRealtimeMonitor": true,
+      "EnableLUFSScan": true,
+      "EnableChapterImageExtraction": false,
+      "ExtractChapterImagesDuringLibraryScan": false,
+      "EnableTrickplayImageExtraction": false,
+      "ExtractTrickplayImagesDuringLibraryScan": false,
+      "PathInfos": [
+        {
+          "Path": "F:\\Media\\Movies Mitra"
+        }
+      ],
+      "SaveLocalMetadata": false,
+      "EnableInternetProviders": false,
+      "EnableAutomaticSeriesGrouping": false,
+      "EnableEmbeddedTitles": true,
+      "EnableEmbeddedExtrasTitles": false,
+      "EnableEmbeddedEpisodeInfos": false,
+      "AutomaticRefreshIntervalDays": 0,
+      "PreferredMetadataLanguage": "",
+      "MetadataCountryCode": "",
+      "SeasonZeroDisplayName": "Specials",
+      "MetadataSavers": [],
+      "DisabledLocalMetadataReaders": [],
+      "LocalMetadataReaderOrder": [
+        "Nfo"
+      ],
+      "DisabledSubtitleFetchers": [],
+      "SubtitleFetcherOrder": [],
+      "DisabledMediaSegmentProviders": [],
+      "MediaSegmentProvideOrder": [],
+      "SkipSubtitlesIfEmbeddedSubtitlesPresent": false,
+      "SkipSubtitlesIfAudioTrackMatches": false,
+      "SubtitleDownloadLanguages": [],
+      "RequirePerfectSubtitleMatch": true,
+      "SaveSubtitlesWithMedia": true,
+      "SaveLyricsWithMedia": false,
+      "SaveTrickplayWithMedia": false,
+      "DisabledLyricFetchers": [],
+      "LyricFetcherOrder": [],
+      "PreferNonstandardArtistsTag": false,
+      "UseCustomTagDelimiters": false,
+      "CustomTagDelimiters": [
+        "/",
+        "|",
+        ";",
+        "\\"
+      ],
+      "DelimiterWhitelist": [],
+      "AutomaticallyAddToCollection": false,
+      "AllowEmbeddedSubtitles": 0,
+      "TypeOptions": [
+        {
+          "Type": "Movie",
+          "MetadataFetchers": [
+            "TheMovieDb",
+            "The Open Movie Database"
+          ],
+          "MetadataFetcherOrder": [
+            "TheMovieDb",
+            "The Open Movie Database"
+          ],
+          "ImageFetchers": [
+            "TheMovieDb",
+            "The Open Movie Database",
+            "Embedded Image Extractor",
+            "Screen Grabber"
+          ],
+          "ImageFetcherOrder": [
+            "TheMovieDb",
+            "The Open Movie Database",
+            "Embedded Image Extractor",
+            "Screen Grabber"
+          ],
+          "ImageOptions": []
+        }
+      ]
+    }
+  },
+  {
+    "Id": "a656b907eb3a73532e40e44b968d0225",
+    "IdDashed": "a656b907-eb3a-7353-2e40-e44b968d0225",
+    "Name": "Shows",
+    "CollectionType": "tvshows",
+    "Locations": [
+      "F:\\Media\\TV Shows"
+    ],
+    "PrimaryImageItemId": "a656b907eb3a73532e40e44b968d0225",
+    "RootPath": "C:\\ProgramData\\Jellyfin\\Server\\root\\default\\Shows",
+    "RootPaths": null,
+    "Options": {
+      "Enabled": true,
+      "EnablePhotos": true,
+      "EnableRealtimeMonitor": true,
+      "EnableLUFSScan": true,
+      "EnableChapterImageExtraction": false,
+      "ExtractChapterImagesDuringLibraryScan": false,
+      "EnableTrickplayImageExtraction": false,
+      "ExtractTrickplayImagesDuringLibraryScan": false,
+      "PathInfos": [
+        {
+          "Path": "F:\\Media\\TV Shows"
+        }
+      ],
+      "SaveLocalMetadata": false,
+      "EnableInternetProviders": false,
+      "EnableAutomaticSeriesGrouping": false,
+      "EnableEmbeddedTitles": true,
+      "EnableEmbeddedExtrasTitles": false,
+      "EnableEmbeddedEpisodeInfos": true,
+      "AutomaticRefreshIntervalDays": 0,
+      "PreferredMetadataLanguage": "",
+      "MetadataCountryCode": "",
+      "SeasonZeroDisplayName": "Specials",
+      "MetadataSavers": [],
+      "DisabledLocalMetadataReaders": [],
+      "LocalMetadataReaderOrder": [
+        "Nfo"
+      ],
+      "DisabledSubtitleFetchers": [],
+      "SubtitleFetcherOrder": [],
+      "DisabledMediaSegmentProviders": [],
+      "MediaSegmentProvideOrder": [],
+      "SkipSubtitlesIfEmbeddedSubtitlesPresent": false,
+      "SkipSubtitlesIfAudioTrackMatches": false,
+      "SubtitleDownloadLanguages": [],
+      "RequirePerfectSubtitleMatch": true,
+      "SaveSubtitlesWithMedia": true,
+      "SaveLyricsWithMedia": false,
+      "SaveTrickplayWithMedia": false,
+      "DisabledLyricFetchers": [],
+      "LyricFetcherOrder": [],
+      "PreferNonstandardArtistsTag": false,
+      "UseCustomTagDelimiters": false,
+      "CustomTagDelimiters": [
+        "/",
+        "|",
+        ";",
+        "\\"
+      ],
+      "DelimiterWhitelist": [],
+      "AutomaticallyAddToCollection": false,
+      "AllowEmbeddedSubtitles": 0,
+      "TypeOptions": [
+        {
+          "Type": "Series",
+          "MetadataFetchers": [
+            "TheMovieDb",
+            "The Open Movie Database"
+          ],
+          "MetadataFetcherOrder": [
+            "TheMovieDb",
+            "The Open Movie Database"
+          ],
+          "ImageFetchers": [
+            "TheMovieDb"
+          ],
+          "ImageFetcherOrder": [
+            "TheMovieDb"
+          ],
+          "ImageOptions": []
+        },
+        {
+          "Type": "Season",
+          "MetadataFetchers": [
+            "TheMovieDb"
+          ],
+          "MetadataFetcherOrder": [
+            "TheMovieDb"
+          ],
+          "ImageFetchers": [
+            "TheMovieDb"
+          ],
+          "ImageFetcherOrder": [
+            "TheMovieDb"
+          ],
+          "ImageOptions": []
+        },
+        {
+          "Type": "Episode",
+          "MetadataFetchers": [
+            "TheMovieDb",
+            "The Open Movie Database"
+          ],
+          "MetadataFetcherOrder": [
+            "TheMovieDb",
+            "The Open Movie Database"
+          ],
+          "ImageFetchers": [
+            "TheMovieDb",
+            "The Open Movie Database",
+            "Embedded Image Extractor",
+            "Screen Grabber"
+          ],
+          "ImageFetcherOrder": [
+            "TheMovieDb",
+            "The Open Movie Database",
+            "Embedded Image Extractor",
+            "Screen Grabber"
+          ],
+          "ImageOptions": []
+        }
+      ]
+    }
+  },
+  {
+    "Id": "235d1385733014225a212efdfa702b70",
+    "IdDashed": "235d1385-7330-1422-5a21-2efdfa702b70",
+    "Name": "Shows - Mitra",
+    "CollectionType": "tvshows",
+    "Locations": [
+      "F:\\Media\\TV Shows Mitra"
+    ],
+    "PrimaryImageItemId": "235d1385733014225a212efdfa702b70",
+    "RootPath": "C:\\ProgramData\\Jellyfin\\Server\\root\\default\\Shows - Mitra",
+    "RootPaths": null,
+    "Options": {
+      "Enabled": true,
+      "EnablePhotos": true,
+      "EnableRealtimeMonitor": true,
+      "EnableLUFSScan": true,
+      "EnableChapterImageExtraction": false,
+      "ExtractChapterImagesDuringLibraryScan": false,
+      "EnableTrickplayImageExtraction": false,
+      "ExtractTrickplayImagesDuringLibraryScan": false,
+      "PathInfos": [
+        {
+          "Path": "F:\\Media\\TV Shows Mitra"
+        }
+      ],
+      "SaveLocalMetadata": false,
+      "EnableInternetProviders": false,
+      "EnableAutomaticSeriesGrouping": false,
+      "EnableEmbeddedTitles": true,
+      "EnableEmbeddedExtrasTitles": false,
+      "EnableEmbeddedEpisodeInfos": true,
+      "AutomaticRefreshIntervalDays": 0,
+      "PreferredMetadataLanguage": "",
+      "MetadataCountryCode": "",
+      "SeasonZeroDisplayName": "Specials",
+      "MetadataSavers": [],
+      "DisabledLocalMetadataReaders": [],
+      "LocalMetadataReaderOrder": [
+        "Nfo"
+      ],
+      "DisabledSubtitleFetchers": [],
+      "SubtitleFetcherOrder": [],
+      "DisabledMediaSegmentProviders": [],
+      "MediaSegmentProvideOrder": [],
+      "SkipSubtitlesIfEmbeddedSubtitlesPresent": false,
+      "SkipSubtitlesIfAudioTrackMatches": false,
+      "SubtitleDownloadLanguages": [],
+      "RequirePerfectSubtitleMatch": true,
+      "SaveSubtitlesWithMedia": true,
+      "SaveLyricsWithMedia": false,
+      "SaveTrickplayWithMedia": false,
+      "DisabledLyricFetchers": [],
+      "LyricFetcherOrder": [],
+      "PreferNonstandardArtistsTag": false,
+      "UseCustomTagDelimiters": false,
+      "CustomTagDelimiters": [
+        "/",
+        "|",
+        ";",
+        "\\"
+      ],
+      "DelimiterWhitelist": [],
+      "AutomaticallyAddToCollection": false,
+      "AllowEmbeddedSubtitles": 0,
+      "TypeOptions": [
+        {
+          "Type": "Series",
+          "MetadataFetchers": [
+            "TheMovieDb",
+            "The Open Movie Database"
+          ],
+          "MetadataFetcherOrder": [
+            "TheMovieDb",
+            "The Open Movie Database"
+          ],
+          "ImageFetchers": [
+            "TheMovieDb"
+          ],
+          "ImageFetcherOrder": [
+            "TheMovieDb"
+          ],
+          "ImageOptions": []
+        },
+        {
+          "Type": "Season",
+          "MetadataFetchers": [
+            "TheMovieDb"
+          ],
+          "MetadataFetcherOrder": [
+            "TheMovieDb"
+          ],
+          "ImageFetchers": [
+            "TheMovieDb"
+          ],
+          "ImageFetcherOrder": [
+            "TheMovieDb"
+          ],
+          "ImageOptions": []
+        },
+        {
+          "Type": "Episode",
+          "MetadataFetchers": [
+            "TheMovieDb",
+            "The Open Movie Database"
+          ],
+          "MetadataFetcherOrder": [
+            "TheMovieDb",
+            "The Open Movie Database"
+          ],
+          "ImageFetchers": [
+            "TheMovieDb",
+            "The Open Movie Database",
+            "Embedded Image Extractor",
+            "Screen Grabber"
+          ],
+          "ImageFetcherOrder": [
+            "TheMovieDb",
+            "The Open Movie Database",
+            "Embedded Image Extractor",
+            "Screen Grabber"
+          ],
+          "ImageOptions": []
+        }
+      ]
+    }
+  },
+  {
+    "Id": "b2701674644e863dffae182a0f5bad23",
+    "IdDashed": "b2701674-644e-863d-ffae-182a0f5bad23",
+    "Name": "Shows Chris",
+    "CollectionType": "tvshows",
+    "Locations": [
+      "F:\\Media\\TV Shows Chris"
+    ],
+    "PrimaryImageItemId": "b2701674644e863dffae182a0f5bad23",
+    "RootPath": "C:\\ProgramData\\Jellyfin\\Server\\root\\default\\Shows Chris",
+    "RootPaths": null,
+    "Options": {
+      "Enabled": true,
+      "EnablePhotos": true,
+      "EnableRealtimeMonitor": true,
+      "EnableLUFSScan": true,
+      "EnableChapterImageExtraction": false,
+      "ExtractChapterImagesDuringLibraryScan": false,
+      "EnableTrickplayImageExtraction": false,
+      "ExtractTrickplayImagesDuringLibraryScan": false,
+      "PathInfos": [
+        {
+          "Path": "F:\\Media\\TV Shows Chris"
+        }
+      ],
+      "SaveLocalMetadata": false,
+      "EnableInternetProviders": false,
+      "EnableAutomaticSeriesGrouping": false,
+      "EnableEmbeddedTitles": true,
+      "EnableEmbeddedExtrasTitles": false,
+      "EnableEmbeddedEpisodeInfos": false,
+      "AutomaticRefreshIntervalDays": 0,
+      "PreferredMetadataLanguage": "en",
+      "MetadataCountryCode": "GB",
+      "SeasonZeroDisplayName": "Specials",
+      "MetadataSavers": [],
+      "DisabledLocalMetadataReaders": [],
+      "LocalMetadataReaderOrder": [
+        "Nfo"
+      ],
+      "DisabledSubtitleFetchers": [],
+      "SubtitleFetcherOrder": [],
+      "DisabledMediaSegmentProviders": [],
+      "MediaSegmentProvideOrder": [],
+      "SkipSubtitlesIfEmbeddedSubtitlesPresent": false,
+      "SkipSubtitlesIfAudioTrackMatches": false,
+      "SubtitleDownloadLanguages": [],
+      "RequirePerfectSubtitleMatch": true,
+      "SaveSubtitlesWithMedia": true,
+      "SaveLyricsWithMedia": false,
+      "SaveTrickplayWithMedia": false,
+      "DisabledLyricFetchers": [],
+      "LyricFetcherOrder": [],
+      "PreferNonstandardArtistsTag": false,
+      "UseCustomTagDelimiters": false,
+      "CustomTagDelimiters": [
+        "/",
+        "|",
+        ";",
+        "\\"
+      ],
+      "DelimiterWhitelist": [],
+      "AutomaticallyAddToCollection": false,
+      "AllowEmbeddedSubtitles": 0,
+      "TypeOptions": [
+        {
+          "Type": "Series",
+          "MetadataFetchers": [
+            "TheMovieDb",
+            "The Open Movie Database"
+          ],
+          "MetadataFetcherOrder": [
+            "TheMovieDb",
+            "The Open Movie Database"
+          ],
+          "ImageFetchers": [
+            "TheMovieDb"
+          ],
+          "ImageFetcherOrder": [
+            "TheMovieDb"
+          ],
+          "ImageOptions": []
+        },
+        {
+          "Type": "Season",
+          "MetadataFetchers": [
+            "TheMovieDb"
+          ],
+          "MetadataFetcherOrder": [
+            "TheMovieDb"
+          ],
+          "ImageFetchers": [
+            "TheMovieDb"
+          ],
+          "ImageFetcherOrder": [
+            "TheMovieDb"
+          ],
+          "ImageOptions": []
+        },
+        {
+          "Type": "Episode",
+          "MetadataFetchers": [
+            "TheMovieDb",
+            "The Open Movie Database"
+          ],
+          "MetadataFetcherOrder": [
+            "TheMovieDb",
+            "The Open Movie Database"
+          ],
+          "ImageFetchers": [
+            "TheMovieDb",
+            "The Open Movie Database",
+            "Embedded Image Extractor",
+            "Screen Grabber"
+          ],
+          "ImageFetcherOrder": [
+            "TheMovieDb",
+            "The Open Movie Database",
+            "Embedded Image Extractor",
+            "Screen Grabber"
+          ],
+          "ImageOptions": []
+        }
+      ]
+    }
+  }
+]

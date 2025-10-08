@@ -125,88 +125,178 @@ internal sealed class ImportService
         }
     }
 
-    private static void AnalyzeUsers(string root, ImportAnalysisResult result, CancellationToken cancellationToken)
+    private void AnalyzeUsers(string root, ImportAnalysisResult result, CancellationToken cancellationToken)
     {
         var usersPath = Path.Combine(root, "users_basic.json");
         if (!File.Exists(usersPath))
         {
+            _logger.LogWarning("Import: users_basic.json not found in archive at {Path}", usersPath);
             result.Errors.Add("users_basic.json not found in archive.");
             return;
         }
+
+        _logger.LogInformation("Import: Analyzing users from {Path}", usersPath);
 
         using var fs = File.OpenRead(usersPath);
         using var doc = JsonDocument.Parse(fs);
         var rootEl = doc.RootElement;
         if (rootEl.ValueKind != JsonValueKind.Array)
         {
+            _logger.LogError("Import: users_basic.json is not a JSON array");
             result.Errors.Add("users_basic.json is not a JSON array.");
             return;
         }
 
+        var userCount = 0;
         foreach (var el in rootEl.EnumerateArray())
         {
             cancellationToken.ThrowIfCancellationRequested();
-            string? id = null;
-            string? username = null;
 
-            if (el.TryGetProperty("id", out var idEl))
+            var user = new ImportUser { Selected = true };
+
+            // ID
+            if (el.TryGetProperty("id", out var idEl) || el.TryGetProperty("Id", out idEl))
             {
-                id = idEl.GetString();
-            }
-            else if (el.TryGetProperty("Id", out var idEl2))
-            {
-                id = idEl2.GetString();
+                user.Id = idEl.GetString();
             }
 
-            if (el.TryGetProperty("username", out var unEl))
+            // Username
+            if (el.TryGetProperty("username", out var unEl) || el.TryGetProperty("Username", out unEl))
             {
-                username = unEl.GetString();
-            }
-            else if (el.TryGetProperty("Username", out var unEl2))
-            {
-                username = unEl2.GetString();
+                user.Username = unEl.GetString();
             }
 
-            result.Users.Add(new SimpleUser { Id = id, Username = username });
+            // IsAdministrator
+            if (el.TryGetProperty("isAdministrator", out var adminEl) || el.TryGetProperty("IsAdministrator", out adminEl))
+            {
+                user.IsAdministrator = adminEl.GetBoolean();
+            }
+            else if (el.TryGetProperty("policy", out var policyEl) && policyEl.TryGetProperty("isAdministrator", out var pAdminEl))
+            {
+                user.IsAdministrator = pAdminEl.GetBoolean();
+            }
+
+            // IsDisabled
+            if (el.TryGetProperty("isDisabled", out var disEl) || el.TryGetProperty("IsDisabled", out disEl))
+            {
+                user.IsDisabled = disEl.GetBoolean();
+            }
+            else if (el.TryGetProperty("policy", out var policyEl2) && policyEl2.TryGetProperty("isDisabled", out var pDisEl))
+            {
+                user.IsDisabled = pDisEl.GetBoolean();
+            }
+
+            // Password Hash
+            if (el.TryGetProperty("passwordHash", out var pwEl) || el.TryGetProperty("PasswordHash", out pwEl))
+            {
+                user.PasswordHash = pwEl.GetString();
+            }
+
+            // Libraries
+            if (el.TryGetProperty("libraries", out var libsEl) || el.TryGetProperty("Libraries", out libsEl))
+            {
+                if (libsEl.ValueKind == JsonValueKind.Array)
+                {
+                    foreach (var libEl in libsEl.EnumerateArray())
+                    {
+                        if (libEl.TryGetProperty("id", out var libIdEl) || libEl.TryGetProperty("Id", out libIdEl))
+                        {
+                            var libId = libIdEl.GetString();
+                            if (!string.IsNullOrWhiteSpace(libId))
+                            {
+                                user.LibraryIds.Add(libId);
+                            }
+                        }
+
+                        if (libEl.TryGetProperty("name", out var libNameEl) || libEl.TryGetProperty("Name", out libNameEl))
+                        {
+                            var libName = libNameEl.GetString();
+                            if (!string.IsNullOrWhiteSpace(libName))
+                            {
+                                user.LibraryNames.Add(libName);
+                            }
+                        }
+                    }
+                }
+            }
+
+            result.Users.Add(user);
+            userCount++;
+            _logger.LogDebug("Import: Parsed user {Username} (ID: {Id}, Admin: {IsAdmin}, Disabled: {IsDisabled}, Libraries: {LibCount})", user.Username, user.Id, user.IsAdministrator, user.IsDisabled, user.LibraryIds.Count);
         }
+
+        _logger.LogInformation("Import: Successfully parsed {Count} users", userCount);
     }
 
-    private static void AnalyzeLibraries(string root, ImportAnalysisResult result, CancellationToken cancellationToken)
+    private void AnalyzeLibraries(string root, ImportAnalysisResult result, CancellationToken cancellationToken)
     {
         var libsPath = Path.Combine(root, "libraries.json");
         if (!File.Exists(libsPath))
         {
+            _logger.LogWarning("Import: libraries.json not found in archive at {Path}", libsPath);
             result.Errors.Add("libraries.json not found in archive.");
             return;
         }
+
+        _logger.LogInformation("Import: Analyzing libraries from {Path}", libsPath);
 
         using var fs = File.OpenRead(libsPath);
         using var doc = JsonDocument.Parse(fs);
         var rootEl = doc.RootElement;
         if (rootEl.ValueKind != JsonValueKind.Array)
         {
+            _logger.LogError("Import: libraries.json is not a JSON array");
             result.Errors.Add("libraries.json is not a JSON array.");
             return;
         }
 
+        var libCount = 0;
         foreach (var el in rootEl.EnumerateArray())
         {
             cancellationToken.ThrowIfCancellationRequested();
-            string? id = null;
-            string? name = null;
 
+            var library = new ImportLibrary { Selected = true };
+
+            // ID
             if (el.TryGetProperty("Id", out var idEl) || el.TryGetProperty("id", out idEl))
             {
-                id = idEl.GetString();
+                library.Id = idEl.GetString();
             }
 
+            // Name
             if (el.TryGetProperty("Name", out var nameEl) || el.TryGetProperty("name", out nameEl))
             {
-                name = nameEl.GetString();
+                library.Name = nameEl.GetString();
             }
 
-            result.Libraries.Add(new SimpleLibrary { Id = id, Name = name });
+            // CollectionType
+            if (el.TryGetProperty("CollectionType", out var typeEl) || el.TryGetProperty("collectionType", out typeEl))
+            {
+                library.CollectionType = typeEl.GetString();
+            }
+
+            // Locations
+            if (el.TryGetProperty("Locations", out var locsEl) || el.TryGetProperty("locations", out locsEl))
+            {
+                if (locsEl.ValueKind == JsonValueKind.Array)
+                {
+                    foreach (var locEl in locsEl.EnumerateArray())
+                    {
+                        var loc = locEl.GetString();
+                        if (!string.IsNullOrWhiteSpace(loc))
+                        {
+                            library.Locations.Add(loc);
+                        }
+                    }
+                }
+            }
+
+            result.Libraries.Add(library);
+            libCount++;
+            _logger.LogDebug("Import: Parsed library {Name} (ID: {Id}, Type: {Type}, Locations: {LocCount})", library.Name, library.Id, library.CollectionType, library.Locations.Count);
         }
+
+        _logger.LogInformation("Import: Successfully parsed {Count} libraries", libCount);
     }
 
     internal sealed class ImportAnalysisResult
@@ -217,24 +307,42 @@ internal sealed class ImportService
 
         public string? ExtractedPath { get; set; }
 
-        public List<SimpleUser> Users { get; set; } = new List<SimpleUser>();
+        public List<ImportUser> Users { get; set; } = new List<ImportUser>();
 
-        public List<SimpleLibrary> Libraries { get; set; } = new List<SimpleLibrary>();
+        public List<ImportLibrary> Libraries { get; set; } = new List<ImportLibrary>();
 
         public List<string> Errors { get; set; } = new List<string>();
     }
 
-    internal sealed class SimpleUser
+    internal sealed class ImportUser
     {
         public string? Id { get; set; }
 
         public string? Username { get; set; }
+
+        public bool IsAdministrator { get; set; }
+
+        public bool IsDisabled { get; set; }
+
+        public string? PasswordHash { get; set; }
+
+        public List<string> LibraryIds { get; set; } = new List<string>();
+
+        public List<string> LibraryNames { get; set; } = new List<string>();
+
+        public bool Selected { get; set; }
     }
 
-    internal sealed class SimpleLibrary
+    internal sealed class ImportLibrary
     {
         public string? Id { get; set; }
 
         public string? Name { get; set; }
+
+        public string? CollectionType { get; set; }
+
+        public List<string> Locations { get; set; } = new List<string>();
+
+        public bool Selected { get; set; }
     }
 }

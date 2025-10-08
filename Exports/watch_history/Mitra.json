@@ -1,0 +1,798 @@
+[
+  {
+    "ids": {
+      "id": "ffc0251256423cdbf9cc071e66180b73",
+      "type": "Episode",
+      "name": "It\u2019s Time For My Solo",
+      "providerIds": {
+        "Tvdb": "11091077",
+        "Imdb": "tt35639389"
+      },
+      "path": "F:\\Media\\TV Shows Mitra\\Ginny \u0026 Georgia\\Season 3\\Ginny \u0026 Georgia - S03E09 - It\u2019s Time For My Solo HDTV-1080p.mkv",
+      "productionYear": 2025,
+      "seriesName": "Ginny \u0026 Georgia",
+      "seasonNumber": 3,
+      "episodeNumber": 9
+    },
+    "played": false,
+    "playCount": 1,
+    "isFavorite": false,
+    "playbackPositionTicks": 5445020000,
+    "lastPlayedUtc": "2025-06-12T13:05:12.4565504Z"
+  },
+  {
+    "ids": {
+      "id": "fc89a218127fda7b7ba2247468d80f02",
+      "type": "Episode",
+      "name": "Namaste Muthafucka",
+      "providerIds": {
+        "Tvdb": "6455697",
+        "Imdb": "tt7536794"
+      },
+      "path": "F:\\Media\\TV Shows Mitra\\The Chi\\Season 1\\The Chi - S01E09 - Namaste Muthafucka WEBRip-1080p.mp4",
+      "productionYear": 2018,
+      "seriesName": "The Chi",
+      "seasonNumber": 1,
+      "episodeNumber": 9
+    },
+    "played": true,
+    "playCount": 3,
+    "isFavorite": false,
+    "playbackPositionTicks": 0,
+    "lastPlayedUtc": "2025-06-27T20:01:32.2706291Z"
+  },
+  {
+    "ids": {
+      "id": "73bf9a1c322ee1806fbfa342cfe466a4",
+      "type": "Episode",
+      "name": "Wallets",
+      "providerIds": {
+        "Tvdb": "6455696",
+        "Imdb": "tt7540666"
+      },
+      "path": "F:\\Media\\TV Shows Mitra\\The Chi\\Season 1\\The Chi - S01E08 - Wallets WEBRip-1080p.mp4",
+      "productionYear": 2018,
+      "seriesName": "The Chi",
+      "seasonNumber": 1,
+      "episodeNumber": 8
+    },
+    "played": false,
+    "playCount": 4,
+    "isFavorite": false,
+    "playbackPositionTicks": 28467345453,
+    "lastPlayedUtc": "2025-06-30T09:40:15.7143373Z"
+  },
+  {
+    "ids": {
+      "id": "79ae442ba7a34588c3033ddcfc26af59",
+      "type": "Episode",
+      "name": "Summer Heat",
+      "providerIds": {
+        "Imdb": "tt15397430",
+        "Tvdb": "9190159",
+        "sonarr": "677"
+      },
+      "path": "F:\\Media\\TV Shows Mitra\\The Summer I Turned Pretty\\Season 01\\The Summer I Turned Pretty - S01E04 - Summer Heat.mkv",
+      "productionYear": 2022,
+      "seriesName": "The Summer I Turned Pretty",
+      "seasonNumber": 1,
+      "episodeNumber": 4
+    },
+    "played": true,
+    "playCount": 1,
+    "isFavorite": false,
+    "playbackPositionTicks": 0,
+    "lastPlayedUtc": "2025-07-17T09:48:48.8721903Z"
+  },
+  {
+    "ids": {
+      "id": "5094ff2fb5c5f9e3b2e845a34082f9ec",
+      "type": "Episode",
+      "name": "Eruptions",
+      "providerIds": {
+        "Tvdb": "7017112",
+        "Imdb": "tt7947872"
+      },
+      "path": "F:\\Media\\TV Shows Mitra\\The Chi\\Season 2\\The Chi - S02E01 - Eruptions WEBRip-1080p.mp4",
+      "productionYear": 2019,
+      "seriesName": "The Chi",
+      "seasonNumber": 2,
+      "episodeNumber": 1
+    },
+    "played": true,
+    "playCount": 4,
+    "isFavorite": false,
+    "playbackPositionTicks": 0,
+    "lastPlayedUtc": "2025-07-07T05:00:55.9500272Z"
+  },
+  {
+    "ids": {
+      "id": "fd7d84369cc5f4657418186832d5cf9d",
+      "type": "Episode",
+      "name": "Everybody Hates the Laundromat",
+      "providerIds": {
+        "Tvdb": "298881",
+        "Imdb": "tt0574123",
+        "TvRage": "58785"
+      },
+      "path": "F:\\Media\\TV Shows Mitra\\Everybody Hates Chris\\Season 1\\Everybody Hates Chris - S01E08 - Everybody Hates the Laundromat WEBDL-1080p.mkv",
+      "productionYear": 2005,
+      "seriesName": "Everybody Hates Chris",
+      "seasonNumber": 1,
+      "episodeNumber": 8
+    },
+    "played": true,
+    "playCount": 2,
+    "isFavorite": false,
+    "playbackPositionTicks": 0,
+    "lastPlayedUtc": "2025-05-16T06:07:56.502447Z"
+  },
+  {
+    "ids": {
+      "id": "0bd8513713de089090529dba0e2dea3a",
+      "type": "Episode",
+      "name": "Everybody Hates Sausage",
+      "providerIds": {
+        "Tvdb": "298876",
+        "Imdb": "tt0574118",
+        "TvRage": "58780"
+      },
+      "path": "F:\\Media\\TV Shows Mitra\\Everybody Hates Chris\\Season 1\\Everybody Hates Chris - S01E04 - Everybody Hates Sausage WEBDL-1080p.mkv",
+      "productionYear": 2005,
+      "seriesName": "Everybody Hates Chris",
+      "seasonNumber": 1,
+      "episodeNumber": 4
+    },
+    "played": true,
+    "playCount": 3,
+    "isFavorite": false,
+    "playbackPositionTicks": 0,
+    "lastPlayedUtc": "2025-04-11T10:27:00.1370883Z"
+  },
+  {
+    "ids": {
+      "id": "3dbdb04133782efcfa7babb1dbf88315",
+      "type": "Episode",
+      "name": "Ease On Down The Road",
+      "providerIds": {
+        "Tvdb": "6455698",
+        "Imdb": "tt7536792"
+      },
+      "path": "F:\\Media\\TV Shows Mitra\\The Chi\\Season 1\\The Chi - S01E10 - Ease On Down the Road WEBRip-1080p.mp4",
+      "productionYear": 2018,
+      "seriesName": "The Chi",
+      "seasonNumber": 1,
+      "episodeNumber": 10
+    },
+    "played": true,
+    "playCount": 2,
+    "isFavorite": false,
+    "playbackPositionTicks": 0,
+    "lastPlayedUtc": "2025-06-29T10:48:29.233678Z"
+  },
+  {
+    "ids": {
+      "id": "b85db945e72d6223a7f50594afff1a24",
+      "type": "Episode",
+      "name": "Everybody Hates Keisha",
+      "providerIds": {
+        "Tvdb": "298874",
+        "Imdb": "tt0574117",
+        "TvRage": "58779"
+      },
+      "path": "F:\\Media\\TV Shows Mitra\\Everybody Hates Chris\\Season 1\\Everybody Hates Chris - S01E02 - Everybody Hates Keisha WEBDL-1080p.mkv",
+      "productionYear": 2005,
+      "seriesName": "Everybody Hates Chris",
+      "seasonNumber": 1,
+      "episodeNumber": 2
+    },
+    "played": true,
+    "playCount": 1,
+    "isFavorite": false,
+    "playbackPositionTicks": 0,
+    "lastPlayedUtc": "2025-04-07T06:15:34.9895186Z"
+  },
+  {
+    "ids": {
+      "id": "33e5ab48abd11bdc76f66f1848109108",
+      "type": "Episode",
+      "name": "Everybody Hates the Babysitter",
+      "providerIds": {
+        "Tvdb": "298880",
+        "Imdb": "tt0574121",
+        "TvRage": "58784"
+      },
+      "path": "F:\\Media\\TV Shows Mitra\\Everybody Hates Chris\\Season 1\\Everybody Hates Chris - S01E07 - Everybody Hates the Babysitter WEBDL-1080p.mkv",
+      "productionYear": 2005,
+      "seriesName": "Everybody Hates Chris",
+      "seasonNumber": 1,
+      "episodeNumber": 7
+    },
+    "played": true,
+    "playCount": 1,
+    "isFavorite": false,
+    "playbackPositionTicks": 0,
+    "lastPlayedUtc": "2025-04-12T05:46:23.8044037Z"
+  },
+  {
+    "ids": {
+      "id": "6130db49f1f616f51da0e0150b041ffb",
+      "type": "Episode",
+      "name": "Everybody Hates Fat Mike",
+      "providerIds": {
+        "Tvdb": "298877",
+        "Imdb": "tt0574111",
+        "TvRage": "58782"
+      },
+      "path": "F:\\Media\\TV Shows Mitra\\Everybody Hates Chris\\Season 1\\Everybody Hates Chris - S01E05 - Everybody Hates Fat Mike WEBDL-1080p.mkv",
+      "productionYear": 2005,
+      "seriesName": "Everybody Hates Chris",
+      "seasonNumber": 1,
+      "episodeNumber": 5
+    },
+    "played": true,
+    "playCount": 1,
+    "isFavorite": false,
+    "playbackPositionTicks": 0,
+    "lastPlayedUtc": "2025-04-11T10:46:22.7142435Z"
+  },
+  {
+    "ids": {
+      "id": "d550e24bba3cb89237da0c2d06fe3ed7",
+      "type": "Episode",
+      "name": "Summer House",
+      "providerIds": {
+        "Imdb": "tt14120874",
+        "Tvdb": "9084828",
+        "sonarr": "674"
+      },
+      "path": "F:\\Media\\TV Shows Mitra\\The Summer I Turned Pretty\\Season 01\\The Summer I Turned Pretty - S01E01 - Summer House.mkv",
+      "productionYear": 2022,
+      "seriesName": "The Summer I Turned Pretty",
+      "seasonNumber": 1,
+      "episodeNumber": 1
+    },
+    "played": true,
+    "playCount": 1,
+    "isFavorite": false,
+    "playbackPositionTicks": 0,
+    "lastPlayedUtc": "2025-07-17T07:07:48.6904844Z"
+  },
+  {
+    "ids": {
+      "id": "0b97045135ef4b469b0e22d24f5e9653",
+      "type": "Movie",
+      "name": "Moana 2",
+      "providerIds": {
+        "Tmdb": "1241982",
+        "Imdb": "tt13622970",
+        "TmdbCollection": "1241984"
+      },
+      "path": "F:\\Media\\Movies Mitra\\Moana 2\\Moana 2 (2024).mp4",
+      "productionYear": 2024,
+      "seriesName": null,
+      "seasonNumber": null,
+      "episodeNumber": null
+    },
+    "played": false,
+    "playCount": 2,
+    "isFavorite": false,
+    "playbackPositionTicks": 18463466121,
+    "lastPlayedUtc": "2025-06-22T06:32:10.2007721Z"
+  },
+  {
+    "ids": {
+      "id": "20147c53dfb9e9a3d7c7496e1d72fffc",
+      "type": "Episode",
+      "name": "Everybody Hates Basketball",
+      "providerIds": {
+        "Tvdb": "298875",
+        "Imdb": "tt0574107",
+        "TvRage": "58781"
+      },
+      "path": "F:\\Media\\TV Shows Mitra\\Everybody Hates Chris\\Season 1\\Everybody Hates Chris - S01E03 - Everybody Hates Basketball WEBDL-1080p.mkv",
+      "productionYear": 2005,
+      "seriesName": "Everybody Hates Chris",
+      "seasonNumber": 1,
+      "episodeNumber": 3
+    },
+    "played": true,
+    "playCount": 1,
+    "isFavorite": false,
+    "playbackPositionTicks": 0,
+    "lastPlayedUtc": "2025-04-07T13:03:27.1548445Z"
+  },
+  {
+    "ids": {
+      "id": "7636b26cc47b97f7434559a742ad1e8e",
+      "type": "Movie",
+      "name": "The Day the Earth Blew Up: A Looney Tunes Movie",
+      "providerIds": {
+        "Tmdb": "870360",
+        "Imdb": "tt15352542"
+      },
+      "path": "F:\\Media\\Movies Mitra\\The Day the Earth Blew Up - A Looney Tunes Movie (2024)\\The Day the Earth Blew Up - A Looney Tunes Movie (2024) Bluray-1080p.mp4",
+      "productionYear": 2024,
+      "seriesName": null,
+      "seasonNumber": null,
+      "episodeNumber": null
+    },
+    "played": false,
+    "playCount": 1,
+    "isFavorite": false,
+    "playbackPositionTicks": 7889240000,
+    "lastPlayedUtc": "2025-05-09T15:18:04.4183618Z"
+  },
+  {
+    "ids": {
+      "id": "c3e8b275709ca84107d093aa94b1b234",
+      "type": "Episode",
+      "name": "Everybody Hates Food Stamps",
+      "providerIds": {
+        "Tvdb": "298882",
+        "Imdb": "tt0574113",
+        "TvRage": "304301"
+      },
+      "path": "F:\\Media\\TV Shows Mitra\\Everybody Hates Chris\\Season 1\\Everybody Hates Chris - S01E09 - Everybody Hates Food Stamps WEBDL-1080p.mkv",
+      "productionYear": 2005,
+      "seriesName": "Everybody Hates Chris",
+      "seasonNumber": 1,
+      "episodeNumber": 9
+    },
+    "played": false,
+    "playCount": 3,
+    "isFavorite": false,
+    "playbackPositionTicks": 10578700063,
+    "lastPlayedUtc": "2025-06-11T11:32:24.7134931Z"
+  },
+  {
+    "ids": {
+      "id": "5a3cd5841163e9c3e4618bb52c90246c",
+      "type": "Episode",
+      "name": "The Whistle",
+      "providerIds": {
+        "Tvdb": "6455695",
+        "Imdb": "tt7540640"
+      },
+      "path": "F:\\Media\\TV Shows Mitra\\The Chi\\Season 1\\The Chi - S01E07 - The Whistle WEBRip-1080p.mp4",
+      "productionYear": 2018,
+      "seriesName": "The Chi",
+      "seasonNumber": 1,
+      "episodeNumber": 7
+    },
+    "played": true,
+    "playCount": 3,
+    "isFavorite": false,
+    "playbackPositionTicks": 16541707355,
+    "lastPlayedUtc": "2025-06-26T18:10:48.2992406Z"
+  },
+  {
+    "ids": {
+      "id": "d769938d3feeab481826b1542d09283d",
+      "type": "Episode",
+      "name": "Every Day I\u0027m Hustlin",
+      "providerIds": {
+        "Tvdb": "7075938",
+        "Imdb": "tt8741054"
+      },
+      "path": "F:\\Media\\TV Shows Mitra\\The Chi\\Season 2\\The Chi - S02E02 - Every Day I\u0027m Hustlin\u0027 WEBRip-1080p.mp4",
+      "productionYear": 2019,
+      "seriesName": "The Chi",
+      "seasonNumber": 2,
+      "episodeNumber": 2
+    },
+    "played": false,
+    "playCount": 4,
+    "isFavorite": false,
+    "playbackPositionTicks": 7433182411,
+    "lastPlayedUtc": "2025-09-06T21:05:03.7033096Z"
+  },
+  {
+    "ids": {
+      "id": "4f8e4797770c64d4cd2a781f0ef9a38c",
+      "type": "Episode",
+      "name": "Summer Nights",
+      "providerIds": {
+        "Imdb": "tt15292648",
+        "Tvdb": "9190158",
+        "sonarr": "676"
+      },
+      "path": "F:\\Media\\TV Shows Mitra\\The Summer I Turned Pretty\\Season 01\\The Summer I Turned Pretty - S01E03 - Summer Nights.mkv",
+      "productionYear": 2022,
+      "seriesName": "The Summer I Turned Pretty",
+      "seasonNumber": 1,
+      "episodeNumber": 3
+    },
+    "played": true,
+    "playCount": 1,
+    "isFavorite": false,
+    "playbackPositionTicks": 0,
+    "lastPlayedUtc": "2025-07-17T07:30:27.9315864Z"
+  },
+  {
+    "ids": {
+      "id": "1291ea9865a3d3835eb5ace29e0d507c",
+      "type": "Movie",
+      "name": "One of Them Days",
+      "providerIds": {
+        "Tmdb": "1280672",
+        "Imdb": "tt32221196"
+      },
+      "path": "F:\\Media\\Movies Mitra\\One of Them Days (2025)\\One of Them Days (2025).mp4",
+      "productionYear": 2025,
+      "seriesName": null,
+      "seasonNumber": null,
+      "episodeNumber": null
+    },
+    "played": true,
+    "playCount": 6,
+    "isFavorite": false,
+    "playbackPositionTicks": 0,
+    "lastPlayedUtc": "2025-03-28T14:37:01.2907216Z"
+  },
+  {
+    "ids": {
+      "id": "857d699dd8285460a1fc67fa85e7b356",
+      "type": "Episode",
+      "name": "Is That A Packed Lunch?",
+      "providerIds": {
+        "Tvdb": "11091075",
+        "Imdb": "tt35639387"
+      },
+      "path": "F:\\Media\\TV Shows Mitra\\Ginny \u0026 Georgia\\Season 3\\Ginny \u0026 Georgia - S03E08 - Is That A Packed Lunch HDTV-1080p.mkv",
+      "productionYear": 2025,
+      "seriesName": "Ginny \u0026 Georgia",
+      "seasonNumber": 3,
+      "episodeNumber": 8
+    },
+    "played": false,
+    "playCount": 5,
+    "isFavorite": false,
+    "playbackPositionTicks": 8849410224,
+    "lastPlayedUtc": "2025-06-12T13:05:24.8209099Z"
+  },
+  {
+    "ids": {
+      "id": "ef7f3aa15f81a10916e750b458805444",
+      "type": "Episode",
+      "name": "Summer Tides",
+      "providerIds": {
+        "Imdb": "tt15462758",
+        "Tvdb": "9190161",
+        "sonarr": "679"
+      },
+      "path": "F:\\Media\\TV Shows Mitra\\The Summer I Turned Pretty\\Season 01\\The Summer I Turned Pretty - S01E06 - Summer Tides.mkv",
+      "productionYear": 2022,
+      "seriesName": "The Summer I Turned Pretty",
+      "seasonNumber": 1,
+      "episodeNumber": 6
+    },
+    "played": true,
+    "playCount": 2,
+    "isFavorite": false,
+    "playbackPositionTicks": 0,
+    "lastPlayedUtc": "2025-07-17T14:10:01.2320482Z"
+  },
+  {
+    "ids": {
+      "id": "685de9a8b684e71fe640d76a3eddc4be",
+      "type": "Episode",
+      "name": "Summer Dress",
+      "providerIds": {
+        "Imdb": "tt15292628",
+        "Tvdb": "9137571",
+        "sonarr": "675"
+      },
+      "path": "F:\\Media\\TV Shows Mitra\\The Summer I Turned Pretty\\Season 01\\The Summer I Turned Pretty - S01E02 - Summer Dress.mkv",
+      "productionYear": 2022,
+      "seriesName": "The Summer I Turned Pretty",
+      "seasonNumber": 1,
+      "episodeNumber": 2
+    },
+    "played": true,
+    "playCount": 1,
+    "isFavorite": false,
+    "playbackPositionTicks": 0,
+    "lastPlayedUtc": "2025-07-17T07:08:13.2541285Z"
+  },
+  {
+    "ids": {
+      "id": "cd25a7a9d3178655604a3a8b7cd8dec6",
+      "type": "Movie",
+      "name": "The Day the Earth Blew Up: A Looney Tunes Movie",
+      "providerIds": {
+        "Tmdb": "870360",
+        "Imdb": "tt15352542"
+      },
+      "path": "F:\\Media\\Movies\\The Day the Earth Blew Up - A Looney Tunes Movie (2024)\\The Day the Earth Blew Up - A Looney Tunes Movie (2024) Bluray-1080p.mp4",
+      "productionYear": 2024,
+      "seriesName": null,
+      "seasonNumber": null,
+      "episodeNumber": null
+    },
+    "played": false,
+    "playCount": 1,
+    "isFavorite": false,
+    "playbackPositionTicks": 7889240000,
+    "lastPlayedUtc": "2025-05-09T15:18:04.4183618Z"
+  },
+  {
+    "ids": {
+      "id": "5fd0d6adfcde5472ef53af3b2d305a45",
+      "type": "Episode",
+      "name": "Ghosts",
+      "providerIds": {
+        "Tvdb": "6435967",
+        "Imdb": "tt7540616"
+      },
+      "path": "F:\\Media\\TV Shows Mitra\\The Chi\\Season 1\\The Chi - S01E03 - Ghosts WEBRip-1080p.mp4",
+      "productionYear": 2018,
+      "seriesName": "The Chi",
+      "seasonNumber": 1,
+      "episodeNumber": 3
+    },
+    "played": true,
+    "playCount": 2,
+    "isFavorite": false,
+    "playbackPositionTicks": 0,
+    "lastPlayedUtc": "2025-06-26T08:15:09.7471411Z"
+  },
+  {
+    "ids": {
+      "id": "6425d4b75ade5bf373ff671c35df8506",
+      "type": "Episode",
+      "name": "Today was a Good Day",
+      "providerIds": {
+        "Tvdb": "6455693",
+        "Imdb": "tt7540626"
+      },
+      "path": "F:\\Media\\TV Shows Mitra\\The Chi\\Season 1\\The Chi - S01E05 - Today Was a Good Day WEBRip-1080p.mp4",
+      "productionYear": 2018,
+      "seriesName": "The Chi",
+      "seasonNumber": 1,
+      "episodeNumber": 5
+    },
+    "played": true,
+    "playCount": 1,
+    "isFavorite": false,
+    "playbackPositionTicks": 0,
+    "lastPlayedUtc": "2025-06-26T09:41:10.4464189Z"
+  },
+  {
+    "ids": {
+      "id": "3bd935c29f31963691640acfed366840",
+      "type": "Episode",
+      "name": "That\u2019s Wild",
+      "providerIds": {
+        "Tvdb": "11091073",
+        "Imdb": "tt35639382"
+      },
+      "path": "F:\\Media\\TV Shows Mitra\\Ginny \u0026 Georgia\\Season 3\\Ginny \u0026 Georgia - S03E07 - That\u2019s Wild HDTV-1080p.mkv",
+      "productionYear": 2025,
+      "seriesName": "Ginny \u0026 Georgia",
+      "seasonNumber": 3,
+      "episodeNumber": 7
+    },
+    "played": false,
+    "playCount": 1,
+    "isFavorite": false,
+    "playbackPositionTicks": 0,
+    "lastPlayedUtc": "2025-06-12T13:05:08.9443818Z"
+  },
+  {
+    "ids": {
+      "id": "5268e8ce3a29166e88050eda4320863a",
+      "type": "Episode",
+      "name": "Everybody Hates The Pilot",
+      "providerIds": {
+        "Tvdb": "298873",
+        "Imdb": "tt0574125",
+        "TvRage": "58778"
+      },
+      "path": "F:\\Media\\TV Shows Mitra\\Everybody Hates Chris\\Season 1\\Everybody Hates Chris - S01E01 - Everybody Hates the Pilot WEBDL-1080p.mkv",
+      "productionYear": 2005,
+      "seriesName": "Everybody Hates Chris",
+      "seasonNumber": 1,
+      "episodeNumber": 1
+    },
+    "played": true,
+    "playCount": 2,
+    "isFavorite": false,
+    "playbackPositionTicks": 0,
+    "lastPlayedUtc": "2025-04-07T06:01:58.3218802Z"
+  },
+  {
+    "ids": {
+      "id": "545cfad1aab0984e5b8fa58a0f9442c5",
+      "type": "Episode",
+      "name": "Pilot",
+      "providerIds": {
+        "Tvdb": "307459",
+        "Imdb": "tt0466369",
+        "TvRage": "390052"
+      },
+      "path": "F:\\Media\\TV Shows Mitra\\Eureka\\Season 1\\Eureka - S01E01 - Pilot Bluray-1080p.mp4",
+      "productionYear": 2006,
+      "seriesName": "Eureka",
+      "seasonNumber": 1,
+      "episodeNumber": 1
+    },
+    "played": false,
+    "playCount": 4,
+    "isFavorite": false,
+    "playbackPositionTicks": 35181178754,
+    "lastPlayedUtc": "2025-06-17T15:32:27.0077223Z"
+  },
+  {
+    "ids": {
+      "id": "2abd27d27bdaaeef7a647568b74ce152",
+      "type": "Episode",
+      "name": "Quaking Grass",
+      "providerIds": {
+        "Tvdb": "6436896",
+        "Imdb": "tt7540622"
+      },
+      "path": "F:\\Media\\TV Shows Mitra\\The Chi\\Season 1\\The Chi - S01E04 - Quaking Grass WEBRip-1080p.mp4",
+      "productionYear": 2018,
+      "seriesName": "The Chi",
+      "seasonNumber": 1,
+      "episodeNumber": 4
+    },
+    "played": true,
+    "playCount": 1,
+    "isFavorite": false,
+    "playbackPositionTicks": 0,
+    "lastPlayedUtc": "2025-06-26T08:48:22.6972059Z"
+  },
+  {
+    "ids": {
+      "id": "79e4f3dae55609289d3d886184bd2145",
+      "type": "Episode",
+      "name": "Everybody Hates Halloween",
+      "providerIds": {
+        "Tvdb": "298879",
+        "Imdb": "tt0574116",
+        "TvRage": "58783"
+      },
+      "path": "F:\\Media\\TV Shows Mitra\\Everybody Hates Chris\\Season 1\\Everybody Hates Chris - S01E06 - Everybody Hates Halloween WEBDL-1080p.mkv",
+      "productionYear": 2005,
+      "seriesName": "Everybody Hates Chris",
+      "seasonNumber": 1,
+      "episodeNumber": 6
+    },
+    "played": true,
+    "playCount": 1,
+    "isFavorite": false,
+    "playbackPositionTicks": 0,
+    "lastPlayedUtc": "2025-04-11T12:14:56.4426602Z"
+  },
+  {
+    "ids": {
+      "id": "49fe78dcac7e028cd953db011dbdcfbc",
+      "type": "Episode",
+      "name": "Alee",
+      "providerIds": {
+        "Tvdb": "6419794",
+        "Imdb": "tt7540602"
+      },
+      "path": "F:\\Media\\TV Shows Mitra\\The Chi\\Season 1\\The Chi - S01E02 - Alee WEBRip-1080p.mp4",
+      "productionYear": 2018,
+      "seriesName": "The Chi",
+      "seasonNumber": 1,
+      "episodeNumber": 2
+    },
+    "played": true,
+    "playCount": 1,
+    "isFavorite": false,
+    "playbackPositionTicks": 0,
+    "lastPlayedUtc": "2025-06-24T13:37:43.9024573Z"
+  },
+  {
+    "ids": {
+      "id": "593c58e370204f02acc1d788205f28d4",
+      "type": "Episode",
+      "name": "Summer Love",
+      "providerIds": {
+        "Imdb": "tt15462768",
+        "Tvdb": "9190162",
+        "sonarr": "680"
+      },
+      "path": "F:\\Media\\TV Shows Mitra\\The Summer I Turned Pretty\\Season 01\\The Summer I Turned Pretty - S01E07 - Summer Love.mkv",
+      "productionYear": 2022,
+      "seriesName": "The Summer I Turned Pretty",
+      "seasonNumber": 1,
+      "episodeNumber": 7
+    },
+    "played": true,
+    "playCount": 3,
+    "isFavorite": false,
+    "playbackPositionTicks": 0,
+    "lastPlayedUtc": "2025-07-19T06:07:08.5551988Z"
+  },
+  {
+    "ids": {
+      "id": "42259fe963358d46341ccb24107134ee",
+      "type": "Episode",
+      "name": "Summer Catch",
+      "providerIds": {
+        "Imdb": "tt15462754",
+        "Tvdb": "9190160",
+        "sonarr": "678"
+      },
+      "path": "F:\\Media\\TV Shows Mitra\\The Summer I Turned Pretty\\Season 01\\The Summer I Turned Pretty - S01E05 - Summer Catch.mkv",
+      "productionYear": 2022,
+      "seriesName": "The Summer I Turned Pretty",
+      "seasonNumber": 1,
+      "episodeNumber": 5
+    },
+    "played": true,
+    "playCount": 1,
+    "isFavorite": false,
+    "playbackPositionTicks": 0,
+    "lastPlayedUtc": "2025-07-17T11:40:17.9120114Z"
+  },
+  {
+    "ids": {
+      "id": "01a0e0e97f4e6f4d60bb2e336ef0a8fb",
+      "type": "Episode",
+      "name": "Pilot",
+      "providerIds": {
+        "Tvdb": "6369386",
+        "Imdb": "tt7536798"
+      },
+      "path": "F:\\Media\\TV Shows Mitra\\The Chi\\Season 1\\The Chi - S01E01 - Pilot WEBRip-1080p.mp4",
+      "productionYear": 2018,
+      "seriesName": "The Chi",
+      "seasonNumber": 1,
+      "episodeNumber": 1
+    },
+    "played": true,
+    "playCount": 2,
+    "isFavorite": false,
+    "playbackPositionTicks": 0,
+    "lastPlayedUtc": "2025-06-24T12:54:34.5437704Z"
+  },
+  {
+    "ids": {
+      "id": "798bece954c3c13a52b6867cfa3a7a00",
+      "type": "Episode",
+      "name": "Love Lost",
+      "providerIds": {
+        "Imdb": "tt20895774",
+        "Tvdb": "9222805",
+        "sonarr": "681"
+      },
+      "path": "F:\\Media\\TV Shows Mitra\\The Summer I Turned Pretty\\Season 02\\The Summer I Turned Pretty - S02E01 - Love Lost.mkv",
+      "productionYear": 2023,
+      "seriesName": "The Summer I Turned Pretty",
+      "seasonNumber": 2,
+      "episodeNumber": 1
+    },
+    "played": false,
+    "playCount": 3,
+    "isFavorite": false,
+    "playbackPositionTicks": 4057968452,
+    "lastPlayedUtc": "2025-09-06T21:04:53.3014184Z"
+  },
+  {
+    "ids": {
+      "id": "51a903f7093d2715ff8ecb1be8e7816e",
+      "type": "Episode",
+      "name": "Penetrate a Fraud",
+      "providerIds": {
+        "Tvdb": "6455694",
+        "Imdb": "tt7540630"
+      },
+      "path": "F:\\Media\\TV Shows Mitra\\The Chi\\Season 1\\The Chi - S01E06 - Penetrate a Fraud WEBRip-1080p.mp4",
+      "productionYear": 2018,
+      "seriesName": "The Chi",
+      "seasonNumber": 1,
+      "episodeNumber": 6
+    },
+    "played": false,
+    "playCount": 3,
+    "isFavorite": false,
+    "playbackPositionTicks": 23417191824,
+    "lastPlayedUtc": "2025-06-26T14:41:04.4039124Z"
+  }
+]
