@@ -787,6 +787,8 @@
 
                     // Update config
                     config.Mode = 'Import';
+                    // Import toggles
+                    config.ImportIncludeUsers = document.querySelector('#ImportIncludeUsers')?.checked || false;
                     config.ImportIncludeLibraries = document.querySelector('#ImportIncludeLibraries')?.checked || false;
                     config.ImportSelectedLibraryIds = selectedLibIds;
                     config.ImportLibraryPathMappingsJson = JSON.stringify(pathMappings);

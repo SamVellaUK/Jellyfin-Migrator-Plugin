@@ -8,8 +8,8 @@ namespace Jellyfin.Plugin.Template.Configuration;
 /// <summary>
 /// Plugin configuration for export selections and options.
 /// </summary>
-public class PluginConfiguration : BasePluginConfiguration
-{
+    public class PluginConfiguration : BasePluginConfiguration
+    {
     /// <summary>
     /// Initializes a new instance of the <see cref="PluginConfiguration"/> class with defaults.
     /// </summary>
@@ -32,6 +32,9 @@ public class PluginConfiguration : BasePluginConfiguration
         SelectedUsernames = new List<string>();
         SelectedLibraryIds = new List<string>();
         SelectedLibraryPaths = new List<string>();
+
+        // Import defaults
+        ImportIncludeUsers = true;
     }
 
     /// <summary>
@@ -176,4 +179,11 @@ public class PluginConfiguration : BasePluginConfiguration
     /// Gets or sets the last import log text.
     /// </summary>
     public string? LastImportLog { get; set; }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether to include users in import.
+    /// When enabled, users from the analyzed archive will be created (if not existing),
+    /// their library permissions restored, and password hashes applied if present.
+    /// </summary>
+    public bool ImportIncludeUsers { get; set; }
 }

@@ -145,6 +145,13 @@
             Gets or sets the last import log text.
             </summary>
         </member>
+        <member name="P:Jellyfin.Plugin.Template.Configuration.PluginConfiguration.ImportIncludeUsers">
+            <summary>
+            Gets or sets a value indicating whether to include users in import.
+            When enabled, users from the analyzed archive will be created (if not existing),
+            their library permissions restored, and password hashes applied if present.
+            </summary>
+        </member>
         <member name="T:Jellyfin.Plugin.Template.Export.DeviceExporter">
             <summary>
             Exports registered devices, optionally filtered by selected users.
@@ -428,6 +435,21 @@
             <param name="pathMappings">Dictionary mapping old library ID to new paths from GUI.</param>
             <param name="cancellationToken">Cancellation token.</param>
             <returns>Number of libraries imported.</returns>
+        </member>
+        <member name="T:Jellyfin.Plugin.Template.Import.UserImporter">
+            <summary>
+            Imports users from the analyzed export, restores library permissions,
+            and updates password hashes in the SQLite DB if present.
+            </summary>
+        </member>
+        <member name="M:Jellyfin.Plugin.Template.Import.UserImporter.ImportUsersAsync(System.String,System.Collections.Generic.List{Jellyfin.Plugin.Template.Import.ImportService.ImportUser},System.Threading.CancellationToken)">
+            <summary>
+            Import users after libraries have been rebuilt.
+            </summary>
+            <param name="extractedPath">Extracted export path (contains users_basic.json).</param>
+            <param name="users">Users parsed during analysis.</param>
+            <param name="cancellationToken">Cancellation token.</param>
+            <returns>Number of users created.</returns>
         </member>
         <member name="T:Jellyfin.Plugin.Template.Plugin">
             <summary>

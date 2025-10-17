@@ -273,6 +273,29 @@ public class ExportService
                 cancellationToken).ConfigureAwait(false);
 
             exportLogger.Log($"=== Import Complete: {importedCount}/{librariesToImport.Count} libraries imported ===");
+
+            // After libraries are rebuilt, optionally import users
+            if ((Plugin.Instance?.Configuration?.ImportIncludeUsers ?? false) && analysisResult.Users.Count > 0)
+            {
+                exportLogger.Log("Proceeding with user import (after libraries rebuilt)...");
+                try
+                {
+                    var userImporter = new Import.UserImporter(_paths, exportLogger, _logger, _userManager, _libraryManager);
+                    var created = await userImporter.ImportUsersAsync(
+                        analysisResult.ExtractedPath ?? string.Empty,
+                        analysisResult.Users,
+                        cancellationToken).ConfigureAwait(false);
+                    exportLogger.Log($"User import completed: {created}/{analysisResult.Users.Count} created (existing users skipped)");
+                }
+                catch (Exception ex)
+                {
+                    exportLogger.LogError($"User import failed: {ex.Message}", ex);
+                }
+            }
+            else
+            {
+                exportLogger.Log("User import disabled or no users present in analysis. Skipping users.");
+            }
         }
         catch (Exception ex)
         {
